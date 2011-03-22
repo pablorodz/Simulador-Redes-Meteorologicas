@@ -14,13 +14,15 @@ public abstract class Sensor extends Componente implements ClockListener {
     protected int ID;
     private static int IDsiguiente = 1000;
     private boolean estado;
-    private double[] rangoMedida;
-    private double precision;
-    private double offset;
-    private double sensibilidad;
-    private double resolucion;
-    private double rapidezDeRespuesta;
-    private double repetitividad;
+
+    // Variables no necesarias para el funcionamiento básico
+//    private double[] rangoMedida;
+//    private double precision;
+//    private double offset;
+//    private double sensibilidad;
+//    private double resolucion;
+//    private double rapidezDeRespuesta;
+//    private double repetitividad;
 
     /** 
      *  Constructor.
@@ -31,7 +33,7 @@ public abstract class Sensor extends Componente implements ClockListener {
         ID = IDsiguiente;
         IDsiguiente++;
         
-        rangoMedida = new double[2];
+//        rangoMedida = new double[2];
         setEstado(false);  // deberia poner solo estado = false ??
         
     }
@@ -40,23 +42,23 @@ public abstract class Sensor extends Componente implements ClockListener {
     
     public int getID() { return ID; }
     public boolean isEstado () { return estado; }
-    public double[] getRangoMedida() { return rangoMedida; }
-    public double getPecision() { return precision; }
-    public double getOffset() { return offset; }
-    public double getSensibilidad() { return sensibilidad; }
-    public double getResolucion() { return resolucion; }
-    public double getRapidezDeRespuesta() { return rapidezDeRespuesta; }
-    public double getRepetitividad() { return repetitividad; }
+//    public double[] getRangoMedida() { return rangoMedida; }
+//    public double getPecision() { return precision; }
+//    public double getOffset() { return offset; }
+//    public double getSensibilidad() { return sensibilidad; }
+//    public double getResolucion() { return resolucion; }
+//    public double getRapidezDeRespuesta() { return rapidezDeRespuesta; }
+//    public double getRepetitividad() { return repetitividad; }
     
     /** Podria eliminarse y dejar solo prender() apagar() */
     private void setEstado ( boolean estado ) { estado = false; }
-    public void setRangoMedida( double[] rangoMedida ) { this.rangoMedida = rangoMedida; }
-    public void setPecision( double precision ) { this.precision = precision; }
-    public void setOffset( double offset ) { this.offset = offset; }
-    public void setSensibilidad( double sensibilidad ) { this.sensibilidad = sensibilidad; }
-    public void setResolucion( double resolucion ) { this.resolucion = resolucion; }
-    public void setRapidezDeRespuesta( double rapidezDeRespuesta ) { this.rapidezDeRespuesta = rapidezDeRespuesta; }
-    public void setRepetitividad( double repetitividad ) { this.repetitividad = repetitividad; }
+//    public void setRangoMedida( double[] rangoMedida ) { this.rangoMedida = rangoMedida; }
+//    public void setPecision( double precision ) { this.precision = precision; }
+//    public void setOffset( double offset ) { this.offset = offset; }
+//    public void setSensibilidad( double sensibilidad ) { this.sensibilidad = sensibilidad; }
+//    public void setResolucion( double resolucion ) { this.resolucion = resolucion; }
+//    public void setRapidezDeRespuesta( double rapidezDeRespuesta ) { this.rapidezDeRespuesta = rapidezDeRespuesta; }
+//    public void setRepetitividad( double repetitividad ) { this.repetitividad = repetitividad; }
     
     /* *** Otros metodos *** */
     

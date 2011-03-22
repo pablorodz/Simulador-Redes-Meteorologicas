@@ -11,12 +11,16 @@ package logica;
  *  Segunda parte: sensores
  */
 public class PaqueteDatos {
-    // Primera parte
+    // Primera parte - Cabecera
     private int IDestacion;
     private int hora;  // int ??
+    // Segunda parte - Cuerpo
     
-    public PaqueteDatos() {
-        
+    public PaqueteDatos(int IDestacion, int hora) {
+        // Cabecera
+        this.IDestacion = IDestacion;
+        this.hora = hora;
+        // Cuerpo
     }
 
 }

@@ -15,6 +15,7 @@ import java.util.logging.Logger;
  *      * Lista de Estaciones Meteorologicas (maximo 3) ??
  *      * Lanza una excepcion, pero esta excepcion nunca deberia pasar. 
           Asi que en el try-catch no se deberia atrapar nunca nada.
+ *  * La estacion base le pide a cada subestacion los datos --> EstacionMet.pedirData().
  */
 public class EstacionMet extends Estacion {
     private static int IDsiguiente = 1;
@@ -86,5 +87,13 @@ public class EstacionMet extends Estacion {
         LOGGER.log(Level.INFO, String.format("Eliminado el sensor %1$ de la "
                 + "red de la estacion %2$", sensorElim.getID(), ID));
     }
-    
+
+    /**
+     * Este metodo es al que se llama desde la estacion base para pedir los datos.
+     * El return debe ser un PaqueteDatos.
+     */
+    public PaqueteDatos pedirData() {
+        // Crear un objeto de tipo PaqueteDatos y cargarle los sensores
+        
+    }
 }
