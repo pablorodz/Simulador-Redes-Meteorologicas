@@ -1,0 +1,38 @@
+Version acotada del simulador (SimEstMet)
+  * sin grafo
+  * solo estacion base puede tener sub estaciones
+  * Solo una estacion base
+
+Hago esto para resolver un problema mas chico y despues ampliarlo.
+
+** Modificaciones **
+
+  * Porque debo restringir la estacion base a ID=0 ?
+Como va a haber solo una estacion base, la clase Estacion posee la variable
+existeEstacionBase.
+La Estacion sera la encargada de dar los IDs, la estacion base no tendra
+necesariamente el ID=0, y para ver si se construye una estacion base o una
+subestacion se creara un ENUM con valores de estacion base y subestacion.
+
+  * Tipo de dato de las mediciones
+Indiferentemente del sensor a utilizar, el tipo de dato de la medicion tiene
+que ser uniforme para poder trabajar con cualquier tipo de sensor de la misma
+manera.
+Para se me ocurrieron (por ahora) dos soluciones:
+  * Todas la mediciones son de tipo Double. Esto porque la unica medicion que
+    no es de tipo Double es la del SensorVientoDir y puedo convertir la
+    direccion a un double correspondiente.
+  * Todas las mediciones de tipo String. El beneficio de esto es que cualquier
+    sensor actual y cualquier otro que se quiera agregar, puede tener el mismo
+    formato, y para utilizarlo se parcea el string. El parceo no es difícil,
+    debido a que la mayoría es de tipo numérico y el que no, por el momento,
+    es de tipo String.
+Se implementa con el tipo de dato String porque me parece que va a ser mas
+generico.
+
+  * La hora en el PaqueteDatos esta por el momento como la hora actual de la
+maquina. Cuando se tenga el clock de la simulacion, cambiar "hora" por ese valor.
+
+·······
+los sensores tienen un metodo heredado, que lo poseen todos que es el set y get
+a traves de String y metodos propios de set y get a traves de sus variables.
