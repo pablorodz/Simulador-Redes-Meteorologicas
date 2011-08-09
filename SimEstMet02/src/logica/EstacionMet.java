@@ -6,6 +6,7 @@
 
 package logica;
 
+import java.util.List;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -135,10 +136,10 @@ public class EstacionMet extends Estacion {
         String[] medicion = new String[redSensores.length];
     
         // Cargo el resumen de la estacion si es que existe.
-        XMLConfiguration config = new XMLConfiguration();
-        config.setFileName(String.format("resumenes/%d", ID));
+        XMLConfiguration registro = new XMLConfiguration();
+        registro.setFileName(String.format("resumenes/%d", ID));
         try {
-            config.load();
+            registro.load();
         } catch (ConfigurationException ex) {
             // Nothing
         }
@@ -153,7 +154,7 @@ public class EstacionMet extends Estacion {
                 sensoresID[i] = redSensores[i].getID();
                 tipo[i] = redSensores[i].getClass().getSimpleName();
                 medicion[i] = redSensores[i].getMedicion();
-                resumenSave(config, sensoresID[i], tipo[i], medicion[i]);
+                resumenSave(registro, sensoresID[i], tipo[i], medicion[i]);
             }
         }
 
@@ -163,15 +164,32 @@ public class EstacionMet extends Estacion {
         return medidasPila;
     }
 
-    private void resumenSave(XMLConfiguration config, Integer sensoresID, String tipo, String medicion) {
+    private void resumenSave(XMLConfiguration registro, Integer sensorID, String tipo, String medicion) {
         try {
             // Busco si ya hay algun registro del sensor.
+            List<String> idsRegistro = registro.getList("Sensor.id");
+            boolean existe = false;
             
+            for (String id : idsRegistro) {
+                if (Integer.valueOf(id).equals(sensorID)) {
+                    existe = true;
+                    break;
+                }
+            }
             // Si ya hay, actualizo
-            
+            if (existe) {
+                
+            }
             // Si no, creo y cargo los valores como iniciales
-            
-            config.save();
+            else {
+                registro.addProperty("id", sensorID.toString());
+                registro.addProperty("tipo", tipo);
+                registro.addProperty("maximo", medicion);
+                registro.addProperty("minimo", medicion);
+                registro.addProperty("medio", medicion);
+                registro.addProperty("mediciones", new Integer(1));
+            }
+            registro.save();
         } catch (ConfigurationException ex) {
             Logger.getLogger(EstacionMet.class.getName()).log(Level.SEVERE, null, ex);
         }
