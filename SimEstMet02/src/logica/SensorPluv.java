@@ -6,6 +6,9 @@
 
 package logica;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *  Pluviómetro.
  *  Lluvia caída en los últimos 5 minutos.
@@ -13,12 +16,19 @@ package logica;
 public class SensorPluv extends Sensor {
     private double lluviaInstantanea;  // En los últimos 5 minutos.
 
+    // El logger solo para esta clase
+    private final static Logger LOGGER = Logger.getLogger(Estacion.class .getName());
+
     /** 
      *  Constructor.
      */
-//     public SensorPluv () {
-//
-//     }
+     public SensorPluv () {
+         super();
+         // Inicializo el sensor
+         lluviaInstantanea = 0;
+         
+         LOGGER.log(Level.INFO, String.format("Creado sensor de humedad, ID = %d", ID));
+     }
 
     /* *** Setters y Getters *** */
 

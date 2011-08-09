@@ -6,9 +6,10 @@
 
 package logica;
 
-import java.util.Calendar;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.configuration.*;
 
 /* 
  *  Estacion Meteorologica
@@ -31,18 +32,24 @@ public class EstacionMet extends Estacion {
 
     public EstacionMet( String nombre ) throws CreacionException {
         super( nombre, Tipo.MET );
-
-        // Creo la red de sensores de la estacion.
-        redSensores = new Sensor[4];  // Maximo 4 sensores
-        for ( Sensor sensor : redSensores )
-            sensor = null;
-
+        inicializar();
     }
 
     public EstacionMet() throws CreacionException {
         super( Tipo.MET );
+        inicializar();
     }
 
+    /**
+     * Inicializo la estcion meteorologica
+     */
+    private void inicializar() {
+        // Creo la red de sensores de la estacion.
+        redSensores = new Sensor[4];  // Maximo 4 sensores
+        for ( Sensor sensor : redSensores )
+            sensor = null;
+    }
+    
     /* *** Otros metodos *** */
 
     /**
@@ -51,19 +58,28 @@ public class EstacionMet extends Estacion {
     public void agregarSensor(Sensor sensorNuevo)
             throws ArrayIndexOutOfBoundsException {
         boolean insertado = false;
-        for (Sensor sensor : redSensores)
-            if ( sensor == null ) {
-                sensor = sensorNuevo;
+// No agrega el sensor a redSensores
+//        for (Sensor sensor : redSensores)
+//            if ( sensor == null ) {
+//                sensor = sensorNuevo;
+//                insertado = true;
+//                break;
+//            }
+
+        for (int i=0; i<redSensores.length; i++) {
+            if (redSensores[i] == null) {
+                redSensores[i] = sensorNuevo;
                 insertado = true;
                 break;
             }
-
+        }
+        
         if ( !insertado )
             throw new ArrayIndexOutOfBoundsException( "No se puede insertar el"
                     + " sensor. No una coneccion disponible" );
 
-        LOGGER.log(Level.INFO, String.format("Agregando sensor %1$ a la red "
-                + "de la estacion %2$", sensorNuevo.getID(), ID));
+        LOGGER.log(Level.INFO, String.format("Agregando sensor %d a la red "
+                + "de la estacion %d", sensorNuevo.getID(), ID));
     }
 
     /**
@@ -83,27 +99,82 @@ public class EstacionMet extends Estacion {
             throw new ObjectNotFoundException(" No se pudo eliminar el sensor."
                     + " El sensor dado no existe." );
 
-        LOGGER.log(Level.INFO, String.format("Eliminado el sensor %1$ de la "
-                + "red de la estacion %2$", sensorElim.getID(), ID));
+        LOGGER.log(Level.INFO, String.format("Eliminado el sensor %d de la "
+                + "red de la estacion %d", sensorElim.getID(), ID));
     }
 
     /**
+     * @Override por actualizar()
      * Este metodo es al que se llama desde la estacion base para pedir los datos.
      * El return debe ser un PaqueteDatos.
      */
-    public PaqueteDatos pedirData() {
+//    public PaqueteDatos pedirData() {
+//        String[] tipo = new String[redSensores.length];
+//        String[] medicion = new String[redSensores.length];
+//        // Creo el arreglo conlos tipos de sensores
+//        for ( int i=0; i<=redSensores.length; i++ ) {
+//            tipo[i] = redSensores[i].getClass().getSimpleName();
+//            medicion[i] = redSensores[i].getMedicion();
+//        }
+//        int HH = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+//        int MM = Calendar.getInstance().get(Calendar.MINUTE);
+//        int SS = Calendar.getInstance().get(Calendar.SECOND);
+//        String hora = HH + ":" + MM + ":" + SS;
+//
+//        return new PaqueteDatos(ID, hora, tipo, medicion);
+//    }
+//    
+    
+    // @NEW
+    // Agrego los sensores de esta estacion a los sensores de las sub-estaciones
+    @Override
+    public Stack<PaqueteDatos> actualizar() {
+        // Informacion para PaqueteDatos()
+        Integer[] sensoresID = new Integer[redSensores.length];
         String[] tipo = new String[redSensores.length];
         String[] medicion = new String[redSensores.length];
-        // Creo el arreglo conlos tipos de sensores
-        for ( int i=0; i<=redSensores.length; i++ ) {
-            tipo[i] = redSensores[i].getClass().getSimpleName();
-            medicion[i] = redSensores[i].getMedicion();
+    
+        // Cargo el resumen de la estacion si es que existe.
+        XMLConfiguration config = new XMLConfiguration();
+        config.setFileName(String.format("resumenes/%d", ID));
+        try {
+            config.load();
+        } catch (ConfigurationException ex) {
+            // Nothing
         }
-        int HH = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        int MM = Calendar.getInstance().get(Calendar.MINUTE);
-        int SS = Calendar.getInstance().get(Calendar.SECOND);
-        String hora = HH + ":" + MM + ":" + SS;
+        
+        // Datos de las sub-estaciones
+        medidasPila = super.actualizar();
+        
+        // Busco y guardo las mediciones de los sensores.
+        int largo = redSensores.length;
+        for ( int i=0; i<largo; i++ ) {
+            if (redSensores[i] != null) {
+                sensoresID[i] = redSensores[i].getID();
+                tipo[i] = redSensores[i].getClass().getSimpleName();
+                medicion[i] = redSensores[i].getMedicion();
+                resumenSave(config, sensoresID[i], tipo[i], medicion[i]);
+            }
+        }
 
-        return new PaqueteDatos(ID, hora, tipo, medicion);
+        // Agrego el los datos de esta estacion al final de los datos de las sub-estaciones
+        medidasPila.push(new PaqueteDatos(ID, getHora(), sensoresID, tipo, medicion));
+        
+        return medidasPila;
     }
+
+    private void resumenSave(XMLConfiguration config, Integer sensoresID, String tipo, String medicion) {
+        try {
+            // Busco si ya hay algun registro del sensor.
+            
+            // Si ya hay, actualizo
+            
+            // Si no, creo y cargo los valores como iniciales
+            
+            config.save();
+        } catch (ConfigurationException ex) {
+            Logger.getLogger(EstacionMet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

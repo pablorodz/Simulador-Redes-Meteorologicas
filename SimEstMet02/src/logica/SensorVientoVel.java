@@ -6,16 +6,25 @@
 
 package logica;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *  Sensor de velocidad del viento.
  *  Indicación en km/h.
  */
 public class SensorVientoVel extends Sensor {
     private double vientoVel;
+    // El logger solo para esta clase
+    private final static Logger LOGGER = Logger.getLogger(Estacion.class .getName());
 
-//     public SensorVientoVel() {
-//         
-//     }
+     public SensorVientoVel() {
+         super();
+         // Inicializo el sensor
+         vientoVel = 0;
+
+         LOGGER.log(Level.INFO, String.format("Creado sensor de velocidad del viento, ID = %d", ID));         
+     }
 
     /* *** Setters y Getters *** */
 

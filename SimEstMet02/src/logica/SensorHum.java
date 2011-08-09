@@ -6,6 +6,10 @@
 
 package logica;
 
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *  Sensor de humedad.
  *  Indica la humedad actual
@@ -13,13 +17,22 @@ package logica;
 public class SensorHum extends Sensor {
     private double humedad;
 
-//     public SensorHum() {
-//         
-//     }
+    // El logger solo para esta clase
+    private final static Logger LOGGER = Logger.getLogger(Estacion.class .getName());
+
+     public SensorHum() {
+         super();
+         // Inicializo el sensor
+         humedad = 0;
+         
+         LOGGER.log(Level.INFO, String.format("Creado sensor de humedad, ID = %d", ID));
+     }
 
     /* *** Setters y Getters *** */
 
     public double getHumedad () {
+        actualizar();
+        LOGGER.log(Level.INFO, "getHumedad");
         return humedad;
     }
 
@@ -41,7 +54,9 @@ public class SensorHum extends Sensor {
 
     @Override
     public void actualizar() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Random random = new Random();
+        
+        humedad = random.nextDouble()*100;
     }
 
 }

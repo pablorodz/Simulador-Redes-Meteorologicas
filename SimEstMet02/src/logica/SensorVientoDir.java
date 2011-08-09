@@ -6,30 +6,43 @@
 
 package logica;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *  Sensor de dirección de viento. 
  *  Indicación S, SE, E, NE, N, NO, O, SO.
  */
 public class SensorVientoDir extends Sensor {
-    private String vientoDir;
+    private Direccion vientoDir;
     public enum Direccion { S, SE, E, NE, N, NO, O, SO };
-    
-//     public SensorVientoDir() {
-//         
-//     }
+    // El logger solo para esta clase
+    private final static Logger LOGGER = Logger.getLogger(Estacion.class .getName());
+
+     public SensorVientoDir() {
+         super();
+         // Inicializo el sensor
+         vientoDir = Direccion.N;
+         
+         LOGGER.log(Level.INFO, String.format("Creado sensor de direccion del viento, ID = %d", ID));         
+     }
 
     /* *** Setters y Getters *** */
 
     /*
-     *  No existe un metodo getVientoDir() porque seria igual a getMedicion()
+     *  GetVientoDir() igual a getMedicion()
      */
     @Override
     public String getMedicion() {
-        return vientoDir;
+        return getViento().toString();
     }
 
+    public Direccion getViento() {
+        return vientoDir;
+    }
+    
     public void setViento (Direccion dir) {
-        vientoDir = dir.toString();
+        vientoDir = dir;
     }
 
     @Override

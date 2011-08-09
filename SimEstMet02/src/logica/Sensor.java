@@ -6,6 +6,8 @@
 
 package logica;
 
+import java.util.logging.Logger;
+
 /*
  * Cada sensor especifico posee su valor de la medicion.
  * Es una clase abstracta porque tengo varios metodos definidos.
@@ -18,6 +20,9 @@ public abstract class Sensor {
     // Voy a probar primero con .getClass.getSimpleName()
 //    public enum Tipo { HUM, PLUV, TEMP, VDIR, VVEL };  // Es public debido a que paquete de datos lo debe utilizar
 
+    // El logger solo para esta clase
+    private final static Logger LOGGER = Logger.getLogger(Estacion.class .getName());
+    
     /** 
      *  Constructor.
      *  estado = false. 

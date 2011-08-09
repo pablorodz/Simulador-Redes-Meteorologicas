@@ -6,6 +6,8 @@
 
 package logica;
 
+import java.util.Calendar;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,14 +29,21 @@ public abstract class Estacion {
     private String nombre;
 
     /// El arreglo que indica con que estaciones esta conectada esta estacion.
-    private Estacion[] redEstaciones;
+    protected Estacion[] redEstaciones;
     /// Variable para chequear si ya existe o no, una EstacionBase.
     protected static boolean estacionBaseExiste = false;  // Tiene que ser static ??
+    
+    // @NEW
+    // Pila con la informacion de las sub-estaciones
+    protected Stack<PaqueteDatos> medidasPila;
 
-    // The Logger only for this class
+    // El logger solo para esta clase
     private final static Logger LOGGER = Logger.getLogger(Estacion.class .getName());
-    // Define de que tipo es la estacion.
+
+    // Definición de los tipos de estaciones
     protected enum Tipo { BASE, MET };
+    // Define de que tipo es la estacion
+    protected Tipo clase;
 
     /* *** Constructores *** */
 
@@ -47,6 +56,7 @@ public abstract class Estacion {
                         + "objeto. No se puede crear mas de una Estacion Base");
             // else
             estacionBaseExiste = true;
+            clase = Tipo.BASE;
         }
         else {
             // No se puede instanciar una estacion meteorologica sin tener una base
@@ -54,6 +64,8 @@ public abstract class Estacion {
             if ( !estacionBaseExiste )
                 throw new CreacionException("No se pudo instanciar el "
                         + "objeto. Se debe crear primero una Estacion Base");
+            
+            clase = Tipo.MET;
         }
 
         this.ID = IDsiguiente;
@@ -63,12 +75,15 @@ public abstract class Estacion {
         this.nombre = nombre;
 
         LOGGER.log(Level.INFO, String.format(
-                "Creanda estacion %1$ ( %2$ ).", ID, nombre));
+                "Creanda estacion %s %d ( %s ).", clase.toString(), ID, nombre));
 
         // Creo la red de estaciones del la estacion.
         redEstaciones = new Estacion[4];  // Maximo 4 estaciones conectadas
         for ( Estacion estacion : redEstaciones )
             estacion = null;
+        
+        // @NEW
+        medidasPila = new Stack();
     }
 
     public Estacion( Tipo tipo ) throws CreacionException {
@@ -89,6 +104,8 @@ public abstract class Estacion {
         this.nombre = nombre;
     }
 
+    public Stack<PaqueteDatos> getMedidas() { return medidasPila; }
+    
     /* *** Otros metodos *** */
     
     /**
@@ -100,12 +117,21 @@ public abstract class Estacion {
             throws ArrayIndexOutOfBoundsException {
 
         boolean insertado = false;
-        for (Estacion estacion : redEstaciones)
-            if ( estacion == null ) {
-                estacion = estacionNueva;
+// No agrega la estacion a redEstaciones
+//        for (Estacion estacion : redEstaciones)
+//            if ( estacion == null ) {
+//                estacion = estacionNueva;
+//                insertado = true;
+//                break;
+//            }
+        
+        for (int i=0; i<redEstaciones.length; i++) {
+            if (redEstaciones[i] == null) {
+                redEstaciones[i] = estacionNueva;
                 insertado = true;
                 break;
             }
+        }
         
         if ( !insertado )
             throw new ArrayIndexOutOfBoundsException( "No se puede insertar "
@@ -113,8 +139,8 @@ public abstract class Estacion {
 
         // Avisar a estacion base
         
-        LOGGER.log(Level.INFO, String.format("Agreganda estacion %1$ a la red "
-                + "de la estacion %2$.", estacionNueva.getID(), ID));
+        LOGGER.log(Level.INFO, String.format("Agregada estacion %d a la red "
+                + "de la estacion %d.", estacionNueva.getID(), ID));
     }
 
     /**
@@ -137,13 +163,52 @@ public abstract class Estacion {
 
         // Avisar a estacion base ¿? ¿como hago esto?
         
-        LOGGER.log(Level.INFO, String.format("Eliminada la estacion %1$ de la"
-                + " red de la estacion %2$.", estacionElim.getID(), ID));
+        LOGGER.log(Level.INFO, String.format("Eliminada la estacion %d de la"
+                + " red de la estacion %d.", estacionElim.getID(), ID));
     }
 
     @Override
-    /// Estacion ID ( nombre )
+    /// toString() -> Estacion $ID ( $nombre )
     public String toString() {
-        return ( String.format("Estación %1$ ( %2$ )", ID, nombre) );  
+        return ( String.format("Estación %d ( %s )", ID, nombre) );  
+    }
+    
+    /// Actualiza todas las sub-estaciones
+    // @NEW
+    public Stack<PaqueteDatos> actualizar() {
+        // Toda la informacion recibida de las sub-estaciones
+        // La información recibida de _una_ subestacion se almacena acá
+        Stack<PaqueteDatos> newData = new Stack();
+        medidasPila.clear();    // Limpio la pila
+        
+        for (Estacion subestacion : redEstaciones) {
+            if (subestacion != null) {
+                newData = subestacion.actualizar();
+                
+//                newData.peek().printDatos();    // Para debbugear
+            
+                // newData >> data
+                if(newData.peek() != null)
+                    medidasPila.addAll(newData);    // !!! Probar si funciona, agrega al final de la pila ¿?
+                
+                // otra
+//                while(newData.peek() != null) {
+//                    medidasCola.addAll(newData);    // !!! Probar si funciona, agrega al final de la pila ¿?
+//                    newData.pop();
+//                }
+            }
+        }
+        
+        LOGGER.log(Level.INFO, String.format("actualizada estacion %s %d", clase.toString(), ID));
+                
+        return medidasPila;
+    }
+    
+    protected String getHora() {
+        int HH = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        int MM = Calendar.getInstance().get(Calendar.MINUTE);
+        int SS = Calendar.getInstance().get(Calendar.SECOND);
+        
+        return (HH + ":" + MM + ":" + SS);
     }
 }

@@ -1,0 +1,84 @@
+--------------------
+Test 1 - Funcionando
+--------------------
+
+package Main;
+
+import java.io.IOException;
+import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import logica.*;
+
+/**
+ *
+ */
+public class TestSimulador {
+
+    public static void main(String args[]) {
+        Estacion base = null;
+        EstacionMet met1 = null;
+        EstacionMet met2 = null;
+        SensorHum sensor1 = null;
+        SensorHum sensor2 = null;
+        SensorTemp sensor3 = null;
+        Stack<PaqueteDatos> datos = new Stack();
+        
+        Loggers.setLevel(Level.WARNING);
+        
+        try {
+            // Creo estacion Base
+            base = new EstacionBase();
+            
+                // Creo una subestacion
+                met1 = new EstacionMet();
+                
+                    // Creo Sensores
+                    sensor1 = new SensorHum();
+                    // Agrego los sensores a la sub estacion
+                    met1.agregarSensor(sensor1);
+
+                // Agrego la subestacion a la estacion base
+                base.agregarEstacion(met1);
+                
+                // Creo una subestacion
+                met2 = new EstacionMet();
+                
+                    // Creo Sensores
+                    sensor2 = new SensorHum();
+                    sensor3 = new SensorTemp();
+                    
+                    // Agrego los sensores a la sub estacion
+                    met2.agregarSensor(sensor2);
+                    met2.agregarSensor(sensor3);
+
+                // Agrego la subestacion a la estacion base
+                base.agregarEstacion(met2);
+                
+        } catch (CreacionException ex) {
+            Logger.getLogger(TestSimulador.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(1);
+        }
+        
+        // Loop
+        while(true) {
+            // Actualizo
+            datos = base.actualizar();
+            
+            // Muestro info
+            while( !(datos.empty()) ) {
+                datos.pop().printDatos();
+            }
+            
+            try {
+                System.out.print("¿Actualizar? [Y/n]");
+                System.in.read();
+            } catch (IOException ex) {
+                Logger.getLogger(TestSimulador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+}
+
+--------------------------------------------------------------------------------
+

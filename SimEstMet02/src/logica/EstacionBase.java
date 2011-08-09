@@ -6,6 +6,8 @@
 
 package logica;
 
+import java.util.Stack;
+
 /*
  *  Estacion base.
  *      * Solo se puede crear una. Esto se chequea en el constructor de Estacion
@@ -20,13 +22,15 @@ public class EstacionBase extends Estacion {
     /* *** Propiedades *** */
 
     /// El arreglo que indica todas estaciones que pertenecen a la estacion base.
-    private Estacion[] totalEstaciones;
+    // private Estacion[] totalEstaciones;
+    
+    // Resumen (Min, Max, Typ)
 
     /* *** Constructores *** */
 
     // Como se va a crear una unica estacion base, su nombre va a estar definido
     public EstacionBase() throws CreacionException {
-        this( "Estacion Base");
+        this("Estacion Base");
         // En caso de tener poder crear mas de una estacion base, el nombre va a
         // ser mas generico.
         // super( Tipo.BASE );
@@ -36,4 +40,14 @@ public class EstacionBase extends Estacion {
         super( nombre, Tipo.BASE );
     }
 
+    @Override
+    public Stack<PaqueteDatos> actualizar() {
+        // Ejecuta el metodo original, pero no usa su salida
+        Stack<PaqueteDatos> datos = super.actualizar();
+        
+        // Se actualiza el resumen
+        
+        
+        return datos;
+    }
 }

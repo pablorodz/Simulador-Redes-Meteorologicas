@@ -6,6 +6,10 @@
 
 package logica;
 
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *  Sensor de temperatura.
  *  Indica la temperatura actual.
@@ -13,13 +17,22 @@ package logica;
 public class SensorTemp extends Sensor {
     private double temp;
 
-//     public SensorTemp() {
-//         
-//     }
+    // El logger solo para esta clase
+    private final static Logger LOGGER = Logger.getLogger(Estacion.class .getName());
+
+     public SensorTemp() {
+         super();
+         // Inicializo el sensor
+         temp = 0;
+         
+         LOGGER.log(Level.INFO, String.format("Creado sensor de temperatura, ID = %d", ID));         
+     }
 
     /* *** Setters y Getters *** */
 
     public double getTemp() {
+        actualizar();
+        LOGGER.log(Level.INFO, "getTemp");
         return temp;
     }
 
@@ -41,7 +54,9 @@ public class SensorTemp extends Sensor {
 
     @Override
     public void actualizar() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Random random = new Random();
+
+        temp = random.nextDouble()*100;
     }
 
 }

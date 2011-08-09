@@ -33,6 +33,50 @@ generico.
   * La hora en el PaqueteDatos esta por el momento como la hora actual de la
 maquina. Cuando se tenga el clock de la simulacion, cambiar "hora" por ese valor.
 
-·······
-los sensores tienen un metodo heredado, que lo poseen todos que es el set y get
+  * Los sensores tienen un metodo heredado, que lo poseen todos que es el set y get
 a traves de String y metodos propios de set y get a traves de sus variables.
+
+----------------------------
+### ACTUALIZAR (REFRESH) ###
+
+ Mandar señal de actualizar a la estacion base (metodo actualizar() de la
+estacion base, llamado desde el programa principal.
+ La estacion base llama al metodo actualizar() de cada sub-estacion. A su vez,
+estas "mandan la señal de actualizar"/"piden la informacion" a los sensores.
+ Se toma la info de los sensores, y cada sub-estacion le manda el paquete con
+los datos a la estacion que posee arriba.
+ Asi se sucede hasta llegar al programa principal.
+
+ La base de datos es una pila. primero se coloca la informaciñon de la estacion
+actual y luego la información de las sub-estaciones.
+ En el metodo actualizar() de Estacion se deben limpiar los datos (medidasPila)
+por que en caso contrario, se apilaran los datos nuevos sobre los anteriores.
+
+-------------------------
+### LOGGER ###
+
+ Propuse de tener un logger por clase, para que cada loger posea el nombre de la
+clase a la cual pertenezca. Esto vale la pena? O conviene tener un logger en la
+clase mas alta y que se herede?
+
+--------------------------------------------------------------------------------
+### Sensor de viento ###
+
+ Porque existen dos sensores, de velocidad y direccion del viento si ambas se 
+deben medir juntas?
+ Crear un solo sensor de ambas!
+
+PROBLEMAS:
+  (1) Ver como mantener la interfaz de Sensor.
+  (2) Ver como hacer con el resumen.
+
+Solucionado.
+
+SOLUCION:
+  (1) El valor de la medicion se conforma de dos partes, la velocidad y la 
+direccion. Como la interfaz devuelve un String, este se forma de la siguiente
+manera:
+  * "velocidad, Direccion"
+
+  (2) Se parsea la salida del metodo getMedicion() y se toma solo la primer 
+parte. Se convierte a valor numerico y luego se compara.

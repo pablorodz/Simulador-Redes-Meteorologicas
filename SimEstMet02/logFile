@@ -1,0 +1,292 @@
+08/08/2011 12:25:30 logica.Estacion <init>
+INFO: Creanda estacion BASE 0 ( Estacion Base ).
+08/08/2011 12:25:30 logica.Estacion <init>
+INFO: Creanda estacion MET 1 ( Estacion1 ).
+08/08/2011 12:25:30 logica.SensorHum <init>
+INFO: Creado sensor de humedad, ID = 1000
+08/08/2011 12:25:30 logica.EstacionMet agregarSensor
+INFO: Agregando sensor 1000 a la red de la estacion 1
+08/08/2011 12:25:30 logica.Estacion agregarEstacion
+INFO: Agregada estacion 1 a la red de la estacion 0.
+08/08/2011 12:25:30 logica.Estacion <init>
+INFO: Creanda estacion MET 2 ( Estacion2 ).
+08/08/2011 12:25:30 logica.SensorHum <init>
+INFO: Creado sensor de humedad, ID = 1001
+08/08/2011 12:25:30 logica.SensorTemp <init>
+INFO: Creado sensor de temperatura, ID = 1002
+08/08/2011 12:25:30 logica.EstacionMet agregarSensor
+INFO: Agregando sensor 1001 a la red de la estacion 2
+08/08/2011 12:25:30 logica.EstacionMet agregarSensor
+INFO: Agregando sensor 1002 a la red de la estacion 2
+08/08/2011 12:25:30 logica.Estacion agregarEstacion
+INFO: Agregada estacion 2 a la red de la estacion 0.
+08/08/2011 12:25:37 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:37 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:37 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:37 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:37 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:37 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:38 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:38 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:38 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:38 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:38 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:38 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:39 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:39 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:39 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:39 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:39 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:39 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:41 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:41 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:41 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:41 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:41 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:41 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:41 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:41 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:41 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:41 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:41 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:41 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:42 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:42 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:42 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:42 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:42 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:42 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:42 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:42 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:42 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:42 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:42 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:42 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:43 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:43 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:43 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:43 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:43 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:43 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:43 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:44 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:44 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:44 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:44 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:44 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:44 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:44 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:44 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:44 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:44 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:44 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:45 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:45 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:45 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:45 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:45 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:45 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:45 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:45 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:45 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:45 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:45 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:45 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:46 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:46 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:46 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:46 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:46 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:46 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:46 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:46 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:46 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:46 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:46 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:46 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:46 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:46 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:46 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:46 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:46 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:46 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:47 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:47 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:47 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:47 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:47 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:47 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:47 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:47 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:47 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:47 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:47 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:47 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:48 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:48 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:48 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:48 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:48 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:48 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:48 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:48 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:48 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:48 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:48 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:48 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:49 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:49 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:49 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:49 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:49 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:49 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:49 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:49 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:49 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:49 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:49 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:49 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:50 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:50 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:50 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
+08/08/2011 12:25:50 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:50 logica.SensorTemp getTemp
+INFO: getTemp
+08/08/2011 12:25:50 logica.Estacion actualizar
+INFO: actualizada estacion BASE 0
+08/08/2011 12:25:52 logica.Estacion actualizar
+INFO: actualizada estacion MET 1
+08/08/2011 12:25:52 logica.SensorHum getHumedad
+INFO: getHumedad
+08/08/2011 12:25:52 logica.Estacion actualizar
+INFO: actualizada estacion MET 2
