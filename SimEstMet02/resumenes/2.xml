@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resumen>
+<estacion2>
+<sensor>
+<id>1001</id>
+<tipo>SensorViento</tipo>
+<maximo>10.110001 SE</maximo>
+<minimo>8.6 S</minimo>
+<medio>9.682501</medio>
+<mediciones>5</mediciones>
+</sensor>
+<sensor>
+<id>1002</id>
+<tipo>SensorTemp</tipo>
+<maximo>-38.9</maximo>
+<minimo>-40.97</minimo>
+<medio>-39.3825</medio>
+<mediciones>5</mediciones>
+</sensor>
+</estacion2>
+</resumen>

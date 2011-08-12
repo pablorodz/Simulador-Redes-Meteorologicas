@@ -6,7 +6,9 @@
 
 package logica;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -104,28 +106,6 @@ public class EstacionMet extends Estacion {
                 + "red de la estacion %d", sensorElim.getID(), ID));
     }
 
-    /**
-     * @Override por actualizar()
-     * Este metodo es al que se llama desde la estacion base para pedir los datos.
-     * El return debe ser un PaqueteDatos.
-     */
-//    public PaqueteDatos pedirData() {
-//        String[] tipo = new String[redSensores.length];
-//        String[] medicion = new String[redSensores.length];
-//        // Creo el arreglo conlos tipos de sensores
-//        for ( int i=0; i<=redSensores.length; i++ ) {
-//            tipo[i] = redSensores[i].getClass().getSimpleName();
-//            medicion[i] = redSensores[i].getMedicion();
-//        }
-//        int HH = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-//        int MM = Calendar.getInstance().get(Calendar.MINUTE);
-//        int SS = Calendar.getInstance().get(Calendar.SECOND);
-//        String hora = HH + ":" + MM + ":" + SS;
-//
-//        return new PaqueteDatos(ID, hora, tipo, medicion);
-//    }
-//    
-    
     // @NEW
     // Agrego los sensores de esta estacion a los sensores de las sub-estaciones
     @Override
@@ -136,12 +116,22 @@ public class EstacionMet extends Estacion {
         String[] medicion = new String[redSensores.length];
     
         // Cargo el resumen de la estacion si es que existe.
+        // Instancio el manejador de XML
         XMLConfiguration registro = new XMLConfiguration();
-        registro.setFileName(String.format("resumenes/%d", ID));
+        registro.setFileName(String.format("resumenes/%d.xml", ID));
+
         try {
+            // Cargo si existe el registro
             registro.load();
         } catch (ConfigurationException ex) {
-            // Nothing
+            // Si no existe, simplemente seteo el nombre del elemento base
+            registro.setRootElementName("resumen");
+            // Y creo el archivo
+            try {
+                registro.save();
+            } catch (ConfigurationException ex1) {
+                Logger.getLogger(EstacionMet.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
         
         // Datos de las sub-estaciones
@@ -164,31 +154,100 @@ public class EstacionMet extends Estacion {
         return medidasPila;
     }
 
-    private void resumenSave(XMLConfiguration registro, Integer sensorID, String tipo, String medicion) {
+    private void resumenSave(XMLConfiguration registro, Integer sensorID, String tipo, String medicionS) {
         try {
             // Busco si ya hay algun registro del sensor.
-            List<String> idsRegistro = registro.getList("Sensor.id");
-            boolean existe = false;
+            List<String> idsRegistro = registro.getList( String.format("estacion%d.sensor.id", ID));
+//            List<String> idsRegistro = registro.getList("sensor.id");
+            int index = -1;
             
             for (String id : idsRegistro) {
                 if (Integer.valueOf(id).equals(sensorID)) {
-                    existe = true;
+                    index = idsRegistro.indexOf( String.valueOf(sensorID) );
                     break;
                 }
             }
             // Si ya hay, actualizo
-            if (existe) {
+            if (index != -1) {
+                float medicion;         // Medicion actual en float
+                String nMedicionesS;    // Numero de mediciones
+                int nMediciones;
+                String maximoS;         // Valor maximo de las mediciones
+                float maximo;
+                String minimoS;         // Valor minimo de las mediciones
+                float minimo;
+                String medioS;          // Valor medio de las mediciones
+                float medio;
                 
+                // Cargo los valores
+                nMedicionesS = registro.getString( String.format("estacion%d.sensor(%d).mediciones", ID, index) );
+                maximoS = registro.getString( String.format("estacion%d.sensor(%d).maximo", ID, index) );
+                minimoS = registro.getString( String.format("estacion%d.sensor(%d).minimo", ID, index) );
+                medioS = registro.getString( String.format("estacion%d.sensor(%d).medio", ID, index) );
+
+                // Aumento en uno la cantidad de mediciones
+                nMediciones = Integer.valueOf(nMedicionesS) + 1;
+                registro.setProperty( String.format("estacion%d.sensor(%d).mediciones", ID, index), String.valueOf(nMediciones) );
+                
+                // Recalculo maximo y minimo
+                medicion = Float.valueOf(medicionS.split(" ")[0]);
+                maximo = Float.valueOf( maximoS.split(" ")[0] );
+                minimo = Float.valueOf( minimoS.split(" ")[0] );
+                
+                if (medicion > maximo)
+                    registro.setProperty(String.format("estacion%d.sensor(%d).maximo", ID, index), medicionS);
+                if (medicion < minimo)
+                    registro.setProperty(String.format("estacion%d.sensor(%d).minimo", ID, index), medicionS);
+                
+                // Recalculo el valor medio
+                medio = Float.valueOf( medioS.split(" ")[0] );
+
+                medio = (medio + medicion) / 2;
+                registro.setProperty(String.format("estacion%d.sensor(%d).medio", ID, index), String.valueOf(medio));
+                
+                // Cargo los valores
+//                nMedicionesS = registro.getString( String.format("estacion.sensor(%d).mediciones", index) );
+//                maximoS = registro.getString( String.format("estacion.sensor(%d).maximo", index) );
+//                minimoS = registro.getString( String.format("estacion.sensor(%d).minimo", index) );
+//                medioS = registro.getString( String.format("estacion.sensor(%d).medio", index) );
+//
+//                // Aumento en uno la cantidad de mediciones
+//                nMediciones = Integer.valueOf(nMedicionesS) + 1;
+//                registro.setProperty( String.format("estacion.sensor(%d).mediciones", index), String.valueOf(nMediciones) );
+//                
+//                // Recalculo maximo y minimo
+//                medicion = Float.valueOf(medicionS.split(" ")[0]);
+//                maximo = Float.valueOf( maximoS.split(" ")[0] );
+//                minimo = Float.valueOf( minimoS.split(" ")[0] );
+//                
+//                if (medicion > maximo)
+//                    registro.setProperty(String.format("estacion.sensor(%d).maximo", index), medicionS);
+//                if (medicion < minimo)
+//                    registro.setProperty(String.format("estacion.sensor(%d).minimo", index), medicionS);
+//                
+//                // Recalculo el valor medio
+//                medio = Float.valueOf( medioS.split(" ")[0] );
+//
+//                medio = (medio + medicion) / 2;
+//                registro.setProperty(String.format("estacion.sensor(%d).medio", index), String.valueOf(medio));
             }
-            // Si no, creo y cargo los valores como iniciales
-            else {
-                registro.addProperty("id", sensorID.toString());
-                registro.addProperty("tipo", tipo);
-                registro.addProperty("maximo", medicion);
-                registro.addProperty("minimo", medicion);
-                registro.addProperty("medio", medicion);
-                registro.addProperty("mediciones", new Integer(1));
+            else {  // Si no, creo y cargo los valores como iniciales
+                index = idsRegistro.size();
+                registro.addProperty(String.format("estacion%d.sensor(%d).id", ID, index), sensorID.toString());
+                registro.addProperty(String.format("estacion%d.sensor(%d).tipo", ID, index), tipo);
+                registro.addProperty(String.format("estacion%d.sensor(%d).maximo", ID, index), medicionS);
+                registro.addProperty(String.format("estacion%d.sensor(%d).minimo", ID, index), medicionS);
+                registro.addProperty(String.format("estacion%d.sensor(%d).medio", ID, index), medicionS);
+                registro.addProperty(String.format("estacion%d.sensor(%d).mediciones", ID, index), "1");
+                
+//                registro.addProperty(String.format("sensor(%d).id", index), sensorID.toString());
+//                registro.addProperty(String.format("sensor(%d).tipo", index), tipo);
+//                registro.addProperty(String.format("sensor(%d).maximo", index), medicionS);
+//                registro.addProperty(String.format("sensor(%d).minimo", index), medicionS);
+//                registro.addProperty(String.format("sensor(%d).medio", index), medicionS);
+//                registro.addProperty(String.format("sensor(%d).mediciones", index), "1");
             }
+            
             registro.save();
         } catch (ConfigurationException ex) {
             Logger.getLogger(EstacionMet.class.getName()).log(Level.SEVERE, null, ex);

@@ -8,8 +8,10 @@ package logica;
 
 import java.util.Calendar;
 import java.util.Stack;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.configuration.*;
 
 /*  
  *  * Los metodos deben ser protected o private??
@@ -45,6 +47,10 @@ public abstract class Estacion {
     // Define de que tipo es la estacion
     protected Tipo clase;
 
+    // Para trabajar con los resumenes en XML
+    // Lo instancio en el momento de usarlo
+//    XMLConfiguration registro;
+
     /* *** Constructores *** */
 
     public Estacion(String nombre, Tipo tipo) throws CreacionException {
@@ -57,6 +63,9 @@ public abstract class Estacion {
             // else
             estacionBaseExiste = true;
             clase = Tipo.BASE;
+            // Creo la red de estaciones del la estacion. 
+            //Maximo 4 estaciones conectadas
+            redEstaciones = new Estacion[4];
         }
         else {
             // No se puede instanciar una estacion meteorologica sin tener una base
@@ -66,6 +75,9 @@ public abstract class Estacion {
                         + "objeto. Se debe crear primero una Estacion Base");
             
             clase = Tipo.MET;
+            // Creo la red de estaciones del la estacion. 
+            //Maximo 4 estaciones conectadas
+            redEstaciones = new Estacion[3];
         }
 
         this.ID = IDsiguiente;
@@ -78,11 +90,10 @@ public abstract class Estacion {
                 "Creanda estacion %s %d ( %s ).", clase.toString(), ID, nombre));
 
         // Creo la red de estaciones del la estacion.
-        redEstaciones = new Estacion[4];  // Maximo 4 estaciones conectadas
         for ( Estacion estacion : redEstaciones )
             estacion = null;
-        
-        // @NEW
+                
+        // Creo la pila donde se guardan las mediciones (PaqueteDeDatos)
         medidasPila = new Stack();
     }
 
@@ -144,18 +155,30 @@ public abstract class Estacion {
     }
 
     /**
-     *  Elimina una coneccion a una estacion (elimina la estacion del
-     *  arreglo redEstaciones) si es que existe.
+     * Elimina una coneccion a una estacion (elimina la estacion del
+     * arreglo redEstaciones) si es que existe.
+     * Se pasa como argumento un Objeto Estacion, lo cual es un problema si no 
+     * se tiene acceso directo al objeto.
      */
     public void eliminarEstacion(Estacion estacionElim)
             throws ObjectNotFoundException {
         boolean eliminado = false;
-        for (Estacion estacion : redEstaciones)
-            if ( estacion == estacionElim ) {
-                estacion = null;
+        
+// Es muy probable que no la elimine, no lo probe
+//        for (Estacion estacion : redEstaciones)
+//            if ( estacion == estacionElim ) {
+//                estacion = null;
+//                eliminado = true;
+//                break;
+//            }
+        
+        for (int i=0; i<redEstaciones.length; i++) {
+            if (redEstaciones[i] == estacionElim) {
+                redEstaciones[i] = null;
                 eliminado = true;
                 break;
             }
+        }
 
         if ( !eliminado )
             throw new ObjectNotFoundException(" No se pudo eliminar la "
@@ -165,6 +188,31 @@ public abstract class Estacion {
         
         LOGGER.log(Level.INFO, String.format("Eliminada la estacion %d de la"
                 + " red de la estacion %d.", estacionElim.getID(), ID));
+    }
+
+    /**
+     * Elimina una coneccion a una estacion (elimina la estacion del
+     * arreglo redEstaciones) si es que existe.
+     * Se pasa como argumento solo el ID de la estacion a eliminar.
+     */
+    public void eliminarEstacion(int estacionElimID)
+            throws ObjectNotFoundException {
+        boolean eliminado = false;
+        
+        for (int i=0; i<redEstaciones.length; i++) {
+            if (redEstaciones[i].getID() == estacionElimID) {
+                redEstaciones[i] = null;
+                eliminado = true;
+                break;
+            }
+        }
+
+        if ( !eliminado )
+            throw new ObjectNotFoundException(" No se pudo eliminar la "
+                    + "estacion. La estacion dada no existe." );
+        
+        LOGGER.log(Level.INFO, String.format("Eliminada la estacion %d de la"
+                + " red de la estacion %d.", estacionElimID, ID));
     }
 
     @Override
@@ -179,6 +227,8 @@ public abstract class Estacion {
         // Toda la informacion recibida de las sub-estaciones
         // La información recibida de _una_ subestacion se almacena acá
         Stack<PaqueteDatos> newData = new Stack();
+        LOGGER.log(Level.INFO, String.format("Actualizando estacion %s %d", clase.toString(), ID));
+        
         medidasPila.clear();    // Limpio la pila
         
         for (Estacion subestacion : redEstaciones) {
@@ -189,18 +239,11 @@ public abstract class Estacion {
             
                 // newData >> data
                 if(newData.peek() != null)
-                    medidasPila.addAll(newData);    // !!! Probar si funciona, agrega al final de la pila ¿?
-                
-                // otra
-//                while(newData.peek() != null) {
-//                    medidasCola.addAll(newData);    // !!! Probar si funciona, agrega al final de la pila ¿?
-//                    newData.pop();
-//                }
+                    // Copia newData (pila) en la base de medidasPila (otra pila).
+                    medidasPila.addAll(newData);
             }
         }
         
-        LOGGER.log(Level.INFO, String.format("actualizada estacion %s %d", clase.toString(), ID));
-                
         return medidasPila;
     }
     
@@ -210,5 +253,43 @@ public abstract class Estacion {
         int SS = Calendar.getInstance().get(Calendar.SECOND);
         
         return (HH + ":" + MM + ":" + SS);
+    }
+    
+    /*
+     * @brief Ubicacion de los resumenes, en un Vector<String>
+     * 
+     * Retorna la ubicacion de los resumenes de esta estacion y de sus 
+     * sub-estaciones, en un Vector<String>.
+     * Se guardan en esa forma, primero la direccion propia y luego la de las 
+     * sub-estaciones.
+     * @return Direccion donde se encuentra el resumen.
+     */
+    public Vector<String> getResumen() {
+        Vector<String> direcciones = new Vector();
+        // Instancio el manejador de XML
+        XMLConfiguration registro = new XMLConfiguration();
+        registro.setFileName(String.format("resumenes/%d.xml", ID));
+
+        if ( !registro.getFile().exists() ) {
+            // Si no existe, simplemente seteo el nombre del elemento base
+            registro.setRootElementName("resumen");
+            // Y creo el archivo
+            try {
+                registro.save();
+            } catch (ConfigurationException ex1) {
+                Logger.getLogger(EstacionMet.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+        
+        // getFileName() me devuelve la direccion dentro del proyecto.
+        // getURL() me devuelve la direccion desde el root de la maquina.
+        direcciones.add( registro.getFileName() );
+        
+        for (Estacion subestacion : redEstaciones) {
+            if ( subestacion != null )
+                direcciones.addAll(subestacion.getResumen());
+        }
+        
+        return direcciones;
     }
 }

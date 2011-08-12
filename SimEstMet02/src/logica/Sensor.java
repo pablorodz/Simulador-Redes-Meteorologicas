@@ -6,6 +6,7 @@
 
 package logica;
 
+import java.util.Random;
 import java.util.logging.Logger;
 
 /*
@@ -22,6 +23,9 @@ public abstract class Sensor {
 
     // El logger solo para esta clase
     private final static Logger LOGGER = Logger.getLogger(Estacion.class .getName());
+    
+    // Creo un Random, porque se usa mucho en todas las subclases.
+    protected Random random = new Random();
     
     /** 
      *  Constructor.
@@ -42,7 +46,8 @@ public abstract class Sensor {
     public boolean isEstado () { return estado; }
     // El valor que mide cada sensor
     public abstract String getMedicion();
-     /*
+    
+    /*
      *  * Settearlo a mano o segun un archivo externo con los valores.
      *  * Debe existir un setter?
      *  * Publico?

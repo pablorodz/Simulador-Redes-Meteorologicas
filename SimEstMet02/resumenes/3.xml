@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resumen>
+<estacion3>
+<sensor>
+<id>1003</id>
+<tipo>SensorHum</tipo>
+<maximo>8.25</maximo>
+<minimo>5.3</minimo>
+<medio>6.5306253</medio>
+<mediciones>5</mediciones>
+</sensor>
+</estacion3>
+</resumen>

@@ -48,7 +48,10 @@ public class PaqueteDatos {
                 System.out.printf("\tSensor: %s \tMedición: %s \n\n", tipos[i], mediciones[i]);
         }
     }
-
+    
+    /* *** Getters *** */
+    /* No se usan, pero existen :) */
+    
     public int getIDestacion() {
         return IDestacion;
     }
