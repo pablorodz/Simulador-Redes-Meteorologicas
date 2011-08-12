@@ -45,7 +45,7 @@ public class PaqueteDatos {
         int largo = tipos.length;
         for (int i=0; i<largo; i++) {
             if(tipos[i] != null)
-                System.out.printf("\tSensor: %s \tMedición: %s \n\n", tipos[i], mediciones[i]);
+                System.out.printf("\tSensor: %d\n\tTipo: %s \tMedición: %s \n\n", sensoresID[i], tipos[i], mediciones[i]);
         }
     }
     

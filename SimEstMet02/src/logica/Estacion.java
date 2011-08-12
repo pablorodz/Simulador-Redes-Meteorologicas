@@ -31,7 +31,7 @@ public abstract class Estacion {
     private String nombre;
 
     /// El arreglo que indica con que estaciones esta conectada esta estacion.
-    protected Estacion[] redEstaciones;
+    protected EstacionMet[] redEstaciones;
     /// Variable para chequear si ya existe o no, una EstacionBase.
     protected static boolean estacionBaseExiste = false;  // Tiene que ser static ??
     
@@ -65,7 +65,7 @@ public abstract class Estacion {
             clase = Tipo.BASE;
             // Creo la red de estaciones del la estacion. 
             //Maximo 4 estaciones conectadas
-            redEstaciones = new Estacion[4];
+            redEstaciones = new EstacionMet[4];
         }
         else {
             // No se puede instanciar una estacion meteorologica sin tener una base
@@ -77,7 +77,7 @@ public abstract class Estacion {
             clase = Tipo.MET;
             // Creo la red de estaciones del la estacion. 
             //Maximo 4 estaciones conectadas
-            redEstaciones = new Estacion[3];
+            redEstaciones = new EstacionMet[3];
         }
 
         this.ID = IDsiguiente;
@@ -90,7 +90,7 @@ public abstract class Estacion {
                 "Creanda estacion %s %d ( %s ).", clase.toString(), ID, nombre));
 
         // Creo la red de estaciones del la estacion.
-        for ( Estacion estacion : redEstaciones )
+        for ( EstacionMet estacion : redEstaciones )
             estacion = null;
                 
         // Creo la pila donde se guardan las mediciones (PaqueteDeDatos)
@@ -120,21 +120,18 @@ public abstract class Estacion {
     /* *** Otros metodos *** */
     
     /**
-     *  Agrega una estacion a la red del la estacion actual, si es que hay lugar
-     *  para una nueva coneccion.
-     *  Se debe tambien agregar la conexion al grafo.
+     * @brief Agrega una estacion a la red del la estacion actual.
+     * 
+     * Agrega la estacion pasada como argumento a la red de la estacion actual.
+     * Esto se hace siempre y cuando haya una conexion libre en la estacion. Es 
+     * decir, si hay lugar en el arreglo redEstaciones.
+     * 
+     * @param estacionNueva Estacion a ser agragada a la red.
+     * 
+     * @return true Si la estacion fue agregada correctamente a la red
      */
-    public void agregarEstacion(Estacion estacionNueva)
-            throws ArrayIndexOutOfBoundsException {
-
+    private boolean agregarEstacion(EstacionMet estacionNueva) {
         boolean insertado = false;
-// No agrega la estacion a redEstaciones
-//        for (Estacion estacion : redEstaciones)
-//            if ( estacion == null ) {
-//                estacion = estacionNueva;
-//                insertado = true;
-//                break;
-//            }
         
         for (int i=0; i<redEstaciones.length; i++) {
             if (redEstaciones[i] == null) {
@@ -144,33 +141,65 @@ public abstract class Estacion {
             }
         }
         
-        if ( !insertado )
-            throw new ArrayIndexOutOfBoundsException( "No se puede insertar "
-                    + "la estacion. No una coneccion disponible" );
-
-        // Avisar a estacion base
+// Reemplazado por el return boolean
+//        if ( !insertado )
+//            throw new ArrayIndexOutOfBoundsException( "No se puede insertar "
+//                    + "la estacion. No una coneccion disponible" );
         
         LOGGER.log(Level.INFO, String.format("Agregada estacion %d a la red "
                 + "de la estacion %d.", estacionNueva.getID(), ID));
+        
+        return insertado;
     }
 
     /**
+     * @brief Agrega una estacion a la red de la estacion padreID.
+     * 
+     * Agrega la estacion pasada como argumento a la red de la estacion padreID.
+     * Si padreID es el ID de la estacion actual, se agrega la nueva estacion 
+     * a la red.
+     * Esto se hace siempre y cuando haya una conexion libre en la estacion. Es 
+     * decir, si hay lugar en el arreglo redEstaciones.
+     * Si padreID no corresponde a la estacion actual, la orden se pasa a todas
+     * las sub-estaciones.
+     * 
+     * @param estacionNueva Estacion a ser agragada a la red.
+     * @param padreID ID de la estacion a la cual debe agregarse estacionNueva.
+     * 
+     * @return true Si la estacion fue agregada correctamente a la red
+     */
+    public boolean agregarEstacion(EstacionMet estacionNueva, int padreID) {
+        boolean insertado = false;
+
+        if ( padreID == ID) // Si esta estacion es el padre, agrego
+            insertado = agregarEstacion(estacionNueva);
+        else {  // Si no, le paso la orden a las sub-estaciones
+            int i = 0;
+            int redSize = redEstaciones.length;
+            while(!insertado && i<redSize) {
+                insertado = redEstaciones[i].agregarEstacion(estacionNueva, padreID);
+                i++;
+            }  
+        }
+        
+        return insertado;
+    }
+
+    /**
+     * @brief Elimina una estacion de la red.
+     * 
      * Elimina una coneccion a una estacion (elimina la estacion del
      * arreglo redEstaciones) si es que existe.
+     * De no existir, le pasa la orden a las sub-estaciones.
      * Se pasa como argumento un Objeto Estacion, lo cual es un problema si no 
      * se tiene acceso directo al objeto.
+     * 
+     * @param estacionElim Una instancia del objeto a eliminar.
+     * 
+     * @return true Si la estacion fue eliminada correctamente de la red.
      */
-    public void eliminarEstacion(Estacion estacionElim)
-            throws ObjectNotFoundException {
+    public boolean eliminarEstacion(EstacionMet estacionElim) {
         boolean eliminado = false;
-        
-// Es muy probable que no la elimine, no lo probe
-//        for (Estacion estacion : redEstaciones)
-//            if ( estacion == estacionElim ) {
-//                estacion = null;
-//                eliminado = true;
-//                break;
-//            }
         
         for (int i=0; i<redEstaciones.length; i++) {
             if (redEstaciones[i] == estacionElim) {
@@ -180,23 +209,41 @@ public abstract class Estacion {
             }
         }
 
-        if ( !eliminado )
-            throw new ObjectNotFoundException(" No se pudo eliminar la "
-                    + "estacion. La estacion dada no existe." );
-
-        // Avisar a estacion base ¿? ¿como hago esto?
-        
-        LOGGER.log(Level.INFO, String.format("Eliminada la estacion %d de la"
+        if (eliminado) {    // Si se logro eliminar, guardo aviso.
+            LOGGER.log(Level.INFO, String.format("Eliminada la estacion %d de la"
                 + " red de la estacion %d.", estacionElim.getID(), ID));
+        }
+        else { // Si no, le paso la orden a las sub-estaciones
+            int i = 0;
+            int redSize = redEstaciones.length;
+            while(!eliminado && i<redSize) {
+                eliminado = redEstaciones[i].eliminarEstacion(estacionElim);
+                i++;
+            }
+        }
+        
+// Reemplazado por el return boolean
+//        if ( !eliminado )
+//            throw new ObjectNotFoundException(" No se pudo eliminar la "
+//                    + "estacion. La estacion dada no existe." );
+
+        return eliminado;
     }
 
     /**
+     * @brief Elimina una estacion de la red.
+     * 
      * Elimina una coneccion a una estacion (elimina la estacion del
      * arreglo redEstaciones) si es que existe.
-     * Se pasa como argumento solo el ID de la estacion a eliminar.
+     * De no existir, le pasa la orden a las sub-estaciones.
+     * Se pasa como argumento solo el ID de la estacion a eliminar. Util si no 
+     * se tiene acceso al objeto de la estacion.
+     * 
+     * @param estacionElim Una instancia del objeto a eliminar.
+     * 
+     * @return true Si la estacion fue eliminada correctamente de la red.
      */
-    public void eliminarEstacion(int estacionElimID)
-            throws ObjectNotFoundException {
+    public boolean eliminarEstacion(int estacionElimID) {
         boolean eliminado = false;
         
         for (int i=0; i<redEstaciones.length; i++) {
@@ -206,13 +253,26 @@ public abstract class Estacion {
                 break;
             }
         }
-
-        if ( !eliminado )
-            throw new ObjectNotFoundException(" No se pudo eliminar la "
-                    + "estacion. La estacion dada no existe." );
         
-        LOGGER.log(Level.INFO, String.format("Eliminada la estacion %d de la"
+        if (eliminado) {    // Si se logro eliminar, guardo aviso.
+            LOGGER.log(Level.INFO, String.format("Eliminada la estacion %d de la"
                 + " red de la estacion %d.", estacionElimID, ID));
+        }
+        else { // Si no, le paso la orden a las sub-estaciones
+            int i = 0;
+            int redSize = redEstaciones.length;
+            while(!eliminado && i<redSize) {
+                eliminado = redEstaciones[i].eliminarEstacion(estacionElimID);
+                i++;
+            }
+        }
+        
+// Reemplazado por el return boolean
+//        if ( !eliminado )
+//            throw new ObjectNotFoundException(" No se pudo eliminar la "
+//                    + "estacion. La estacion dada no existe." );
+        
+        return eliminado;
     }
 
     @Override
@@ -231,7 +291,7 @@ public abstract class Estacion {
         
         medidasPila.clear();    // Limpio la pila
         
-        for (Estacion subestacion : redEstaciones) {
+        for (EstacionMet subestacion : redEstaciones) {
             if (subestacion != null) {
                 newData = subestacion.actualizar();
                 
@@ -277,7 +337,7 @@ public abstract class Estacion {
             try {
                 registro.save();
             } catch (ConfigurationException ex1) {
-                Logger.getLogger(EstacionMet.class.getName()).log(Level.SEVERE, null, ex1);
+                LOGGER.log(Level.SEVERE, null, ex1);
             }
         }
         
@@ -285,7 +345,7 @@ public abstract class Estacion {
         // getURL() me devuelve la direccion desde el root de la maquina.
         direcciones.add( registro.getFileName() );
         
-        for (Estacion subestacion : redEstaciones) {
+        for (EstacionMet subestacion : redEstaciones) {
             if ( subestacion != null )
                 direcciones.addAll(subestacion.getResumen());
         }

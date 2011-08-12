@@ -62,69 +62,30 @@ public class EstacionBase extends Estacion {
      * sub-estaciones, en un Vector<String>.
      * Se guardan en esa forma, primero la direccion propia y luego la de las 
      * sub-estaciones.
-     * Se agrega al metodo de la superclase que antes de retornar la direccion
-     * del resumen, actuliza el resumen.
+     * Como la estacion base no tiene sensores, se elimina a esta de las 
+     * direcciones.
+     * Este metodo no tiene sentido y menos que se encuentre getResumen() en 
+     * Estacion. Esto es asi porque en getResumen() de EstacionBase se deberia
+     * crear un resumen con todos los resumnes de su red. Por el momento esto 
+     * no lo hace debido a complicaciones a la hora de copiar un resumen(XML) 
+     * en otro (se pierde la estructura).
+     * A pesar de que no haya un resumen de la EstacionBase se podria pensar de
+     * la siguiente manera:
+     *   * Las sub-estaciones tiene sus resumenes en sus servidores.
+     *   * getResumen() de estacionBase toma estas direcciones y hace una copia local.
+     *   * getResumen() retorna la direccion en disco donde estan estas copias.
      * 
-     * @return Direccion donde se encuentra el resumen.
+     * @return Direccion donde se encuentran los resumenes.
      */
     @Override
     public Vector<String> getResumen() {
         // Direcciones de todos los resumes de la red
         Vector<String> direcciones = super.getResumen();
 
-        // Antes de retornar las direcciones, se actuliza el resumen
-        actualizarResumen(direcciones);
+        // Antes de retornar las direcciones, borra la propia del arreglo
+        direcciones.removeElementAt(0);
         
         return direcciones;
     }
     
-    /*
-     * @brief Actualiza el resumen de la Estacion Base
-     * 
-     * Se crea un nuevo resumen a partir de los resumenes de todas las 
-     * estaciones de la red.
-     */
-    private void actualizarResumen(Vector<String> direcciones) {
-        // Instancio el manejador de XML
-        XMLConfiguration registro = new XMLConfiguration();
-        registro.setFileName(String.format("resumenes/%d.xml", ID));
-        // Configurador local que se usa para cargar configuraciones externas
-        XMLConfiguration config2add = new XMLConfiguration();
-        // Objeto para operaciones intermedias
-        File file;
-        
-        // Elimino el archivo actual
-        // Se que existe porque lo creo en getResumen()
-        file = new File(registro.getFileName());
-        file.delete();
-        
-        // Seteo el nombre del elemento base
-        registro.setRootElementName("resumen");
-        // Y creo el archivo nuevamente
-        try {
-            registro.save();
-        } catch (ConfigurationException ex1) {
-            Logger.getLogger(EstacionBase.class.getName()).log(Level.SEVERE, null, ex1);
-        }
-
-        // Creo el resumen con resumenes
-        // Trate de hacerlo de una manera mas prolija pero no se porque no podia
-        // cargar el archivo de configuracion. Decia que no existia.
-        int numDir = direcciones.size();
-        // Inicio en 1 porque el indice 0 es la direccion de esta estacion.
-        for (int i=1; i<numDir; i++) {
-            file = new File(direcciones.elementAt(i));
-            config2add.setFile(file);
-//            System.out.println( String.format("%s\t%s", config2add.getFileName(), config2add.getFile().exists()) );
-            
-            try {
-                config2add.load();
-                registro.append(config2add);
-                registro.save();
-            } catch (ConfigurationException ex) {
-                LOGGER.log(Level.SEVERE, null, ex);
-            }
-            
-        }
-    }
 }

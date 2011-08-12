@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logica.*;
@@ -40,8 +41,7 @@ public class TestSimulador {
                     + "(4) Correr Simulación\n"
                     + "(5) Ver resumen\n"
                     + "(6) Limpiar resumenes\n"
-                    + "(7) Configurar salida\n"
-                    + "(8) Salir\n"
+                    + "(7) Salir\n"
                     + "\nSeleccione menu ingresando el número correspondiente.");
             // # Agregar limpiar registros
             
@@ -65,13 +65,22 @@ public class TestSimulador {
         
         switch(seleccion) {
             case 1: System.out.println("Not implemented yet."); break;
+                
             case 2: System.out.println("Not implemented yet."); break;
+                
             case 3: base = ejemplo1(); break;
+                
             case 4: start(base); break;
+                
             case 5: {
-                System.out.println("El resumen se encuentra en: " + base.getResumen().firstElement());
+                Vector<String> direcciones = base.getResumen();
+                System.out.println("Los resumenes se encuentran en:"); 
+                for (String dir : direcciones) {
+                    System.out.printf("\t%s\n", dir);
+                }
                 break;
             }
+                
             case 6: {
                 try {
                     if (limpiarResumenesDir() == false)
@@ -84,8 +93,8 @@ public class TestSimulador {
                 }
                 break;
             }
-            case 7: System.out.println("Not implemented yet."); break;
-            case 8: salir = true; break;
+                
+            case 7: salir = true; break;
         }
         
         return salir;
@@ -116,10 +125,10 @@ public class TestSimulador {
                     // Creo Sensores
                     sensor1 = new SensorHum();
                     // Agrego los sensores a la sub estacion
-                    met1.agregarSensor(sensor1);
+                    met1.agregarSensor(sensor1, met1.getID());
 
                 // Agrego la subestacion a la estacion base
-                base.agregarEstacion(met1);
+                base.agregarEstacion(met1, base.getID());
                 
                 // Creo una subestacion
                 met2 = new EstacionMet();
@@ -129,11 +138,11 @@ public class TestSimulador {
                     sensor3 = new SensorTemp();
                     
                     // Agrego los sensores a la sub estacion
-                    met2.agregarSensor(sensor2);
-                    met2.agregarSensor(sensor3);
+                    met2.agregarSensor(sensor2, met2.getID());
+                    met2.agregarSensor(sensor3, met2.getID());
 
                 // Agrego la subestacion a la estacion base
-                base.agregarEstacion(met2);
+                base.agregarEstacion(met2, base.getID());
                 
                 // Creo una subestacion
                 met3 = new EstacionMet();
@@ -141,7 +150,7 @@ public class TestSimulador {
                     // Creo Sensores
                     sensor5 = new SensorHum();
                     // Agrego los sensores a la sub estacion
-                    met3.agregarSensor(sensor5);
+                    met3.agregarSensor(sensor5, met3.getID());
 
                     // Creo una subestacion
                     met4 = new EstacionMet();
@@ -149,13 +158,13 @@ public class TestSimulador {
                         // Creo Sensores
                         sensor4 = new SensorPluv();
                         // Agrego los sensores a la sub estacion
-                        met4.agregarSensor(sensor4);
+                        met4.agregarSensor(sensor4, met4.getID());
 
                     // Agrego la subestacion a la estacion base
-                    met3.agregarEstacion(met4);
+                    met3.agregarEstacion(met4, met3.getID());
 
                 // Agrego la subestacion a la estacion base
-                base.agregarEstacion(met3);
+                base.agregarEstacion(met3, base.getID());
                 
         } catch (CreacionException ex) {
             Logger.getLogger(TestSimulador.class.getName()).log(Level.SEVERE, null, ex);
@@ -173,7 +182,7 @@ public class TestSimulador {
         Stack<PaqueteDatos> datos = new Stack();
         
 //        while(stop != true) {
-        for (int i=0; i<5; i++) {
+        for (int i=0; i<5; i++) {   // Para prueba cuando todavia no se modifica stop
             // Inicio un timer
             // Para cuando haya un relor, si es que lo hay
 

@@ -56,18 +56,18 @@ public class EstacionMet extends Estacion {
     /* *** Otros metodos *** */
 
     /**
-     *  Agrega un sensor a la estacion, si es que hay lugar.
+     * @brief Agrega un sensor a la red del la estacion actual.
+     * 
+     * Agrega el sensor pasado como argumento a la red de la estacion actual.
+     * Esto se hace siempre y cuando haya una conexion libre en la estacion. Es 
+     * decir, si hay lugar en el arreglo redSensores.
+     * 
+     * @param sensorNuevo Sensor a ser agregado a la red.
+     * 
+     * @return true Si el sensor fue agregado correctamente a la red.
      */
-    public void agregarSensor(Sensor sensorNuevo)
-            throws ArrayIndexOutOfBoundsException {
+    private boolean agregarSensor(Sensor sensorNuevo) {
         boolean insertado = false;
-// No agrega el sensor a redSensores
-//        for (Sensor sensor : redSensores)
-//            if ( sensor == null ) {
-//                sensor = sensorNuevo;
-//                insertado = true;
-//                break;
-//            }
 
         for (int i=0; i<redSensores.length; i++) {
             if (redSensores[i] == null) {
@@ -76,37 +76,140 @@ public class EstacionMet extends Estacion {
                 break;
             }
         }
-        
-        if ( !insertado )
-            throw new ArrayIndexOutOfBoundsException( "No se puede insertar el"
-                    + " sensor. No una coneccion disponible" );
+// Reemplazado por el return boolean
+//        if ( !insertado )
+//            throw new ArrayIndexOutOfBoundsException( "No se puede insertar el"
+//                    + " sensor. No una coneccion disponible" );
 
         LOGGER.log(Level.INFO, String.format("Agregando sensor %d a la red "
                 + "de la estacion %d", sensorNuevo.getID(), ID));
+        
+        return insertado;
     }
 
     /**
-     *  Elimina una coneccion a un sensor (elimina el sensor del arreglo
-     *  redSensores) si es que existe.
+     * @brief Agrega un sensor a la red del la estacion padreID.
+     * 
+     * Agrega la sensor pasado como argumento a la red de la estacion padreID.
+     * Si padreID es el ID de la estacion actual, se agrega el nuevo sensor
+     * a la red.
+     * Esto se hace siempre y cuando haya una conexion libre en la estacion. Es 
+     * decir, si hay lugar en el arreglo redSensores.
+     * Si padreID no corresponde a la estacion actual, la orden se pasa a todas
+     * las sub-estaciones.
+     * 
+     * @param sensorNuevo Sensor a ser agragado a la red.
+     * @param padreID ID de la estacion a la cual debe agregarse sensorNuevo.
+     * 
+     * @return true Si el sensor fue agregado correctamente a la red
      */
-    public void eliminarSensor(Sensor sensorElim) throws ObjectNotFoundException {
+    public boolean agregarSensor(Sensor sensorNuevo, int padreID) {
+        boolean insertado = false;
+
+        if ( padreID == ID) // Si esta estacion es el padre, agrego
+            insertado = agregarSensor(sensorNuevo);
+        else {  // Si no, le paso la orden a las sub-estaciones
+            int i = 0;
+            int redSize = redEstaciones.length;
+            while(!insertado && i<redSize) {
+                insertado = redEstaciones[i].agregarSensor(sensorNuevo, padreID);
+                i++;
+            }  
+        }
+        
+        return insertado;
+    }
+
+    /**
+     * @brief Elimina un sensor de la red.
+     * 
+     * Elimina una coneccion a un sensor (elimina el sensor del arreglo
+     * redSensores) si es que existe.
+     * De no existir, le pasa la orden a las sub-estaciones.
+     * Se pasa como argumento un Objeto Sensor, lo cual es un problema si no 
+     * se tiene acceso directo al objeto.
+     * 
+     * @param sensorElim Una instancia del objeto a eliminar.
+     * 
+     * @return true Si el sensor fue eliminado correctamente de la red.
+     */
+    public boolean eliminarSensor(Sensor sensorElim) {
         boolean eliminado = false;
-        for (Sensor sensor : redSensores)
-            if ( sensor == sensorElim ) {
-                sensor = null;
+        
+        for (int i=0; i<redSensores.length; i++) {
+            if (redSensores[i] == sensorElim) {
+                redSensores[i] = null;
                 eliminado = true;
                 break;
             }
+        }
+        
+        if (eliminado) {    // Si se logro eliminar, guardo aviso.
+            LOGGER.log(Level.INFO, String.format("Eliminado el sensor %d de la "
+                    + "red de la estacion %d", sensorElim.getID(), ID));        
+        }
+        else { // Si no, le paso la orden a las sub-estaciones
+            int i = 0;
+            int redSize = redEstaciones.length;
+            while(!eliminado && i<redSize) {
+                eliminado = redEstaciones[i].eliminarSensor(sensorElim);
+                i++;
+            }
+        }
 
-        if ( !eliminado )
-            throw new ObjectNotFoundException(" No se pudo eliminar el sensor."
-                    + " El sensor dado no existe." );
+// Reemplazado por el return boolean
+//        if ( !eliminado )
+//            throw new ObjectNotFoundException(" No se pudo eliminar el sensor."
+//                    + " El sensor dado no existe." );
 
-        LOGGER.log(Level.INFO, String.format("Eliminado el sensor %d de la "
-                + "red de la estacion %d", sensorElim.getID(), ID));
+        return eliminado;
     }
 
-    // @NEW
+    /**
+     * @brief Elimina un sensor de la red.
+     * 
+     * Elimina una coneccion a un sensor (elimina el sensor del arreglo
+     * redSensores) si es que existe.
+     * De no existir, le pasa la orden a las sub-estaciones.
+     * Se pasa como argumento solo el ID del sensor a eliminar. Util si no se 
+     * tiene acceso al objeto del sensor.
+     * 
+     * @param sensorElimID El id del sensor a eliminar de la red.
+     * 
+     * @return true Si el sensor fue eliminado correctamente de la red.
+     */
+    public boolean eliminarSensor(int sensorElimID) {
+        boolean eliminado = false;
+        
+        for (int i=0; i<redSensores.length; i++) {
+            if (redSensores[i].getID() == sensorElimID) {
+                redSensores[i] = null;
+                eliminado = true;
+                break;
+            }
+        }
+
+        if (eliminado) {    // Si se logro eliminar, guardo aviso.
+            LOGGER.log(Level.INFO, String.format("Eliminado el sensor %d de la "
+                    + "red de la estacion %d", sensorElimID, ID));        
+        }
+        else { // Si no, le paso la orden a las sub-estaciones
+            int i = 0;
+            int redSize = redEstaciones.length;
+            while(!eliminado && i<redSize) {
+                eliminado = redEstaciones[i].eliminarSensor(sensorElimID);
+                i++;
+            }
+        }
+
+// Reemplazado por el return boolean
+//        if ( !eliminado )
+//            throw new ObjectNotFoundException(" No se pudo eliminar el sensor."
+//                    + " El sensor dado no existe." );
+
+        return eliminado;
+    }
+
     // Agrego los sensores de esta estacion a los sensores de las sub-estaciones
     @Override
     public Stack<PaqueteDatos> actualizar() {
