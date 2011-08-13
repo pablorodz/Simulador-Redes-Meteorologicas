@@ -31,7 +31,7 @@ public abstract class Estacion {
     private String nombre;
 
     /// El arreglo que indica con que estaciones esta conectada esta estacion.
-    protected EstacionMet[] redEstaciones;
+    protected Estacion[] redEstaciones;
     /// Variable para chequear si ya existe o no, una EstacionBase.
     protected static boolean estacionBaseExiste = false;  // Tiene que ser static ??
     
@@ -65,7 +65,7 @@ public abstract class Estacion {
             clase = Tipo.BASE;
             // Creo la red de estaciones del la estacion. 
             //Maximo 4 estaciones conectadas
-            redEstaciones = new EstacionMet[4];
+            redEstaciones = new Estacion[4];
         }
         else {
             // No se puede instanciar una estacion meteorologica sin tener una base
@@ -77,7 +77,7 @@ public abstract class Estacion {
             clase = Tipo.MET;
             // Creo la red de estaciones del la estacion. 
             //Maximo 4 estaciones conectadas
-            redEstaciones = new EstacionMet[3];
+            redEstaciones = new Estacion[3];
         }
 
         this.ID = IDsiguiente;
@@ -90,7 +90,7 @@ public abstract class Estacion {
                 "Creanda estacion %s %d ( %s ).", clase.toString(), ID, nombre));
 
         // Creo la red de estaciones del la estacion.
-        for ( EstacionMet estacion : redEstaciones )
+        for ( Estacion estacion : redEstaciones )
             estacion = null;
                 
         // Creo la pila donde se guardan las mediciones (PaqueteDeDatos)
@@ -130,7 +130,7 @@ public abstract class Estacion {
      * 
      * @return true Si la estacion fue agregada correctamente a la red
      */
-    private boolean agregarEstacion(EstacionMet estacionNueva) {
+    private boolean agregarEstacion(Estacion estacionNueva) {
         boolean insertado = false;
         
         for (int i=0; i<redEstaciones.length; i++) {
@@ -168,7 +168,7 @@ public abstract class Estacion {
      * 
      * @return true Si la estacion fue agregada correctamente a la red
      */
-    public boolean agregarEstacion(EstacionMet estacionNueva, int padreID) {
+    public boolean agregarEstacion(Estacion estacionNueva, int padreID) {
         boolean insertado = false;
 
         if ( padreID == ID) // Si esta estacion es el padre, agrego
@@ -177,7 +177,8 @@ public abstract class Estacion {
             int i = 0;
             int redSize = redEstaciones.length;
             while(!insertado && i<redSize) {
-                insertado = redEstaciones[i].agregarEstacion(estacionNueva, padreID);
+                if (redEstaciones[i] != null)
+                    insertado = redEstaciones[i].agregarEstacion(estacionNueva, padreID);
                 i++;
             }  
         }
@@ -198,10 +199,11 @@ public abstract class Estacion {
      * 
      * @return true Si la estacion fue eliminada correctamente de la red.
      */
-    public boolean eliminarEstacion(EstacionMet estacionElim) {
+    public boolean eliminarEstacion(Estacion estacionElim) {
         boolean eliminado = false;
         
-        for (int i=0; i<redEstaciones.length; i++) {
+        int redSize = redEstaciones.length;
+        for (int i=0; i<redSize; i++) {
             if (redEstaciones[i] == estacionElim) {
                 redEstaciones[i] = null;
                 eliminado = true;
@@ -215,9 +217,9 @@ public abstract class Estacion {
         }
         else { // Si no, le paso la orden a las sub-estaciones
             int i = 0;
-            int redSize = redEstaciones.length;
             while(!eliminado && i<redSize) {
-                eliminado = redEstaciones[i].eliminarEstacion(estacionElim);
+                if (redEstaciones[i] != null)
+                    eliminado = redEstaciones[i].eliminarEstacion(estacionElim);
                 i++;
             }
         }
@@ -246,7 +248,8 @@ public abstract class Estacion {
     public boolean eliminarEstacion(int estacionElimID) {
         boolean eliminado = false;
         
-        for (int i=0; i<redEstaciones.length; i++) {
+        int redSize = redEstaciones.length;
+        for (int i=0; i<redSize; i++) {
             if (redEstaciones[i].getID() == estacionElimID) {
                 redEstaciones[i] = null;
                 eliminado = true;
@@ -260,9 +263,9 @@ public abstract class Estacion {
         }
         else { // Si no, le paso la orden a las sub-estaciones
             int i = 0;
-            int redSize = redEstaciones.length;
             while(!eliminado && i<redSize) {
-                eliminado = redEstaciones[i].eliminarEstacion(estacionElimID);
+                if (redEstaciones[i] != null)
+                    eliminado = redEstaciones[i].eliminarEstacion(estacionElimID);
                 i++;
             }
         }
@@ -276,13 +279,12 @@ public abstract class Estacion {
     }
 
     @Override
-    /// toString() -> Estacion $ID ( $nombre )
+    /// toString() -> Estacion $ID
     public String toString() {
-        return ( String.format("Estación %d ( %s )", ID, nombre) );  
+        return ( String.format("Estación%d", ID) );  
     }
     
     /// Actualiza todas las sub-estaciones
-    // @NEW
     public Stack<PaqueteDatos> actualizar() {
         // Toda la informacion recibida de las sub-estaciones
         // La información recibida de _una_ subestacion se almacena acá
@@ -291,7 +293,7 @@ public abstract class Estacion {
         
         medidasPila.clear();    // Limpio la pila
         
-        for (EstacionMet subestacion : redEstaciones) {
+        for (Estacion subestacion : redEstaciones) {
             if (subestacion != null) {
                 newData = subestacion.actualizar();
                 
@@ -315,13 +317,14 @@ public abstract class Estacion {
         return (HH + ":" + MM + ":" + SS);
     }
     
-    /*
+    /**
      * @brief Ubicacion de los resumenes, en un Vector<String>
      * 
      * Retorna la ubicacion de los resumenes de esta estacion y de sus 
      * sub-estaciones, en un Vector<String>.
      * Se guardan en esa forma, primero la direccion propia y luego la de las 
      * sub-estaciones.
+     * 
      * @return Direccion donde se encuentra el resumen.
      */
     public Vector<String> getResumen() {
@@ -330,26 +333,37 @@ public abstract class Estacion {
         XMLConfiguration registro = new XMLConfiguration();
         registro.setFileName(String.format("resumenes/%d.xml", ID));
 
-        if ( !registro.getFile().exists() ) {
-            // Si no existe, simplemente seteo el nombre del elemento base
-            registro.setRootElementName("resumen");
-            // Y creo el archivo
-            try {
-                registro.save();
-            } catch (ConfigurationException ex1) {
-                LOGGER.log(Level.SEVERE, null, ex1);
-            }
-        }
+// No es necesario crear el resumen si no existe
+//        if ( !registro.getFile().exists() ) {
+//            // Si no existe, simplemente seteo el nombre del elemento base
+//            registro.setRootElementName("resumen");
+//            // Y creo el archivo
+//            try {
+//                registro.save();
+//            } catch (ConfigurationException ex1) {
+//                LOGGER.log(Level.SEVERE, null, ex1);
+//            }
+//        }
         
         // getFileName() me devuelve la direccion dentro del proyecto.
         // getURL() me devuelve la direccion desde el root de la maquina.
-        direcciones.add( registro.getFileName() );
+        if ( registro.getFile().exists() )
+            direcciones.add( registro.getFileName() );
         
-        for (EstacionMet subestacion : redEstaciones) {
+        for (Estacion subestacion : redEstaciones) {
             if ( subestacion != null )
                 direcciones.addAll(subestacion.getResumen());
         }
         
         return direcciones;
     }
+
+    /* *** Metodos para trabajar con sensores *** */
+    public abstract boolean agregarSensor(Sensor sensorNuevo, int padreID);
+    
+    public abstract boolean eliminarSensor(Sensor sensorElim);
+    
+    public abstract boolean eliminarSensor(int sensorElimID);
+
+
 }

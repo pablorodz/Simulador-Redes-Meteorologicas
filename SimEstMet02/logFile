@@ -1,222 +1,72 @@
-12/08/2011 12:47:11 java.util.logging.LogManager$RootLogger log
-INFO: Limpiando directorio de resumenes
-12/08/2011 12:47:14 logica.Estacion <init>
-INFO: Creanda estacion BASE 0 ( Estacion Base ).
-12/08/2011 12:47:14 logica.Estacion <init>
-INFO: Creanda estacion MET 1 ( Estacion1 ).
-12/08/2011 12:47:14 logica.SensorHum <init>
-INFO: Creado sensor de humedad, ID = 1000
-12/08/2011 12:47:14 logica.EstacionMet agregarSensor
-INFO: Agregando sensor 1000 a la red de la estacion 1
-12/08/2011 12:47:14 logica.Estacion agregarEstacion
-INFO: Agregada estacion 1 a la red de la estacion 0.
-12/08/2011 12:47:14 logica.Estacion <init>
-INFO: Creanda estacion MET 2 ( Estacion2 ).
-12/08/2011 12:47:14 logica.SensorViento <init>
-INFO: Creado sensor de viento, ID = 1001
-12/08/2011 12:47:14 logica.SensorTemp <init>
-INFO: Creado sensor de temperatura, ID = 1002
-12/08/2011 12:47:14 logica.EstacionMet agregarSensor
-INFO: Agregando sensor 1001 a la red de la estacion 2
-12/08/2011 12:47:14 logica.EstacionMet agregarSensor
-INFO: Agregando sensor 1002 a la red de la estacion 2
-12/08/2011 12:47:14 logica.Estacion agregarEstacion
-INFO: Agregada estacion 2 a la red de la estacion 0.
-12/08/2011 12:47:14 logica.Estacion <init>
-INFO: Creanda estacion MET 3 ( Estacion3 ).
-12/08/2011 12:47:14 logica.SensorHum <init>
-INFO: Creado sensor de humedad, ID = 1003
-12/08/2011 12:47:14 logica.EstacionMet agregarSensor
-INFO: Agregando sensor 1003 a la red de la estacion 3
-12/08/2011 12:47:14 logica.Estacion <init>
-INFO: Creanda estacion MET 4 ( Estacion4 ).
-12/08/2011 12:47:14 logica.SensorPluv <init>
-INFO: Creado sensor de humedad, ID = 1004
-12/08/2011 12:47:14 logica.EstacionMet agregarSensor
-INFO: Agregando sensor 1004 a la red de la estacion 4
-12/08/2011 12:47:14 logica.Estacion agregarEstacion
-INFO: Agregada estacion 4 a la red de la estacion 3.
-12/08/2011 12:47:14 logica.Estacion agregarEstacion
-INFO: Agregada estacion 3 a la red de la estacion 0.
-12/08/2011 12:47:16 logica.Estacion actualizar
-INFO: Actualizando estacion BASE 0
-12/08/2011 12:47:16 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/1.xml
-12/08/2011 12:47:16 logica.Estacion actualizar
-INFO: Actualizando estacion MET 1
-12/08/2011 12:47:16 logica.SensorHum getHumedad
-INFO: getHumedad
-12/08/2011 12:47:16 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/2.xml
-12/08/2011 12:47:17 logica.Estacion actualizar
-INFO: Actualizando estacion MET 2
-12/08/2011 12:47:17 logica.SensorViento getVientoVel
-INFO: getVientoVel()
-12/08/2011 12:47:17 logica.SensorViento getVientoDir
-INFO: getVientoDir()
-12/08/2011 12:47:17 logica.SensorTemp getTemp
-INFO: getTemp
-12/08/2011 12:47:17 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/3.xml
-12/08/2011 12:47:17 logica.Estacion actualizar
-INFO: Actualizando estacion MET 3
-12/08/2011 12:47:17 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/4.xml
-12/08/2011 12:47:17 logica.Estacion actualizar
-INFO: Actualizando estacion MET 4
-12/08/2011 12:47:17 logica.SensorPluv getLluvia
-INFO: getLluvia
-12/08/2011 12:47:17 logica.SensorHum getHumedad
-INFO: getHumedad
-12/08/2011 12:47:18 logica.Estacion actualizar
-INFO: Actualizando estacion BASE 0
-12/08/2011 12:47:18 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/1.xml
-12/08/2011 12:47:18 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/1.xml
-12/08/2011 12:47:18 logica.Estacion actualizar
-INFO: Actualizando estacion MET 1
-12/08/2011 12:47:18 logica.SensorHum getHumedad
-INFO: getHumedad
-12/08/2011 12:47:18 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/2.xml
-12/08/2011 12:47:18 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/2.xml
-12/08/2011 12:47:18 logica.Estacion actualizar
-INFO: Actualizando estacion MET 2
-12/08/2011 12:47:18 logica.SensorViento getVientoVel
-INFO: getVientoVel()
-12/08/2011 12:47:18 logica.SensorViento getVientoDir
-INFO: getVientoDir()
-12/08/2011 12:47:18 logica.SensorTemp getTemp
-INFO: getTemp
-12/08/2011 12:47:18 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/3.xml
-12/08/2011 12:47:18 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/3.xml
-12/08/2011 12:47:18 logica.Estacion actualizar
-INFO: Actualizando estacion MET 3
-12/08/2011 12:47:18 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/4.xml
-12/08/2011 12:47:18 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/4.xml
-12/08/2011 12:47:18 logica.Estacion actualizar
-INFO: Actualizando estacion MET 4
-12/08/2011 12:47:18 logica.SensorPluv getLluvia
-INFO: getLluvia
-12/08/2011 12:47:18 logica.SensorHum getHumedad
-INFO: getHumedad
-12/08/2011 12:47:19 logica.Estacion actualizar
-INFO: Actualizando estacion BASE 0
-12/08/2011 12:47:19 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/1.xml
-12/08/2011 12:47:19 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/1.xml
-12/08/2011 12:47:19 logica.Estacion actualizar
-INFO: Actualizando estacion MET 1
-12/08/2011 12:47:19 logica.SensorHum getHumedad
-INFO: getHumedad
-12/08/2011 12:47:19 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/2.xml
-12/08/2011 12:47:19 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/2.xml
-12/08/2011 12:47:19 logica.Estacion actualizar
-INFO: Actualizando estacion MET 2
-12/08/2011 12:47:19 logica.SensorViento getVientoVel
-INFO: getVientoVel()
-12/08/2011 12:47:19 logica.SensorViento getVientoDir
-INFO: getVientoDir()
-12/08/2011 12:47:19 logica.SensorTemp getTemp
-INFO: getTemp
-12/08/2011 12:47:19 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/3.xml
-12/08/2011 12:47:19 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/3.xml
-12/08/2011 12:47:19 logica.Estacion actualizar
-INFO: Actualizando estacion MET 3
-12/08/2011 12:47:19 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/4.xml
-12/08/2011 12:47:19 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/4.xml
-12/08/2011 12:47:19 logica.Estacion actualizar
-INFO: Actualizando estacion MET 4
-12/08/2011 12:47:19 logica.SensorPluv getLluvia
-INFO: getLluvia
-12/08/2011 12:47:19 logica.SensorHum getHumedad
-INFO: getHumedad
-12/08/2011 12:47:21 logica.Estacion actualizar
-INFO: Actualizando estacion BASE 0
-12/08/2011 12:47:21 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/1.xml
-12/08/2011 12:47:21 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/1.xml
-12/08/2011 12:47:21 logica.Estacion actualizar
-INFO: Actualizando estacion MET 1
-12/08/2011 12:47:21 logica.SensorHum getHumedad
-INFO: getHumedad
-12/08/2011 12:47:21 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/2.xml
-12/08/2011 12:47:21 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/2.xml
-12/08/2011 12:47:21 logica.Estacion actualizar
-INFO: Actualizando estacion MET 2
-12/08/2011 12:47:21 logica.SensorViento getVientoVel
-INFO: getVientoVel()
-12/08/2011 12:47:21 logica.SensorViento getVientoDir
-INFO: getVientoDir()
-12/08/2011 12:47:21 logica.SensorTemp getTemp
-INFO: getTemp
-12/08/2011 12:47:21 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/3.xml
-12/08/2011 12:47:21 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/3.xml
-12/08/2011 12:47:21 logica.Estacion actualizar
-INFO: Actualizando estacion MET 3
-12/08/2011 12:47:21 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/4.xml
-12/08/2011 12:47:21 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/4.xml
-12/08/2011 12:47:21 logica.Estacion actualizar
-INFO: Actualizando estacion MET 4
-12/08/2011 12:47:21 logica.SensorPluv getLluvia
-INFO: getLluvia
-12/08/2011 12:47:21 logica.SensorHum getHumedad
-INFO: getHumedad
-12/08/2011 12:47:22 logica.Estacion actualizar
-INFO: Actualizando estacion BASE 0
-12/08/2011 12:47:22 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/1.xml
-12/08/2011 12:47:22 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/1.xml
-12/08/2011 12:47:22 logica.Estacion actualizar
-INFO: Actualizando estacion MET 1
-12/08/2011 12:47:22 logica.SensorHum getHumedad
-INFO: getHumedad
-12/08/2011 12:47:22 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/2.xml
-12/08/2011 12:47:22 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/2.xml
-12/08/2011 12:47:22 logica.Estacion actualizar
-INFO: Actualizando estacion MET 2
-12/08/2011 12:47:22 logica.SensorViento getVientoVel
-INFO: getVientoVel()
-12/08/2011 12:47:22 logica.SensorViento getVientoDir
-INFO: getVientoDir()
-12/08/2011 12:47:22 logica.SensorTemp getTemp
-INFO: getTemp
-12/08/2011 12:47:22 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/3.xml
-12/08/2011 12:47:22 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/3.xml
-12/08/2011 12:47:22 logica.Estacion actualizar
-INFO: Actualizando estacion MET 3
-12/08/2011 12:47:22 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: ConfigurationUtils.locate(): base is null, name is resumenes/4.xml
-12/08/2011 12:47:22 org.apache.commons.configuration.ConfigurationUtils locate
-FINA: Loading configuration from the path resumenes/4.xml
-12/08/2011 12:47:22 logica.Estacion actualizar
-INFO: Actualizando estacion MET 4
-12/08/2011 12:47:22 logica.SensorPluv getLluvia
-INFO: getLluvia
-12/08/2011 12:47:22 logica.SensorHum getHumedad
-INFO: getHumedad
+13/08/2011 15:36:21 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.581.680;  tasks=null
+13/08/2011 15:36:22 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.582.181;  tasks=null
+13/08/2011 15:36:22 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.582.683;  tasks=null
+13/08/2011 15:36:23 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.583.184;  tasks=null
+13/08/2011 15:36:23 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.583.686;  tasks=null
+13/08/2011 15:36:24 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.584.187;  tasks=null
+13/08/2011 15:36:24 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.584.689;  tasks=null
+13/08/2011 15:36:25 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.585.190;  tasks=null
+13/08/2011 15:36:25 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.585.692;  tasks=null
+13/08/2011 15:36:26 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.586.193;  tasks=null
+13/08/2011 15:36:26 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.586.695;  tasks=null
+13/08/2011 15:36:27 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.587.196;  tasks=null
+13/08/2011 15:36:27 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.587.698;  tasks=null
+13/08/2011 15:36:28 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.588.199;  tasks=null
+13/08/2011 15:36:28 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.588.701;  tasks=null
+13/08/2011 15:36:29 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.589.202;  tasks=null
+13/08/2011 15:36:29 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.589.703;  tasks=null
+13/08/2011 15:36:30 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.590.205;  tasks=null
+13/08/2011 15:36:30 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.590.707;  tasks=null
+13/08/2011 15:36:31 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.591.208;  tasks=null
+13/08/2011 15:36:31 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.591.710;  tasks=null
+13/08/2011 15:36:32 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.592.211;  tasks=null
+13/08/2011 15:36:32 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.592.713;  tasks=null
+13/08/2011 15:36:33 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.593.214;  tasks=null
+13/08/2011 15:36:33 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.593.716;  tasks=null
+13/08/2011 15:36:34 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.594.217;  tasks=null
+13/08/2011 15:36:34 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.594.718;  tasks=null
+13/08/2011 15:36:35 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.595.220;  tasks=null
+13/08/2011 15:36:35 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.595.721;  tasks=null
+13/08/2011 15:36:36 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.596.223;  tasks=null
+13/08/2011 15:36:36 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.596.725;  tasks=null
+13/08/2011 15:36:37 sun.awt.X11.XToolkit callTimeoutTasks
+MÁS FINA: XToolkit.callTimeoutTasks(): current time=1.313.260.597.226;  tasks=null
+13/08/2011 15:36:37 sun.awt.X11.XToolkit dumpPeers
+FINA: Mapped windows:
+13/08/2011 15:36:37 sun.awt.AWTAutoShutdown dumpPeers
+FINA: Mapped peers:
+13/08/2011 15:36:37 sun.awt.X11.XToolkit dumpPeers
+FINA: Mapped special peers:
+13/08/2011 15:36:37 sun.awt.X11.XToolkit dumpPeers
+FINA: Mapped dispatchers:

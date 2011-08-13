@@ -4,18 +4,18 @@
 <sensor>
 <id>1001</id>
 <tipo>SensorViento</tipo>
-<maximo>23.35 N</maximo>
-<minimo>20.910002 S</minimo>
-<medio>21.755001</medio>
-<mediciones>5</mediciones>
+<maximo>63.57 N</maximo>
+<minimo>63.15 N</minimo>
+<medio>63.36</medio>
+<mediciones>2</mediciones>
 </sensor>
 <sensor>
 <id>1002</id>
 <tipo>SensorTemp</tipo>
-<maximo>13.780001</maximo>
-<minimo>10.900001</minimo>
-<medio>13.08625</medio>
-<mediciones>5</mediciones>
+<maximo>38.58</maximo>
+<minimo>37.27</minimo>
+<medio>37.925003</medio>
+<mediciones>2</mediciones>
 </sensor>
 </estacion2>
 </resumen>

@@ -6,13 +6,8 @@
 
 package logica;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Stack;
-import java.util.Vector;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.configuration.*;
 
 /*
  *  Estacion base.
@@ -54,38 +49,63 @@ public class EstacionBase extends Estacion {
         
         return datos;
     }
-    
-    /*
-     * @brief Ubicacion de los resumenes, en un Vector<String>
-     * 
-     * Retorna la ubicacion de los resumenes de esta estacion y de sus 
-     * sub-estaciones, en un Vector<String>.
-     * Se guardan en esa forma, primero la direccion propia y luego la de las 
-     * sub-estaciones.
-     * Como la estacion base no tiene sensores, se elimina a esta de las 
-     * direcciones.
-     * Este metodo no tiene sentido y menos que se encuentre getResumen() en 
-     * Estacion. Esto es asi porque en getResumen() de EstacionBase se deberia
-     * crear un resumen con todos los resumnes de su red. Por el momento esto 
-     * no lo hace debido a complicaciones a la hora de copiar un resumen(XML) 
-     * en otro (se pierde la estructura).
-     * A pesar de que no haya un resumen de la EstacionBase se podria pensar de
-     * la siguiente manera:
-     *   * Las sub-estaciones tiene sus resumenes en sus servidores.
-     *   * getResumen() de estacionBase toma estas direcciones y hace una copia local.
-     *   * getResumen() retorna la direccion en disco donde estan estas copias.
-     * 
-     * @return Direccion donde se encuentran los resumenes.
-     */
-    @Override
-    public Vector<String> getResumen() {
-        // Direcciones de todos los resumes de la red
-        Vector<String> direcciones = super.getResumen();
 
-        // Antes de retornar las direcciones, borra la propia del arreglo
-        direcciones.removeElementAt(0);
+    @Override
+    public boolean agregarSensor(Sensor sensorNuevo, int padreID) {
+        boolean insertado = false;
         
-        return direcciones;
+        int i = 0;
+        int redSize = redEstaciones.length;
+        while(!insertado && i<redSize) {
+            if (redEstaciones[i] != null)
+                insertado = redEstaciones[i].agregarSensor(sensorNuevo, padreID);
+            i++;
+        }
+        
+        return insertado;
+    }
+
+    @Override
+    public boolean eliminarSensor(Sensor sensorElim) {
+        boolean eliminado = false;
+        
+        int i = 0;
+        int redSize = redEstaciones.length;
+        while(!eliminado && i<redSize) {
+            if (redEstaciones[i] != null)
+                eliminado = redEstaciones[i].eliminarSensor(sensorElim);
+            i++;
+        }
+        
+        return eliminado;
+    }
+
+    @Override
+    public boolean eliminarSensor(int sensorElimID) {
+        boolean eliminado = false;
+        
+        int i = 0;
+        int redSize = redEstaciones.length;
+        while(!eliminado && i<redSize) {
+            if (redEstaciones[i] != null)
+                eliminado = redEstaciones[i].eliminarSensor(sensorElimID);
+            i++;
+        }
+        
+        return eliminado;
     }
     
+// EstacionBase se deberia crear un resumen con todos los resumnes de su red. 
+// Por el momento esto no lo hace debido a complicaciones a la hora de copiar un
+// resumen(XML) en otro, se pierde la estructura.
+//    @Override
+//    public Vector<String> getResumen() {
+//        // Direcciones de todos los resumes de la red
+//        Vector<String> direcciones = super.getResumen();
+//
+//        // Crear resumen con los resumenes
+//        
+//        return direcciones;
+//    }
+
 }

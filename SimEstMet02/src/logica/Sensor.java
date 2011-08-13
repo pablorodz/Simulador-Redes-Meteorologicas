@@ -74,7 +74,10 @@ public abstract class Sensor {
         setEstado(false);  // Si elimino setEstado() --> estado = false
     }
 
-    // Implements ClockListener ??
     public abstract void actualizar();
 
+    @Override
+    public String toString() {
+        return ( String.format("Sensor%D", ID) );
+    }
 }

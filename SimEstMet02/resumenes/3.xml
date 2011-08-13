@@ -4,10 +4,10 @@
 <sensor>
 <id>1003</id>
 <tipo>SensorHum</tipo>
-<maximo>69.53001</maximo>
-<minimo>66.51</minimo>
-<medio>67.631256</medio>
-<mediciones>5</mediciones>
+<maximo>57.63</maximo>
+<minimo>57.16</minimo>
+<medio>57.395</medio>
+<mediciones>2</mediciones>
 </sensor>
 </estacion3>
 </resumen>
