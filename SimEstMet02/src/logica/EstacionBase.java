@@ -26,7 +26,7 @@ public class EstacionBase extends Estacion {
     // private Estacion[] totalEstaciones;
 
     // El logger solo para esta clase
-    private final static Logger LOGGER = Logger.getLogger(EstacionMet.class .getName());
+    private final static Logger LOGGER = Logger.getLogger(EstacionBase.class .getName());
 
     /* *** Constructores *** */
 

@@ -107,6 +107,16 @@ public abstract class Estacion {
         return ID;
     }
 
+    /**
+     * Retorna el id que va a tener la siguiente estacion. Utilizado para saber
+     * el maximo numero de estaciones.
+     * 
+     * @return ID de la siguiente estacion a crear
+     */
+    public static int getSiguienteID() {
+        return IDsiguiente;
+    }
+    
     public String getNombre () {
         return nombre;
     }

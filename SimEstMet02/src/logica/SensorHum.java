@@ -21,7 +21,7 @@ public class SensorHum extends Sensor {
     // Valor maximo permitido de la humedad, en %.
     public static int HUM_MAX = 100;
     // El logger solo para esta clase
-    private final static Logger LOGGER = Logger.getLogger(Estacion.class .getName());
+    private final static Logger LOGGER = Logger.getLogger(SensorHum.class .getName());
 
      public SensorHum() {
          super();

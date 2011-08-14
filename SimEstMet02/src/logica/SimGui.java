@@ -1,277 +1,25 @@
-package Main;
+package logica;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import logica.*;
 
 /**
  *
  */
-public class TestSimulador {
-
-    static EstacionBase base = null;    // Es necesario ponerlo a null ??
-    
-    public static void main(String args[]) {
-        // Limpio el LOG
-        Loggers.clearFileLog();
-        // Apago todos los handlers y habilito solo el que escribe a un archivo
-        Loggers.setLevel(Level.OFF);
-        Loggers.fileLogger(Level.ALL);
-        // Limpio el directorio de los resumenes
-        limpiarResumenesDir();
-        
-        // Menu principal
-        menu();
-    }
-
-    private static void menu() {
-        Scanner scan = new Scanner(System.in);
-        boolean salir = false;
-        Integer seleccion;
-        
-        while(!salir) {
-            // Imprimo menu
-            System.out.printf("\n\tMENU\n"
-                    + "(1) Crear Red\n"
-                    + "(2) Modificar Red\n"
-                    + "(3) Cargar Ejemplo\n"
-                    + "(4) Correr Simulación\n"
-                    + "(5) Ver resumen\n"
-                    + "(6) Limpiar resumenes\n"
-                    + "(7) Salir\n"
-                    + "\nSeleccione menu ingresando el número correspondiente: ");
-            
-            // Busco y ejecuto la seleccion
-            try{
-                seleccion = scan.nextInt();
-                
-                if (seleccion < 1 || seleccion >7)
-                    throw new InputMismatchException();
-                
-                salir = ejecutarSeleccion(seleccion);
-            } catch(InputMismatchException ex) {
-                System.out.println("Simbolo ingresado no válido.");
-            }
-        }
-    }
-    /*
-     * Metodo que decide la accion a seguir dependiendo de la accion del usuario
-     * 
-     * @return boolean True=salir
-     */
-    private static boolean ejecutarSeleccion(Integer seleccion) {
-        boolean salir = false;
-        
-        switch(seleccion) {
-            case 1: {
-                try {
-                    base = nuevaRed();
-                } catch (CreacionException ex) {
-                    Logger.getLogger(TestSimulador.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println(ex.getMessage());
-                }
-                break;
-            }
-                
-            case 2: base = modificarRed(base); break;
-                
-            case 3: base = ejemplo1(); break;
-                
-            case 4: start(base); break;
-                
-            case 5: {
-                Vector<String> direcciones = base.getResumen();
-                System.out.println("Los resumenes se encuentran en:"); 
-                for (String dir : direcciones) {
-                    System.out.printf("\t%s\n", dir);
-                }
-                break;
-            }
-                
-            case 6: {
-                try {
-                    if (limpiarResumenesDir() == false)
-                        Logger.getLogger("").log(Level.WARNING, "No se pudo "
-                                + "limpiar el directorio de resumenes");
-                }
-                catch (NullPointerException ne) {
-                    Logger.getLogger("").log(Level.WARNING, "No se pudo limpiar"
-                            + " el directorio de resumenes, no existe");
-                }
-                break;
-            }
-                
-            case 7: salir = true; break;
-        }
-        
-        return salir;
-    }    
-
-    /*
-     * Se carga un ejemplo en el simulador
-     */
-    public static EstacionBase ejemplo1() {
-        EstacionBase base = null;
-            EstacionMet met1 = null;
-                SensorHum sensor1 = null;
-            EstacionMet met2 = null;
-                SensorViento sensor2 = null;
-                SensorTemp sensor3 = null;
-            EstacionMet met3 = null;
-                SensorHum sensor5 = null;
-                EstacionMet met4 = null;
-                    SensorPluv sensor4 = null;
-                
-        try {
-            // Creo estacion Base
-            base = new EstacionBase();
-            
-                // Creo una subestacion
-                met1 = new EstacionMet();
-                
-                    // Creo Sensores
-                    sensor1 = new SensorHum();
-                    // Agrego los sensores a la sub estacion
-                    met1.agregarSensor(sensor1, met1.getID());
-
-                // Agrego la subestacion a la estacion base
-                base.agregarEstacion(met1, base.getID());
-                
-                // Creo una subestacion
-                met2 = new EstacionMet();
-                
-                    // Creo Sensores
-                    sensor2 = new SensorViento();
-                    sensor3 = new SensorTemp();
-                    
-                    // Agrego los sensores a la sub estacion
-                    met2.agregarSensor(sensor2, met2.getID());
-                    met2.agregarSensor(sensor3, met2.getID());
-
-                // Agrego la subestacion a la estacion base
-                base.agregarEstacion(met2, base.getID());
-                
-                // Creo una subestacion
-                met3 = new EstacionMet();
-                
-                    // Creo Sensores
-                    sensor5 = new SensorHum();
-                    // Agrego los sensores a la sub estacion
-                    met3.agregarSensor(sensor5, met3.getID());
-
-                    // Creo una subestacion
-                    met4 = new EstacionMet();
-
-                        // Creo Sensores
-                        sensor4 = new SensorPluv();
-                        // Agrego los sensores a la sub estacion
-                        met4.agregarSensor(sensor4, met4.getID());
-
-                    // Agrego la subestacion a la estacion base
-                    met3.agregarEstacion(met4, met3.getID());
-
-                // Agrego la subestacion a la estacion base
-                base.agregarEstacion(met3, base.getID());
-                
-        } catch (CreacionException ex) {
-            Logger.getLogger(TestSimulador.class.getName()).log(Level.SEVERE, null, ex);
-            System.exit(1);
-        }
-        
-        return base;
-    }
-
-    /*
+public class SimGui {
+/*
      * Metodo donde se ejcuta la simulacion
      */
-    private static void start(EstacionBase base) {
-        boolean stop = false;
-        boolean sigo = false;
-        Stack<PaqueteDatos> datos = new Stack();
-        Scanner scan = new Scanner(System.in);
-        TimerListener timerListener;
-        javax.swing.Timer timer;
-        int nAct = 0;
-        
-        // Pido tiempo de ejecucion en numero de actualizaciones (mediciones)
-        System.out.print("Numero de actualizaciones: ");
-        try{
-            nAct = scan.nextInt();
-
-            if (nAct < 0)
-                throw new InputMismatchException();
-
-        } catch(InputMismatchException ex) {
-            System.out.println("Simbolo ingresado no válido.");
-        }
-
-        // Creo el listener e inicio el timer
-        timerListener = new TimerListener();
-        timer = new javax.swing.Timer(1000, timerListener);
-
-//        while(stop != true) {
-        for (int i=0; i<nAct; i++) {
-            System.out.println("Esperando actualizacion... ");
-            timer.restart();
-            
-            while (!sigo) {
-                // Miro si se activo el timer
-                sigo = timerListener.getEstado();
-                // Miro si se apreto una tecla
-            }
-            
-            // Paro el timer
-            timer.stop();
-            
-            // Actualizo
-            datos = base.actualizar();
-            
-            // Muestro info
-            while( !(datos.empty()) ) {
-                datos.pop().printDatos();
-            }
-            
-            // Reinicion variables
-            sigo = false;
-            timerListener.reset();
-
-        }
-    }
     
-    /*
-     * @return Si se limpio correctamente el directorio
-     */
-    private static boolean limpiarResumenesDir() throws NullPointerException {
-        File dir = new File("resumenes");
-
-        if (!dir.exists() || !dir.isDirectory())
-            throw new NullPointerException("No existe directorio.");
-        
-        Logger.getLogger("").log(Level.INFO, "Limpiando directorio de resumenes");
-        
-        File[] archivos = dir.listFiles();
-        int numArchivos = dir.list().length;
-        boolean exito = true;
-        
-        for (int i=0; i<numArchivos; i++) {
-            //System.out.println(archivos[i].getName());
-            if (!archivos[i].delete()){
-                exito = false;
-                break;
-            }                
-        }
-        
-        return exito;
-    }
-
     private static EstacionBase nuevaRed() throws CreacionException {
         EstacionBase base = new EstacionBase();
         int numSubEstaciones = 0;
@@ -663,26 +411,6 @@ public class TestSimulador {
         return base;
     }
     
-    /* *** Clase para trabajar con el timer *** */
-    static class TimerListener implements ActionListener {
-        // Un estado para avisar que se disparo el timer
-        private boolean activar;
-        
-        public void actionPerformed(ActionEvent e) {
-            // Se disparo el timer
-            activar = true;
-        }
-        
-        public boolean getEstado() { 
-            if (activar)
-                // Si no pongo esto, no funciona ¿WTF?
-                System.out.println();
-            
-            return activar; 
-        }
-        
-        public void reset() { 
-            activar = false;
-        }
-    }
+    
+    
 }

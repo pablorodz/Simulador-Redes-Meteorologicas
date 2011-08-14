@@ -22,7 +22,7 @@ public class SensorPluv extends Sensor {
     public static int LLUVIA_MAX = 10;
 
     // El logger solo para esta clase
-    private final static Logger LOGGER = Logger.getLogger(Estacion.class .getName());
+    private final static Logger LOGGER = Logger.getLogger(SensorPluv.class .getName());
 
     /** 
      *  Constructor.

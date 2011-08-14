@@ -4,9 +4,9 @@
 <sensor>
 <id>1004</id>
 <tipo>SensorPluv</tipo>
-<maximo>7.8</maximo>
+<maximo>4.51</maximo>
 <minimo>0.0</minimo>
-<medio>3.9</medio>
+<medio>2.255</medio>
 <mediciones>2</mediciones>
 </sensor>
 </estacion4>

@@ -22,7 +22,7 @@ public abstract class Sensor {
 //    public enum Tipo { HUM, PLUV, TEMP, VDIR, VVEL };  // Es public debido a que paquete de datos lo debe utilizar
 
     // El logger solo para esta clase
-    private final static Logger LOGGER = Logger.getLogger(Estacion.class .getName());
+    private final static Logger LOGGER = Logger.getLogger(Sensor.class .getName());
     
     // Creo un Random, porque se usa mucho en todas las subclases.
     protected Random random = new Random();
@@ -46,6 +46,16 @@ public abstract class Sensor {
     public boolean isEstado () { return estado; }
     // El valor que mide cada sensor
     public abstract String getMedicion();
+    
+    /**
+     * Retorna el id que va a tener el siguiente sensor. Utilizado para saber
+     * el maximo numero de sensores.
+     * 
+     * @return ID del siguiente sensor a crear
+     */
+    public static int getSiguienteID() {
+        return IDsiguiente;
+    }
     
     /*
      *  * Settearlo a mano o segun un archivo externo con los valores.

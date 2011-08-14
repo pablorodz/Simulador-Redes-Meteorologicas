@@ -24,7 +24,7 @@ public class SensorViento extends Sensor {
     // Valores que puede tomar la direccion del viento
     public enum Direccion { S, SE, E, NE, N, NO, O, SO };
     // El logger solo para esta clase
-    private final static Logger LOGGER = Logger.getLogger(Estacion.class .getName());
+    private final static Logger LOGGER = Logger.getLogger(SensorViento.class .getName());
 
      public SensorViento() {
          super();

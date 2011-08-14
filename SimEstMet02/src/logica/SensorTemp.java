@@ -22,7 +22,7 @@ public class SensorTemp extends Sensor {
     // positiva como negativa.
     public static int TEMP_MAX = 50;
     // El logger solo para esta clase
-    private final static Logger LOGGER = Logger.getLogger(Estacion.class .getName());
+    private final static Logger LOGGER = Logger.getLogger(SensorTemp.class .getName());
 
      public SensorTemp() {
          super();
