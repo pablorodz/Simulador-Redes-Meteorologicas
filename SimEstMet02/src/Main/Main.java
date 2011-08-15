@@ -20,13 +20,14 @@ public class Main {
     
     public static void main(String args[]) {
         
-        // Limpio el LOG
-        Loggers.clearFileLog();
-        // Apago todos los handlers y habilito solo el que escribe a un archivo
-        Loggers.setLevel(Level.OFF);
-        Loggers.fileLogger(Level.ALL);
-        // Limpio el directorio de los resumenes
-        limpiarResumenesDir();
+// No se pueden ejecutar antes de la gui ¿WTF?
+//        // Limpio el LOG
+//        Loggers.clearFileLog();
+//        // Apago todos los handlers y habilito solo el que escribe a un archivo
+//        Loggers.setLevel(Level.OFF);
+//        Loggers.fileLogger(Level.ALL);
+//        // Limpio el directorio de los resumenes
+//        limpiarResumenesDir();
         
         // Si se usa GUI --> gui.MainWindow.main()
         // Si no se usa GUI --> logica.SimNoGui.menu()
@@ -34,6 +35,14 @@ public class Main {
             MainWindow.main(null);
         }
         else {
+            // Limpio el LOG
+            Loggers.clearFileLog();
+            // Apago todos los handlers y habilito solo el que escribe a un archivo
+            Loggers.setLevel(Level.OFF);
+            Loggers.fileLogger(Level.ALL);
+            // Limpio el directorio de los resumenes
+            limpiarResumenesDir();
+
             SimNoGui app = new SimNoGui();
             app.main();
         }

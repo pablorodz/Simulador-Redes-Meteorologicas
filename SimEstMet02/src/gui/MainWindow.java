@@ -34,6 +34,8 @@ public class MainWindow extends javax.swing.JFrame {
     // Estado de la simulacion: Corriendo=true, parada= false
     private boolean corriendo;
     
+    private boolean sigoEXT;
+    
     /** Creates new form MainWindow */
     public MainWindow() {
         initComponents();
@@ -55,8 +57,7 @@ public class MainWindow extends javax.swing.JFrame {
         startStopToggleButton.setSelected(false);
         
         // Redirijo la salida estandar a salidaTextPane
-        System.setOut(new PrintStream(new FilteredStream(new ByteArrayOutputStream())));
-
+//        System.setOut(new PrintStream(new FilteredStream(new ByteArrayOutputStream())));
     }
 
     /** This method is called from within the constructor to
@@ -385,13 +386,6 @@ private void cargarEjemploMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 private void agregarEstacionMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEstacionMenuItemActionPerformed
     this.agregarEstacion();
-        try {
-            System.out.println("Esperando...");
-            Thread.sleep(2000);
-            System.out.println("Seguimos");
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
 }//GEN-LAST:event_agregarEstacionMenuItemActionPerformed
 
 private void agregarSensorMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarSensorMenuItemActionPerformed
@@ -414,7 +408,9 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }//GEN-LAST:event_salirMenuItemActionPerformed
 
 private void comenzarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comenzarMenuItemActionPerformed
+    System.out.println("Entre");
     this.start();
+    System.out.println("Sali");
 }//GEN-LAST:event_comenzarMenuItemActionPerformed
 
 private void pararMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pararMenuItemActionPerformed
@@ -423,11 +419,11 @@ private void pararMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startStopToggleButtonActionPerformed
     if ( startStopToggleButton.isSelected() )
-//        comenzarMenuItemActionPerformed(evt);
-        System.out.println("Hola maricon!!");
+        comenzarMenuItemActionPerformed(evt);
+//        System.out.println("Hola maricon!!");
     else
-//        pararMenuItemActionPerformed(evt);
-        System.out.println("Chau maricon!!");
+        pararMenuItemActionPerformed(evt);
+//        System.out.println("Chau maricon!!");
 }//GEN-LAST:event_startStopToggleButtonActionPerformed
 
     /**
@@ -464,8 +460,8 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
                 new MainWindow().setVisible(true);
             }
         });
-
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JButton agregarEstacionButton;
@@ -809,42 +805,34 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         corriendo = true;
         estadoLabel.setText("Estado: corriendo");
 
-//        timer.start();
-//        while(stop != true) {
-//            System.out.println("Esperando actualizacion... ");
-//            timer.restart();
-//            
-//            while (!sigo && !stop) {
-//                // Miro si se activo el timer
-//                sigo = timerListener.getEstado();
-//                // Miro si se apreto stop (corriendo = false)
-//                stop = !corriendo;
-//            }
-//            
-//            // Paro el timer
-//            timer.stop();
-//            
-//            // Actualizo
-//            datos = base.actualizar();
-//            
-//            // Muestro info
-//            while( !(datos.empty()) ) {
-//                datos.pop().printDatos();
-//            }
-//            
-//            // Reinicion variables
-//            sigo = false;
-//            timerListener.reset();
-//        }
-//        
-        try {
-            System.out.println("Hola sleep");
-            Thread.sleep(5000);
-            System.out.println("Chau sleep");        
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        timer.start();
+        while(stop != true) {
+            System.out.println("Esperando actualizacion... ");
+            timer.restart();
+            
+            while (!sigo && !stop) {
+                // Miro si se activo el timer
+                sigo = timerListener.getEstado();
+                // Miro si se apreto stop (corriendo = false)
+                stop = !corriendo;
+            }
+            
+            // Paro el timer
+            timer.stop();
+            
+            // Actualizo
+            datos = base.actualizar();
+            
+            // Muestro info
+            while( !(datos.empty()) ) {
+                datos.pop().printDatos();
+            }
+            
+            // Reinicion variables
+            sigo = false;
+            timerListener.reset();
         }
-        
+
         estadoLabel.setText("Estado: parada");
         corriendo = false;  // No es necesario
         startStopToggleButton.setSelected(false);
