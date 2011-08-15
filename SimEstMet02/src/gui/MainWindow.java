@@ -10,6 +10,7 @@
  */
 package gui;
 
+import javax.swing.event.TreeModelEvent;
 import logica.*;
 import Main.Main;   // Para poder usar limpiarResumenes()
 import java.awt.event.*;
@@ -18,6 +19,7 @@ import java.util.Stack;
 import java.util.Vector;
 import java.util.logging.*;
 import javax.swing.JOptionPane;
+import javax.swing.event.TreeModelListener;
 import javax.swing.tree.*;
 
 /**
@@ -31,10 +33,12 @@ public class MainWindow extends javax.swing.JFrame {
     // Estacion base existe siempre, y tambien su TreeNode
     private EstacionBase base;
     private DefaultMutableTreeNode baseTree;
+    private DefaultTreeModel baseTreeModel;
     // Estado de la simulacion: Corriendo=true, parada= false
     private boolean corriendo;
-    
-    private boolean sigoEXT;
+    // El que actualiza y el tiempo de actualizacion en milisegundos
+    private int refreshTime;
+    private javax.swing.Timer timer;
     
     /** Creates new form MainWindow */
     public MainWindow() {
@@ -44,7 +48,9 @@ public class MainWindow extends javax.swing.JFrame {
         try {
             base = new EstacionBase();
             baseTree = new DefaultMutableTreeNode( base );
-            redTree.setModel(new DefaultTreeModel(baseTree));
+            baseTreeModel = new DefaultTreeModel(baseTree);
+            baseTreeModel.addTreeModelListener(new MyTreeModelHandler());
+            redTree.setModel(baseTreeModel);
         } catch (CreacionException ex) {
             String mensaje = String.format("Error critico! \nNo se pudo crear "
                     + "la estacion base.");
@@ -52,12 +58,20 @@ public class MainWindow extends javax.swing.JFrame {
             System.exit(1);
         }
         
+        // Instancio y creo el timer
+        refreshTime = 5000;
+        timer = new javax.swing.Timer( refreshTime, new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                step();
+            }
+        });
+        
         estadoLabel.setText("Estado: parada");
         corriendo = false;
         startStopToggleButton.setSelected(false);
-        
+                
         // Redirijo la salida estandar a salidaTextPane
-//        System.setOut(new PrintStream(new FilteredStream(new ByteArrayOutputStream())));
+        System.setOut(new PrintStream(new FilteredStream(new ByteArrayOutputStream())));
     }
 
     /** This method is called from within the constructor to
@@ -220,7 +234,7 @@ public class MainWindow extends javax.swing.JFrame {
         estadoLabel.setFocusable(false);
         estadoToolBar.add(estadoLabel);
 
-        principalSplitPane.setDividerLocation(140);
+        principalSplitPane.setDividerLocation(180);
         principalSplitPane.setDividerSize(5);
 
         treeScrollPane.setViewportView(redTree);
@@ -408,9 +422,7 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }//GEN-LAST:event_salirMenuItemActionPerformed
 
 private void comenzarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comenzarMenuItemActionPerformed
-    System.out.println("Entre");
     this.start();
-    System.out.println("Sali");
 }//GEN-LAST:event_comenzarMenuItemActionPerformed
 
 private void pararMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pararMenuItemActionPerformed
@@ -453,13 +465,16 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         }
         //</editor-fold>
 
+        final MainWindow mainWin = new MainWindow();
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new MainWindow().setVisible(true);
+                mainWin.setVisible(true);
             }
         });
+        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -505,6 +520,35 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
 
     /* *** Metodos propios *** */
     
+    private void start() {
+//        salidaTextArea.setText("");
+        startStopToggleButton.setSelected(true);
+        corriendo = true;
+        estadoLabel.setText("Estado: corriendo");
+
+        timer.start();
+    }
+
+    private void stop() {
+        timer.stop();
+        
+        estadoLabel.setText("Estado: parada");
+        corriendo = false;  // No es necesario
+        startStopToggleButton.setSelected(false);
+    }
+    
+    private void step() {
+        Stack<PaqueteDatos> datos = new Stack();
+        // Actualizo
+        datos = base.actualizar();
+
+        // Muestro info
+        System.out.printf("\n\t\t##### Estado del sistema #####\n");
+        while( !(datos.empty()) ) {
+            datos.pop().printDatos();
+        }
+    }
+    
     /**
      * Imprime en una pantalla la ubicacion de los resumenes
      */
@@ -538,53 +582,61 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         try {
             // Creo una subestacion
             met1 = new EstacionMet();
-
+            // Agrego la subestacion a la estacion base
+            base.agregarEstacion(met1, base.getID());
+            // Agrego el TreNode
+            baseTreeModel.insertNodeInto(met1.getTreeNode(), baseTree, baseTree.getChildCount());
                 // Creo Sensores
                 sensor1 = new SensorHum();
                 // Agrego los sensores a la sub estacion
                 met1.agregarSensor(sensor1, met1.getID());
-
-            // Agrego la subestacion a la estacion base
-            base.agregarEstacion(met1, base.getID());
-
+                // Agrego el TreNode
+                baseTreeModel.insertNodeInto(sensor1.getTreeNode(), met1.getTreeNode(), met1.getTreeNode().getChildCount());
+            
             // Creo una subestacion
             met2 = new EstacionMet();
-
+            // Agrego la subestacion a la estacion base
+            base.agregarEstacion(met2, base.getID());
+            // Agrego TreeNode
+            baseTreeModel.insertNodeInto(met2.getTreeNode(), baseTree, baseTree.getChildCount());
                 // Creo Sensores
                 sensor2 = new SensorViento();
                 sensor3 = new SensorTemp();
-
                 // Agrego los sensores a la sub estacion
                 met2.agregarSensor(sensor2, met2.getID());
                 met2.agregarSensor(sensor3, met2.getID());
-
-            // Agrego la subestacion a la estacion base
-            base.agregarEstacion(met2, base.getID());
-
+                // Agrego TreeNode
+                baseTreeModel.insertNodeInto(sensor2.getTreeNode(), met2.getTreeNode(), met2.getTreeNode().getChildCount());
+                baseTreeModel.insertNodeInto(sensor3.getTreeNode(), met2.getTreeNode(), met2.getTreeNode().getChildCount());
+            
             // Creo una subestacion
             met3 = new EstacionMet();
-
+            // Agrego la subestacion a la estacion base
+            base.agregarEstacion(met3, base.getID());
+            // Agrego TreeNode
+            baseTreeModel.insertNodeInto(met3.getTreeNode(), baseTree, baseTree.getChildCount());
                 // Creo Sensores
                 sensor5 = new SensorHum();
                 // Agrego los sensores a la sub estacion
                 met3.agregarSensor(sensor5, met3.getID());
+                // Agrego TreeMode
+                baseTreeModel.insertNodeInto(sensor5.getTreeNode(), met3.getTreeNode(), met3.getTreeNode().getChildCount());
 
                 // Creo una subestacion
                 met4 = new EstacionMet();
-
+                // Agrego la subestacion a la estacion base
+                met3.agregarEstacion(met4, met3.getID());
+                // Agrego TreeMode
+                baseTreeModel.insertNodeInto(met4.getTreeNode(), met3.getTreeNode(), met3.getTreeNode().getChildCount());
                     // Creo Sensores
                     sensor4 = new SensorPluv();
                     // Agrego los sensores a la sub estacion
                     met4.agregarSensor(sensor4, met4.getID());
+                    // Agrego TreeMode
+                    baseTreeModel.insertNodeInto(sensor4.getTreeNode(), met4.getTreeNode(), met4.getTreeNode().getChildCount());
 
-                // Agrego la subestacion a la estacion base
-                met3.agregarEstacion(met4, met3.getID());
-
-            // Agrego la subestacion a la estacion base
-            base.agregarEstacion(met3, base.getID());
-                
         } catch (CreacionException ex) {
-            Logger.getLogger(SimGui.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
             System.exit(1);
         }
     }
@@ -615,14 +667,18 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         if (padreID != null) {  // Si se eligio
             // Creo estacion y la agrego si se puede
             try {
-                // Para poder pedir el nombre luego
                 Estacion nuevaEstacion = new EstacionMet();
                 boolean insertada = false;
                 
                 // Agrego estacion a la red
                 insertada = base.agregarEstacion( nuevaEstacion, padreID.intValue());
                 
-                if (insertada) {    // Si se agrego correctamente aviso
+                if (insertada) {    // Si se agrego correctamente, aviso y modifico tree
+                    // Agrego el TreeNode
+                    DefaultMutableTreeNode padreTreeNode = base.getEstacionTreeNode(padreID.intValue());
+                    baseTreeModel.insertNodeInto(nuevaEstacion.getTreeNode(), padreTreeNode, padreTreeNode.getChildCount());
+                    
+                    // Aviso
                     titulo = titulo + ": exito";
                     mensaje = String.format("Se ha agregado la %s en la red de"
                             + " la Estacion%d.", nuevaEstacion.toString(), padreID);
@@ -678,7 +734,7 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
             
             // Creo sensor y la agrego si se puede
             Sensor nuevoSensor = null;
-            boolean insertada = false;
+            boolean insertado = false;
             
             switch (tipo) {
                 case 0: nuevoSensor = new SensorHum(); break;
@@ -687,10 +743,15 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
                 case 3: nuevoSensor = new SensorPluv(); break;
             }
 
-            // Agrego estacion a la red
-            insertada = base.agregarSensor( nuevoSensor, padreID.intValue());
+            // Agrego el sensor a la red
+            insertado = base.agregarSensor( nuevoSensor, padreID.intValue());
 
-            if (insertada) {    // Si se agrego correctamente aviso
+            if (insertado) {    // Si se agrego correctamente, aviso y agrego TreeNode
+                // Agrego el TreeNode
+                DefaultMutableTreeNode padreTreeNode = base.getEstacionTreeNode(padreID.intValue());
+                baseTreeModel.insertNodeInto(nuevoSensor.getTreeNode(), padreTreeNode, padreTreeNode.getChildCount());
+                
+                // Aviso
                 titulo = titulo + ": exito";
                 mensaje = String.format("Se ha agregado el sensor en la red de"
                         + " la Estacion%d.", padreID);
@@ -732,11 +793,16 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         
         if (estacionID != null) {  // Si se eligio, elimino la estacion
             boolean eliminada = false;
-
+            DefaultMutableTreeNode estacionTreeNode = base.getEstacionTreeNode(estacionID.intValue());
+            
             // Elimino estacion de la red
             eliminada = base.eliminarEstacion( estacionID.intValue() );
 
-            if (eliminada) {    // Si se elimino correctamente, aviso
+            if (eliminada) {    // Si se elimino correctamente, aviso y saco de TreeNode
+                // Elimino el TreeNode
+                baseTreeModel.removeNodeFromParent(estacionTreeNode);
+                    
+                // Aviso
                 titulo = titulo + ": exito";
                 mensaje = String.format("Se ha eliminado la Estacion%d en la"
                         + " red.", estacionID);
@@ -772,11 +838,16 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         
         if (sensorID != null) {  // Si se eligio, elimino el sensor
             boolean eliminado = false;
-
+            DefaultMutableTreeNode sensorTreeNode = base.getEstacionTreeNode(sensorID.intValue());
+            
             // Elimino estacion de la red
             eliminado = base.eliminarSensor( sensorID.intValue() );
 
-            if (eliminado) {    // Si se elimino correctamente, aviso
+            if (eliminado) {    // Si se elimino correctamente, aviso y saco de TreeNode
+                // Elimino el TreeNode
+                baseTreeModel.removeNodeFromParent(sensorTreeNode);
+                    
+                // Aviso
                 titulo = titulo + ": exito";
                 mensaje = "Se ha eliminado el sensor de la red";
                 tipo = JOptionPane.INFORMATION_MESSAGE;
@@ -789,79 +860,6 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
 
             // Levanto la ventana de informacion
             JOptionPane.showMessageDialog(null, mensaje, titulo, tipo);
-        }
-    }
-
-    private void start() {
-        boolean stop = false;
-        boolean sigo = false;
-        Stack<PaqueteDatos> datos = new Stack();
-        // Creo el listener y el timer
-        TimerListener timerListener = new TimerListener();
-        javax.swing.Timer timer = new javax.swing.Timer(1000, timerListener);
-
-//        salidaTextArea.setText("");
-        startStopToggleButton.setSelected(true);
-        corriendo = true;
-        estadoLabel.setText("Estado: corriendo");
-
-        timer.start();
-        while(stop != true) {
-            System.out.println("Esperando actualizacion... ");
-            timer.restart();
-            
-            while (!sigo && !stop) {
-                // Miro si se activo el timer
-                sigo = timerListener.getEstado();
-                // Miro si se apreto stop (corriendo = false)
-                stop = !corriendo;
-            }
-            
-            // Paro el timer
-            timer.stop();
-            
-            // Actualizo
-            datos = base.actualizar();
-            
-            // Muestro info
-            while( !(datos.empty()) ) {
-                datos.pop().printDatos();
-            }
-            
-            // Reinicion variables
-            sigo = false;
-            timerListener.reset();
-        }
-
-        estadoLabel.setText("Estado: parada");
-        corriendo = false;  // No es necesario
-        startStopToggleButton.setSelected(false);
-    }
-
-    private void stop() {
-        corriendo = false;
-    }
-    
-    /* *** Clase para trabajar con el timer *** */
-    private class TimerListener implements ActionListener {
-        // Un estado para avisar que se disparo el timer
-        private boolean activar;
-        
-        public void actionPerformed(ActionEvent e) {
-            // Se disparo el timer
-            activar = true;
-        }
-        
-        public boolean getEstado() { 
-            if (activar)
-                // Si no pongo esto, no funciona ¿WTF?
-                System.out.println();
-            
-            return activar; 
-        }
-        
-        public void reset() { 
-            activar = false;
         }
     }
 
@@ -887,4 +885,34 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         }
     }
 
+    private class MyTreeModelHandler implements TreeModelListener {
+
+        public void treeNodesChanged(TreeModelEvent e) {
+        }
+        
+        public void treeNodesInserted(TreeModelEvent e) {
+            // Expando el arbol al ultimo nodo creado
+            DefaultMutableTreeNode node;
+            node = (DefaultMutableTreeNode)(e.getTreePath().getLastPathComponent());
+
+            /*
+             * If the event lists children, then the changed
+             * node is the child of the node we've already
+             * gotten.  Otherwise, the changed node and the
+             * specified node are the same.
+             */
+
+            int index = e.getChildIndices()[0];
+            node = (DefaultMutableTreeNode)(node.getChildAt(index));
+
+            redTree.scrollPathToVisible(new TreePath(node.getPath()));
+        }
+        
+        public void treeNodesRemoved(TreeModelEvent e) {
+        }
+        
+        public void treeStructureChanged(TreeModelEvent e) {
+        }
+        
+    }
 }

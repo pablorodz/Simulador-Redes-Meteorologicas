@@ -8,6 +8,7 @@ package logica;
 
 import java.util.Random;
 import java.util.logging.Logger;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /*
  * Cada sensor especifico posee su valor de la medicion.
@@ -24,6 +25,9 @@ public abstract class Sensor {
     // El logger solo para esta clase
     private final static Logger LOGGER = Logger.getLogger(Sensor.class .getName());
     
+    // TreeNode del sensor
+    protected DefaultMutableTreeNode sensorTreeNode;
+    
     // Creo un Random, porque se usa mucho en todas las subclases.
     protected Random random = new Random();
     
@@ -36,8 +40,11 @@ public abstract class Sensor {
         ID = IDsiguiente;
         IDsiguiente++;
 
+        // Creo el treeNode
+        sensorTreeNode = new DefaultMutableTreeNode(this);
+
         // Seteo el estado inicial
-        setEstado(false);  // deberia poner solo estado = false ??        
+//        setEstado(false);  // deberia poner solo estado = false ??        
     }
 
     /* *** Setters y Getters *** */
@@ -56,7 +63,14 @@ public abstract class Sensor {
     public static int getSiguienteID() {
         return IDsiguiente;
     }
-    
+
+    /**
+     * Retorna el objeto TreeNode del sensor.
+     * 
+     * @return El objeto TreeNode del sensor
+     */
+    public DefaultMutableTreeNode getTreeNode() { return sensorTreeNode; }
+
     /*
      *  * Settearlo a mano o segun un archivo externo con los valores.
      *  * Debe existir un setter?
@@ -88,6 +102,7 @@ public abstract class Sensor {
 
     @Override
     public String toString() {
-        return ( String.format("Sensor%D", ID) );
+        return ( String.format("Sensor%d", ID) );
     }
+
 }

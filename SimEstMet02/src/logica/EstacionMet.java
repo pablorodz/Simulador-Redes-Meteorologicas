@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.tree.DefaultMutableTreeNode;
 import org.apache.commons.configuration.*;
 
 /* 
@@ -52,6 +53,40 @@ public class EstacionMet extends Estacion {
     }
     
     /* *** Otros metodos *** */
+
+        /**
+     * Retorna el objeto TreeNode del sensor coorespondiente al ID
+     * 
+     * Pasa la orden a las sub-estaciones en busca de El TreeNode del sensor 
+     * correspondiente.
+     * 
+     * @return El objeto TreeNode de la estacion o null si no existe en la red de esta estacion.
+     */
+    @Override
+    public DefaultMutableTreeNode getSensorTreeNode( int sensorID ) { 
+        DefaultMutableTreeNode treeNode = null;
+
+        int i = 0;
+        int redSize = redSensores.length;
+        while(treeNode==null && i<redSize) {
+            if (redSensores[i] != null)
+                treeNode = redSensores[i].getTreeNode();
+            i++;
+        }
+
+        // Si no se encontro en los sensores propios, se pasa la orden
+        if (treeNode == null) {
+            i = 0;
+            redSize = redEstaciones.length;
+            while(treeNode==null && i<redSize) {
+                if (redEstaciones[i] != null)
+                    treeNode = redEstaciones[i].getSensorTreeNode(sensorID);
+                i++;
+            }
+        }        
+
+        return treeNode; 
+    }
 
     /**
      * @brief Agrega un sensor a la red del la estacion actual.

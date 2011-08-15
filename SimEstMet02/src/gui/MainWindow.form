@@ -360,7 +360,7 @@
     </Container>
     <Container class="javax.swing.JSplitPane" name="principalSplitPane">
       <Properties>
-        <Property name="dividerLocation" type="int" value="140"/>
+        <Property name="dividerLocation" type="int" value="180"/>
         <Property name="dividerSize" type="int" value="5"/>
       </Properties>
 

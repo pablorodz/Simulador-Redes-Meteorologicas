@@ -12,6 +12,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.configuration.*;
+import javax.swing.tree.*;
 
 /*  
  *  * Los metodos deben ser protected o private??
@@ -35,7 +36,6 @@ public abstract class Estacion {
     /// Variable para chequear si ya existe o no, una EstacionBase.
     protected static boolean estacionBaseExiste = false;  // Tiene que ser static ??
     
-    // @NEW
     // Pila con la informacion de las sub-estaciones
     protected Stack<PaqueteDatos> medidasPila;
 
@@ -47,9 +47,8 @@ public abstract class Estacion {
     // Define de que tipo es la estacion
     protected Tipo clase;
 
-    // Para trabajar con los resumenes en XML
-    // Lo instancio en el momento de usarlo
-//    XMLConfiguration registro;
+    // TreeNode de la estacion
+    protected DefaultMutableTreeNode estacionTreeNode;
 
     /* *** Constructores *** */
 
@@ -95,6 +94,9 @@ public abstract class Estacion {
                 
         // Creo la pila donde se guardan las mediciones (PaqueteDeDatos)
         medidasPila = new Stack();
+        
+        // Creo el treeNode
+        estacionTreeNode = new DefaultMutableTreeNode(this);
     }
 
     public Estacion( Tipo tipo ) throws CreacionException {
@@ -126,6 +128,61 @@ public abstract class Estacion {
     }
 
     public Stack<PaqueteDatos> getMedidas() { return medidasPila; }
+    
+    /**
+     * Retorna el objeto TreeNode de la estacion.
+     * 
+     * @return El objeto TreeNode de la estacion
+     */
+    public DefaultMutableTreeNode getTreeNode() { return estacionTreeNode; }
+    
+    /**
+     * Retorna el objeto TreeNode de la estacion coorespondiente al ID
+     * 
+     * Si el id es de esta estacion, retorna el TreeNode de esta estacion. Si 
+     * no es asi, pasa la orden a las sub-estaciones.
+     * 
+     * @return El objeto TreeNode de la estacion o null si no existe en la red de esta estacion.
+     */
+    public DefaultMutableTreeNode getEstacionTreeNode( int estacionID ) { 
+        DefaultMutableTreeNode treeNode = null;
+        
+        if (ID == estacionID)
+            treeNode = getTreeNode();
+        else {
+            int i = 0;
+            int redSize = redEstaciones.length;
+            while(treeNode==null && i<redSize) {
+                if (redEstaciones[i] != null)
+                    treeNode = redEstaciones[i].getEstacionTreeNode(estacionID);
+                i++;
+            }
+        }
+        
+        return treeNode; 
+    }
+    
+    /**
+     * Retorna el objeto TreeNode del sensor coorespondiente al ID
+     * 
+     * Pasa la orden a las sub-estaciones en busca de El TreeNode del sensor 
+     * correspondiente.
+     * 
+     * @return El objeto TreeNode de la estacion o null si no existe en la red de esta estacion.
+     */
+    public DefaultMutableTreeNode getSensorTreeNode( int sensorID ) { 
+        DefaultMutableTreeNode treeNode = null;
+        
+        int i = 0;
+        int redSize = redEstaciones.length;
+        while(treeNode==null && i<redSize) {
+            if (redEstaciones[i] != null)
+                treeNode = redEstaciones[i].getSensorTreeNode(sensorID);
+            i++;
+        }
+        
+        return treeNode; 
+    }
     
     /* *** Otros metodos *** */
     
