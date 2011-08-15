@@ -32,10 +32,11 @@ public class SimNoGui {
 //        limpiarResumenesDir();
 //        
 //        // Menu principal
-//        menu();
+//        main();
 //    }
 
-    public void menu() {
+    // menu principal
+    public void main() {
         Scanner scan = new Scanner(System.in);
         boolean salir = false;
         Integer seleccion;
@@ -86,7 +87,7 @@ public class SimNoGui {
                 
             case 2: base = modificarRed(base); break;
                 
-            case 3: base = ejemplo1(); break;
+            case 3: base = ejemplo1(base); break;
                 
             case 4: start(base); break;
                 
@@ -121,68 +122,64 @@ public class SimNoGui {
     /*
      * Se carga un ejemplo en el simulador
      */
-    private EstacionBase ejemplo1() {
-        EstacionBase base = null;
-            EstacionMet met1 = null;
-                SensorHum sensor1 = null;
-            EstacionMet met2 = null;
-                SensorViento sensor2 = null;
-                SensorTemp sensor3 = null;
-            EstacionMet met3 = null;
-                SensorHum sensor5 = null;
-                EstacionMet met4 = null;
-                    SensorPluv sensor4 = null;
+    private EstacionBase ejemplo1(EstacionBase base) {
+        EstacionMet met1 = null;
+            SensorHum sensor1 = null;
+        EstacionMet met2 = null;
+            SensorViento sensor2 = null;
+            SensorTemp sensor3 = null;
+        EstacionMet met3 = null;
+            SensorHum sensor5 = null;
+            EstacionMet met4 = null;
+                SensorPluv sensor4 = null;
                 
         try {
-            // Creo estacion Base
-            base = new EstacionBase();
-            
+            // Creo una subestacion
+            met1 = new EstacionMet();
+
+                // Creo Sensores
+                sensor1 = new SensorHum();
+                // Agrego los sensores a la sub estacion
+                met1.agregarSensor(sensor1, met1.getID());
+
+            // Agrego la subestacion a la estacion base
+            base.agregarEstacion(met1, base.getID());
+
+            // Creo una subestacion
+            met2 = new EstacionMet();
+
+                // Creo Sensores
+                sensor2 = new SensorViento();
+                sensor3 = new SensorTemp();
+
+                // Agrego los sensores a la sub estacion
+                met2.agregarSensor(sensor2, met2.getID());
+                met2.agregarSensor(sensor3, met2.getID());
+
+            // Agrego la subestacion a la estacion base
+            base.agregarEstacion(met2, base.getID());
+
+            // Creo una subestacion
+            met3 = new EstacionMet();
+
+                // Creo Sensores
+                sensor5 = new SensorHum();
+                // Agrego los sensores a la sub estacion
+                met3.agregarSensor(sensor5, met3.getID());
+
                 // Creo una subestacion
-                met1 = new EstacionMet();
-                
+                met4 = new EstacionMet();
+
                     // Creo Sensores
-                    sensor1 = new SensorHum();
+                    sensor4 = new SensorPluv();
                     // Agrego los sensores a la sub estacion
-                    met1.agregarSensor(sensor1, met1.getID());
+                    met4.agregarSensor(sensor4, met4.getID());
 
                 // Agrego la subestacion a la estacion base
-                base.agregarEstacion(met1, base.getID());
-                
-                // Creo una subestacion
-                met2 = new EstacionMet();
-                
-                    // Creo Sensores
-                    sensor2 = new SensorViento();
-                    sensor3 = new SensorTemp();
-                    
-                    // Agrego los sensores a la sub estacion
-                    met2.agregarSensor(sensor2, met2.getID());
-                    met2.agregarSensor(sensor3, met2.getID());
+                met3.agregarEstacion(met4, met3.getID());
 
-                // Agrego la subestacion a la estacion base
-                base.agregarEstacion(met2, base.getID());
-                
-                // Creo una subestacion
-                met3 = new EstacionMet();
-                
-                    // Creo Sensores
-                    sensor5 = new SensorHum();
-                    // Agrego los sensores a la sub estacion
-                    met3.agregarSensor(sensor5, met3.getID());
-
-                    // Creo una subestacion
-                    met4 = new EstacionMet();
-
-                        // Creo Sensores
-                        sensor4 = new SensorPluv();
-                        // Agrego los sensores a la sub estacion
-                        met4.agregarSensor(sensor4, met4.getID());
-
-                    // Agrego la subestacion a la estacion base
-                    met3.agregarEstacion(met4, met3.getID());
-
-                // Agrego la subestacion a la estacion base
-                base.agregarEstacion(met3, base.getID());
+            // Agrego la subestacion a la estacion base
+            base.agregarEstacion(met3, base.getID());
                 
         } catch (CreacionException ex) {
             Logger.getLogger(SimNoGui.class.getName()).log(Level.SEVERE, null, ex);

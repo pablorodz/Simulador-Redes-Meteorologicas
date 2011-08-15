@@ -13,10 +13,12 @@ package gui;
 import logica.*;
 import Main.Main;   // Para poder usar limpiarResumenes()
 import java.awt.event.*;
+import java.io.*;
 import java.util.Stack;
 import java.util.Vector;
 import java.util.logging.*;
 import javax.swing.JOptionPane;
+import javax.swing.tree.*;
 
 /**
  *
@@ -26,14 +28,35 @@ public class MainWindow extends javax.swing.JFrame {
 
     // El logger solo para esta clase
     private final static Logger LOGGER = Logger.getLogger(MainWindow.class .getName());
-    // Estacion base existe siempre
-    private static EstacionBase base;
+    // Estacion base existe siempre, y tambien su TreeNode
+    private EstacionBase base;
+    private DefaultMutableTreeNode baseTree;
     // Estado de la simulacion: Corriendo=true, parada= false
     private boolean corriendo;
     
     /** Creates new form MainWindow */
     public MainWindow() {
         initComponents();
+        
+        // Creo la estacion base, su treeNode y lo cargo a redTree
+        try {
+            base = new EstacionBase();
+            baseTree = new DefaultMutableTreeNode( base );
+            redTree.setModel(new DefaultTreeModel(baseTree));
+        } catch (CreacionException ex) {
+            String mensaje = String.format("Error critico! \nNo se pudo crear "
+                    + "la estacion base.");
+            JOptionPane.showMessageDialog(null, mensaje, "Error crítico", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
+        }
+        
+        estadoLabel.setText("Estado: parada");
+        corriendo = false;
+        startStopToggleButton.setSelected(false);
+        
+        // Redirijo la salida estandar a salidaTextPane
+        System.setOut(new PrintStream(new FilteredStream(new ByteArrayOutputStream())));
+
     }
 
     /** This method is called from within the constructor to
@@ -63,8 +86,8 @@ public class MainWindow extends javax.swing.JFrame {
         principalSplitPane = new javax.swing.JSplitPane();
         treeScrollPane = new javax.swing.JScrollPane();
         redTree = new javax.swing.JTree();
-        salidaScrollPane = new javax.swing.JScrollPane();
-        salidaTextPane = new javax.swing.JTextPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        salidaTextArea = new javax.swing.JTextArea();
         principalMenuBar = new javax.swing.JMenuBar();
         simulacionMenu = new javax.swing.JMenu();
         crearRedMenu = new javax.swing.JMenu();
@@ -203,10 +226,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         principalSplitPane.setLeftComponent(treeScrollPane);
 
-        salidaTextPane.setEditable(false);
-        salidaScrollPane.setViewportView(salidaTextPane);
+        salidaTextArea.setColumns(20);
+        salidaTextArea.setEditable(false);
+        salidaTextArea.setRows(5);
+        jScrollPane1.setViewportView(salidaTextArea);
 
-        principalSplitPane.setRightComponent(salidaScrollPane);
+        principalSplitPane.setRightComponent(jScrollPane1);
 
         simulacionMenu.setText("Simulacion");
 
@@ -360,6 +385,13 @@ private void cargarEjemploMenuItemActionPerformed(java.awt.event.ActionEvent evt
 
 private void agregarEstacionMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEstacionMenuItemActionPerformed
     this.agregarEstacion();
+        try {
+            System.out.println("Esperando...");
+            Thread.sleep(2000);
+            System.out.println("Seguimos");
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
 }//GEN-LAST:event_agregarEstacionMenuItemActionPerformed
 
 private void agregarSensorMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarSensorMenuItemActionPerformed
@@ -391,9 +423,11 @@ private void pararMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startStopToggleButtonActionPerformed
     if ( startStopToggleButton.isSelected() )
-        comenzarMenuItemActionPerformed(evt);
+//        comenzarMenuItemActionPerformed(evt);
+        System.out.println("Hola maricon!!");
     else
-        pararMenuItemActionPerformed(evt);
+//        pararMenuItemActionPerformed(evt);
+        System.out.println("Chau maricon!!");
 }//GEN-LAST:event_startStopToggleButtonActionPerformed
 
     /**
@@ -423,16 +457,6 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         }
         //</editor-fold>
 
-        // Creo la estacion base
-        try {
-            base = new EstacionBase();
-        } catch (CreacionException ex) {
-            String mensaje = String.format("Error critico! \nNo se pudo crear "
-                    + "la estacion base.");
-            JOptionPane.showMessageDialog(null, mensaje, "Error crítico", JOptionPane.ERROR_MESSAGE);
-            System.exit(1);
-        }
-        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
@@ -440,6 +464,7 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
                 new MainWindow().setVisible(true);
             }
         });
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
@@ -464,6 +489,7 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
     private javax.swing.JMenu estadoMenu;
     private javax.swing.JToolBar estadoToolBar;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JMenuItem limpiarResumenesMenuItem;
@@ -472,8 +498,7 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
     private javax.swing.JSplitPane principalSplitPane;
     private javax.swing.JTree redTree;
     private javax.swing.JMenu resumenesMenu;
-    private javax.swing.JScrollPane salidaScrollPane;
-    private javax.swing.JTextPane salidaTextPane;
+    private javax.swing.JTextArea salidaTextArea;
     private javax.swing.JMenuItem salirMenuItem;
     private javax.swing.JLabel sensorLabel;
     private javax.swing.JMenu simulacionMenu;
@@ -503,75 +528,69 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
     /**
      * Se carga un ejemplo en el simulador
      */
-    private EstacionBase ejemplo1() {
-        EstacionBase base = null;
-            EstacionMet met1 = null;
-                SensorHum sensor1 = null;
-            EstacionMet met2 = null;
-                SensorViento sensor2 = null;
-                SensorTemp sensor3 = null;
-            EstacionMet met3 = null;
-                SensorHum sensor5 = null;
-                EstacionMet met4 = null;
-                    SensorPluv sensor4 = null;
+    private void ejemplo1() {
+        EstacionMet met1 = null;
+            SensorHum sensor1 = null;
+        EstacionMet met2 = null;
+            SensorViento sensor2 = null;
+            SensorTemp sensor3 = null;
+        EstacionMet met3 = null;
+            SensorHum sensor5 = null;
+            EstacionMet met4 = null;
+                SensorPluv sensor4 = null;
                 
         try {
-            // Creo estacion Base
-            base = new EstacionBase();
-            
+            // Creo una subestacion
+            met1 = new EstacionMet();
+
+                // Creo Sensores
+                sensor1 = new SensorHum();
+                // Agrego los sensores a la sub estacion
+                met1.agregarSensor(sensor1, met1.getID());
+
+            // Agrego la subestacion a la estacion base
+            base.agregarEstacion(met1, base.getID());
+
+            // Creo una subestacion
+            met2 = new EstacionMet();
+
+                // Creo Sensores
+                sensor2 = new SensorViento();
+                sensor3 = new SensorTemp();
+
+                // Agrego los sensores a la sub estacion
+                met2.agregarSensor(sensor2, met2.getID());
+                met2.agregarSensor(sensor3, met2.getID());
+
+            // Agrego la subestacion a la estacion base
+            base.agregarEstacion(met2, base.getID());
+
+            // Creo una subestacion
+            met3 = new EstacionMet();
+
+                // Creo Sensores
+                sensor5 = new SensorHum();
+                // Agrego los sensores a la sub estacion
+                met3.agregarSensor(sensor5, met3.getID());
+
                 // Creo una subestacion
-                met1 = new EstacionMet();
-                
+                met4 = new EstacionMet();
+
                     // Creo Sensores
-                    sensor1 = new SensorHum();
+                    sensor4 = new SensorPluv();
                     // Agrego los sensores a la sub estacion
-                    met1.agregarSensor(sensor1, met1.getID());
+                    met4.agregarSensor(sensor4, met4.getID());
 
                 // Agrego la subestacion a la estacion base
-                base.agregarEstacion(met1, base.getID());
-                
-                // Creo una subestacion
-                met2 = new EstacionMet();
-                
-                    // Creo Sensores
-                    sensor2 = new SensorViento();
-                    sensor3 = new SensorTemp();
-                    
-                    // Agrego los sensores a la sub estacion
-                    met2.agregarSensor(sensor2, met2.getID());
-                    met2.agregarSensor(sensor3, met2.getID());
+                met3.agregarEstacion(met4, met3.getID());
 
-                // Agrego la subestacion a la estacion base
-                base.agregarEstacion(met2, base.getID());
-                
-                // Creo una subestacion
-                met3 = new EstacionMet();
-                
-                    // Creo Sensores
-                    sensor5 = new SensorHum();
-                    // Agrego los sensores a la sub estacion
-                    met3.agregarSensor(sensor5, met3.getID());
-
-                    // Creo una subestacion
-                    met4 = new EstacionMet();
-
-                        // Creo Sensores
-                        sensor4 = new SensorPluv();
-                        // Agrego los sensores a la sub estacion
-                        met4.agregarSensor(sensor4, met4.getID());
-
-                    // Agrego la subestacion a la estacion base
-                    met3.agregarEstacion(met4, met3.getID());
-
-                // Agrego la subestacion a la estacion base
-                base.agregarEstacion(met3, base.getID());
+            // Agrego la subestacion a la estacion base
+            base.agregarEstacion(met3, base.getID());
                 
         } catch (CreacionException ex) {
             Logger.getLogger(SimGui.class.getName()).log(Level.SEVERE, null, ex);
             System.exit(1);
         }
-        
-        return base;
     }
 
     /**
@@ -646,8 +665,8 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         String titulo = "Agregando sensor";
         int tipo = JOptionPane.PLAIN_MESSAGE;
         
-        // Cargo todos los id de las estaciones existentes
-        for (int i=0; i<Estacion.getSiguienteID(); i++) {
+        // Cargo todos los id de las estaciones Met existentes
+        for (int i=1; i<Estacion.getSiguienteID(); i++) {
             estacionesID.add( new Integer(i) );
         }
         
@@ -666,10 +685,10 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
             boolean insertada = false;
             
             switch (tipo) {
-                case 0: nuevoSensor = new SensorHum();
-                case 1: nuevoSensor = new SensorTemp();
-                case 2: nuevoSensor = new SensorViento();
-                case 3: nuevoSensor = new SensorPluv();
+                case 0: nuevoSensor = new SensorHum(); break;
+                case 1: nuevoSensor = new SensorTemp(); break;
+                case 2: nuevoSensor = new SensorViento(); break;
+                case 3: nuevoSensor = new SensorPluv(); break;
             }
 
             // Agrego estacion a la red
@@ -781,45 +800,52 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         boolean stop = false;
         boolean sigo = false;
         Stack<PaqueteDatos> datos = new Stack();
-        TimerListener timerListener;
-        javax.swing.Timer timer;
+        // Creo el listener y el timer
+        TimerListener timerListener = new TimerListener();
+        javax.swing.Timer timer = new javax.swing.Timer(1000, timerListener);
 
+//        salidaTextArea.setText("");
         startStopToggleButton.setSelected(true);
         corriendo = true;
         estadoLabel.setText("Estado: corriendo");
 
-        // Creo el listener e inicio el timer
-        timerListener = new TimerListener();
-        timer = new javax.swing.Timer(1000, timerListener);
-
-        while(stop != true) {
-            System.out.println("Esperando actualizacion... ");
-            timer.restart();
-            
-            while (!sigo && !stop) {
-                // Miro si se activo el timer
-                sigo = timerListener.getEstado();
-                // Miro si se apreto stop (startStopToggleButton)
-                stop = corriendo;
-            }
-            
-            // Paro el timer
-            timer.stop();
-            
-            // Actualizo
-            datos = base.actualizar();
-            
-            // Muestro info
-            while( !(datos.empty()) ) {
-                datos.pop().printDatos();
-            }
-            
-            // Reinicion variables
-            sigo = false;
-            timerListener.reset();
+//        timer.start();
+//        while(stop != true) {
+//            System.out.println("Esperando actualizacion... ");
+//            timer.restart();
+//            
+//            while (!sigo && !stop) {
+//                // Miro si se activo el timer
+//                sigo = timerListener.getEstado();
+//                // Miro si se apreto stop (corriendo = false)
+//                stop = !corriendo;
+//            }
+//            
+//            // Paro el timer
+//            timer.stop();
+//            
+//            // Actualizo
+//            datos = base.actualizar();
+//            
+//            // Muestro info
+//            while( !(datos.empty()) ) {
+//                datos.pop().printDatos();
+//            }
+//            
+//            // Reinicion variables
+//            sigo = false;
+//            timerListener.reset();
+//        }
+//        
+        try {
+            System.out.println("Hola sleep");
+            Thread.sleep(5000);
+            System.out.println("Chau sleep");        
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        estadoLabel.setText("Estado: corriendo");
+        estadoLabel.setText("Estado: parada");
         corriendo = false;  // No es necesario
         startStopToggleButton.setSelected(false);
     }
@@ -829,7 +855,7 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
     }
     
     /* *** Clase para trabajar con el timer *** */
-    static class TimerListener implements ActionListener {
+    private class TimerListener implements ActionListener {
         // Un estado para avisar que se disparo el timer
         private boolean activar;
         
@@ -848,6 +874,28 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         
         public void reset() { 
             activar = false;
+        }
+    }
+
+    private class FilteredStream extends FilterOutputStream {
+        public FilteredStream(OutputStream out) {
+            super(out);
+        }
+        
+        @Override
+        public void write(byte b[]) throws IOException {
+            salidaTextArea.append(new String(b));
+        }
+        
+        @Override
+        public void write(int b) throws IOException {
+            salidaTextArea.append(String.valueOf((char) b));
+        }
+        
+        @Override
+        public void write(byte b[], int off, int len) throws IOException {
+            String tmpString = new String(b , off , len);
+            salidaTextArea.append(tmpString);
         }
     }
 

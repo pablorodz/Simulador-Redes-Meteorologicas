@@ -16,6 +16,8 @@ import logica.*;
  */
 public class Main {
 
+    public static final boolean GUI = true;
+    
     public static void main(String args[]) {
         
         // Limpio el LOG
@@ -28,8 +30,14 @@ public class Main {
         
         // Si se usa GUI --> gui.MainWindow.main()
         // Si no se usa GUI --> logica.SimNoGui.menu()
-        SimNoGui app = new SimNoGui();
-        app.menu();
+        if (GUI) {
+            MainWindow.main(null);
+        }
+        else {
+            SimNoGui app = new SimNoGui();
+            app.main();
+        }
+
     }
     
     /*
