@@ -48,8 +48,9 @@ public class EstacionMet extends Estacion {
     private void inicializar() {
         // Creo la red de sensores de la estacion.
         redSensores = new Sensor[4];  // Maximo 4 sensores
-        for ( Sensor sensor : redSensores )
-            sensor = null;
+        int redSize = redSensores.length;
+        for (int i=0; i<redSize; i++)
+            redSensores[i] = null;
     }
     
     /* *** Otros metodos *** */

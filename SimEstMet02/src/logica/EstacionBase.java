@@ -95,17 +95,14 @@ public class EstacionBase extends Estacion {
         return eliminado;
     }
     
-// EstacionBase se deberia crear un resumen con todos los resumnes de su red. 
-// Por el momento esto no lo hace debido a complicaciones a la hora de copiar un
-// resumen(XML) en otro, se pierde la estructura.
-//    @Override
-//    public Vector<String> getResumen() {
-//        // Direcciones de todos los resumes de la red
-//        Vector<String> direcciones = super.getResumen();
-//
-//        // Crear resumen con los resumenes
-//        
-//        return direcciones;
-//    }
-
+    /**
+     * Limpia la estacion base. Es como si se creara una nueva.
+     */
+    public void nueva() {
+        int redSize = redEstaciones.length;
+        for (int i=0; i<redSize; i++)
+            redEstaciones[i] = null;
+        
+        estacionTreeNode.removeAllChildren();
+    }
 }

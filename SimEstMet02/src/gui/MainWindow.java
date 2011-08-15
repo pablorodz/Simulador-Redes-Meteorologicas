@@ -32,13 +32,15 @@ public class MainWindow extends javax.swing.JFrame {
     private final static Logger LOGGER = Logger.getLogger(MainWindow.class .getName());
     // Estacion base existe siempre, y tambien su TreeNode
     private EstacionBase base;
-    private DefaultMutableTreeNode baseTree;
     private DefaultTreeModel baseTreeModel;
     // Estado de la simulacion: Corriendo=true, parada= false
     private boolean corriendo;
     // El que actualiza y el tiempo de actualizacion en milisegundos
-    private int refreshTime;
+    private final int REFRESH_TIME = 3000;
     private javax.swing.Timer timer;
+
+    // El visor de resumenes
+    Viewer viewer;
     
     /** Creates new form MainWindow */
     public MainWindow() {
@@ -47,8 +49,7 @@ public class MainWindow extends javax.swing.JFrame {
         // Creo la estacion base, su treeNode y lo cargo a redTree
         try {
             base = new EstacionBase();
-            baseTree = new DefaultMutableTreeNode( base );
-            baseTreeModel = new DefaultTreeModel(baseTree);
+            baseTreeModel = new DefaultTreeModel(base.getTreeNode());
             baseTreeModel.addTreeModelListener(new MyTreeModelHandler());
             redTree.setModel(baseTreeModel);
         } catch (CreacionException ex) {
@@ -59,8 +60,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
         
         // Instancio y creo el timer
-        refreshTime = 5000;
-        timer = new javax.swing.Timer( refreshTime, new ActionListener() {
+        timer = new javax.swing.Timer( REFRESH_TIME, new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 step();
             }
@@ -72,6 +72,9 @@ public class MainWindow extends javax.swing.JFrame {
                 
         // Redirijo la salida estandar a salidaTextPane
         System.setOut(new PrintStream(new FilteredStream(new ByteArrayOutputStream())));
+        
+        // Creo la ventana para mostrar los resumenes
+        viewer = new Viewer();
     }
 
     /** This method is called from within the constructor to
@@ -123,6 +126,7 @@ public class MainWindow extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Simulador de Redes Meteorologicas");
 
         botonesToolBar.setFloatable(false);
         botonesToolBar.setRollover(true);
@@ -465,13 +469,11 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         }
         //</editor-fold>
 
-        final MainWindow mainWin = new MainWindow();
-        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                mainWin.setVisible(true);
+                new MainWindow().setVisible(true);
             }
         });
                 
@@ -550,7 +552,7 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
     }
     
     /**
-     * Imprime en una pantalla la ubicacion de los resumenes
+     * Levanta una ventana de seleccion de resumen y lo muestra en un visor.
      */
     private void getResumen() {
         if (base == null)   // No deberia entrar nunca
@@ -562,13 +564,29 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
             mensaje = mensaje + String.format("\n\t%s", dir);
         }
 
-        JOptionPane.showMessageDialog(null, mensaje, "Resumenes", JOptionPane.PLAIN_MESSAGE);
+//        JOptionPane.showMessageDialog(null, mensaje, "Resumenes", JOptionPane.PLAIN_MESSAGE);
+        String dir = (String)JOptionPane.showInputDialog(null, "Seleccione:", "Titulo", JOptionPane.PLAIN_MESSAGE, null, direcciones.toArray(), direcciones.firstElement());
+
+        // Muestro y cargo el archivo
+        viewer.display(new File(dir));
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                viewer.setVisible(true);
+            }
+        });
     }
     
     /**
-     * Se carga un ejemplo en el simulador
+     * Se carga un ejemplo y retorna la base
+     * 
+     * @return La estacion base de la red
      */
     private void ejemplo1() {
+        if (corriendo) {
+            JOptionPane.showMessageDialog(null, "Debe parar la simulacion primero", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         EstacionMet met1 = null;
             SensorHum sensor1 = null;
         EstacionMet met2 = null;
@@ -580,12 +598,16 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
                 SensorPluv sensor4 = null;
                 
         try {
+            // Limpio la base y el Tree
+            base.nueva();
+            baseTreeModel.reload();
+
             // Creo una subestacion
             met1 = new EstacionMet();
             // Agrego la subestacion a la estacion base
             base.agregarEstacion(met1, base.getID());
             // Agrego el TreNode
-            baseTreeModel.insertNodeInto(met1.getTreeNode(), baseTree, baseTree.getChildCount());
+            baseTreeModel.insertNodeInto(met1.getTreeNode(), base.getTreeNode(), base.getTreeNode().getChildCount());
                 // Creo Sensores
                 sensor1 = new SensorHum();
                 // Agrego los sensores a la sub estacion
@@ -598,7 +620,7 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
             // Agrego la subestacion a la estacion base
             base.agregarEstacion(met2, base.getID());
             // Agrego TreeNode
-            baseTreeModel.insertNodeInto(met2.getTreeNode(), baseTree, baseTree.getChildCount());
+            baseTreeModel.insertNodeInto(met2.getTreeNode(), base.getTreeNode(), base.getTreeNode().getChildCount());
                 // Creo Sensores
                 sensor2 = new SensorViento();
                 sensor3 = new SensorTemp();
@@ -614,7 +636,7 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
             // Agrego la subestacion a la estacion base
             base.agregarEstacion(met3, base.getID());
             // Agrego TreeNode
-            baseTreeModel.insertNodeInto(met3.getTreeNode(), baseTree, baseTree.getChildCount());
+            baseTreeModel.insertNodeInto(met3.getTreeNode(), base.getTreeNode(), base.getTreeNode().getChildCount());
                 // Creo Sensores
                 sensor5 = new SensorHum();
                 // Agrego los sensores a la sub estacion
@@ -649,6 +671,11 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
      * Todo el proceso es guiado por ventanas.
      */
     private void agregarEstacion() {
+        if (corriendo) {
+            JOptionPane.showMessageDialog(null, "Debe parar la simulacion primero", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         Vector<Integer> estacionesID = new Vector();
         Integer padreID = null;
         String mensaje = "Seleccione bajo que Estacion debe agregarse: ";
@@ -710,6 +737,11 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
      * Todo el proceso es guiado por ventanas.
      */
     private void agregarSensor() {
+        if (corriendo) {
+            JOptionPane.showMessageDialog(null, "Debe parar la simulacion primero", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         Vector<Integer> estacionesID = new Vector();
         String[] sensoresTipo = {"Humedad", "Temperatura", "Viento", "Pluviometro"};
         Integer padreID = null;
@@ -776,6 +808,11 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
      * Todo el proceso es guiado por ventanas.
      */
     private void eliminarEstacion() {
+        if (corriendo) {
+            JOptionPane.showMessageDialog(null, "Debe parar la simulacion primero", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         Vector<Integer> estacionesID = new Vector();
         Integer estacionID = null;
         String mensaje = "Seleccione el ID de la estacion a eliminar: ";
@@ -821,6 +858,11 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
     }
 
     private void eliminarSensor() {
+        if (corriendo) {
+            JOptionPane.showMessageDialog(null, "Debe parar la simulacion primero", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         Vector<Integer> sensoresID = new Vector();
         Integer sensorID = null;
         String mensaje = "Seleccione el ID del sensor a eliminar: ";

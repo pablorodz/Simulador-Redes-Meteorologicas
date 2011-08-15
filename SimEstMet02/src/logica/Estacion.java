@@ -89,9 +89,10 @@ public abstract class Estacion {
                 "Creanda estacion %s %d ( %s ).", clase.toString(), ID, nombre));
 
         // Creo la red de estaciones del la estacion.
-        for ( Estacion estacion : redEstaciones )
-            estacion = null;
-                
+        int redSize = redEstaciones.length;
+        for (int i=0; i<redSize; i++)
+            redEstaciones[i] = null;
+        
         // Creo la pila donde se guardan las mediciones (PaqueteDeDatos)
         medidasPila = new Stack();
         
