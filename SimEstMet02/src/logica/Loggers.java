@@ -20,6 +20,8 @@ import java.util.logging.SimpleFormatter;
  */
 public class Loggers {
 
+    private static File file = new File("logFile");
+    
     /*
      * Setea el nivel de todos los Loggers y Handlers
      */
@@ -46,13 +48,14 @@ public class Loggers {
      * Se deshabilitan todos los handlers salvo este. En caso de querer 
      * habilitarlos usar setLevel(level)
      */
+    @Deprecated
     public static void fileLogger(Level level) {
         try {
             // Desactivo los handlers
             setLevel(Level.OFF);
             // Creo el handler del archivo
             FileHandler handler;
-            handler = new FileHandler("logFile", true);
+            handler = new FileHandler(file.getName(), true);
             SimpleFormatter formatter = new SimpleFormatter();
             handler.setFormatter(formatter);
             // Seteo el nivel !!
@@ -73,6 +76,29 @@ public class Loggers {
         } catch (SecurityException ex) {
             Logger.getLogger(Loggers.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }        
+
+    /**
+     * Redirecciona la salida estandar de error a un archivo de log
+     */
+    public static void redirectErr(boolean start) {
+        PrintStream out = null;
+        if (start) {
+            try {
+                file.createNewFile();
+                out = new PrintStream(new BufferedOutputStream(new FileOutputStream(file)));
+                // Produces deprecation message:
+                System.setErr(out);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Loggers.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Loggers.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            if (out != null)
+                out.close();
+        }
     }
     
     /*
@@ -82,7 +108,7 @@ public class Loggers {
         PrintWriter result = null;
         
         try {
-            result = new PrintWriter(new FileWriter("logFile"));
+            result = new PrintWriter(new FileWriter(file));
         } catch (IOException ex) {
             Logger.getLogger(Loggers.class.getName()).log(Level.SEVERE, null, ex);
         }

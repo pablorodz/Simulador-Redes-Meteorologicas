@@ -5,7 +5,7 @@
 package Main;
 
 import gui.*;
-import java.io.File;
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logica.*;
@@ -20,32 +20,24 @@ public class Main {
     
     public static void main(String args[]) {
         
-// No se pueden ejecutar antes de la gui ¿WTF?
-//        // Limpio el LOG
-//        Loggers.clearFileLog();
-//        // Apago todos los handlers y habilito solo el que escribe a un archivo
-//        Loggers.setLevel(Level.OFF);
-//        Loggers.fileLogger(Level.ALL);
-//        // Limpio el directorio de los resumenes
-//        limpiarResumenesDir();
+        // Limpio el LOG
+        Loggers.clearFileLog();
+        // Redirecciono la salida estandar de err a un archivo de log
+        Loggers.redirectErr(true);
+        // Limpio el directorio de los resumenes
+        limpiarResumenesDir();
         
-        // Si se usa GUI --> gui.MainWindow.main()
-        // Si no se usa GUI --> logica.SimNoGui.menu()
+        // Si se usa GUI --> gui.MainWindow.main(null)
+        // Si no se usa GUI --> logica.SimNoGui.main()
         if (GUI) {
             MainWindow.main(null);
         }
         else {
-            // Limpio el LOG
-            Loggers.clearFileLog();
-            // Apago todos los handlers y habilito solo el que escribe a un archivo
-            Loggers.setLevel(Level.OFF);
-            Loggers.fileLogger(Level.ALL);
-            // Limpio el directorio de los resumenes
-            limpiarResumenesDir();
-
             SimNoGui app = new SimNoGui();
             app.main();
         }
+
+        Loggers.redirectErr(false);
 
     }
     

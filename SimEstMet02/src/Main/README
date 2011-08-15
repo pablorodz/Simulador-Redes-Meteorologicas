@@ -1,6 +1,8 @@
+Version funcionando. Todavia tiene errores.
+Falta acomodar MUCHO el codigo :)
+
 Version acotada del simulador (SimEstMet)
   * sin grafo
-  * solo estacion base puede tener sub estaciones
   * Solo una estacion base
 
 Hago esto para resolver un problema mas chico y despues ampliarlo.
@@ -86,4 +88,7 @@ parte. Se convierte a valor numerico y luego se compara.
 
  No tiene sentido el valor medio en el sensor de viento !!
 --------------------------------------------------------------------------------
-Ciertos errores deben levantar una ventana de aviso !!
+
+// No se pueden ejecutar antes de la gui ¿WTF?
+
+//        Loggers.fileLogger(Level.ALL);

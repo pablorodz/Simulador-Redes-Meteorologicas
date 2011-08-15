@@ -474,7 +474,7 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
                 mainWin.setVisible(true);
             }
         });
-        
+                
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
