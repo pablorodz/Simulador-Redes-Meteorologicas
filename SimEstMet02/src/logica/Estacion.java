@@ -1,3 +1,20 @@
+/*
+ * Simulador de Redes Meteorológicas
+ * Copyright 2011 (C) Rodríguez Pablo Andrés
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; under version 2 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses>.
+ */ 
+
 /**
  *  @file Estacion.java
  * 
@@ -14,14 +31,10 @@ import java.util.logging.Logger;
 import org.apache.commons.configuration.*;
 import javax.swing.tree.*;
 
-/*  
- *  * Los metodos deben ser protected o private??
- *  * No se setean los ID mediante una variable static debido a que la 
- *  estacion base va a ser unica y tener el ID = 0. Entonces, las estaciones 
- *  meteorologicas son las que van a ir obteniendo un ID unico en serie a 
- *  partir de 1 y cualquier otro tipo de estacion que se quiera crear debe 
- *  extender de esta (EstacionMeteorologica).
- *  * Esta clase es la encargada de chequear que no se creen mas de una Estacion Base.
+/**
+ * Clase padre de todas las estaciones
+ *
+ * Esta clase es la encargada de chequear que no se creen mas de una Estacion Base.
  */
 public abstract class Estacion {
 
@@ -106,6 +119,11 @@ public abstract class Estacion {
 
     /* *** Setters y Getters *** */
     
+    /**
+     * Retorna el id de la estacion actual
+     * 
+     * @return ID de la estacion actual
+     */
     public int getID () {
         return ID;
     }
@@ -120,16 +138,31 @@ public abstract class Estacion {
         return IDsiguiente;
     }
     
+    /**
+     * Retorna el nombre de la estacion actual
+     * 
+     * @return Nombre de la estacion actual
+     */
     public String getNombre () {
         return nombre;
     }
 
+    /**
+     * Retorna la pila con las mediciones de la estacion actual
+     * 
+     * @return Pila con las mediciones de la estacion actual
+     */
+    public Stack<PaqueteDatos> getMedidas() { return medidasPila; }
+    
+    /**
+     * Renombra la estacion
+     * 
+     * @param nombre Nombre para la estacion
+     */
     public void setNombre (String nombre) {
         this.nombre = nombre;
     }
 
-    public Stack<PaqueteDatos> getMedidas() { return medidasPila; }
-    
     /**
      * Retorna el objeto TreeNode de la estacion.
      * 
@@ -352,7 +385,11 @@ public abstract class Estacion {
         return ( String.format("Estación%d", ID) );  
     }
     
-    /// Actualiza todas las sub-estaciones
+    /**
+     *  Actualiza todas las sub-estaciones y retorna una pila con todas ellas
+     * 
+     * @return Pila de PaqueteDatos con las mediciones de toda esta sub red
+     */
     public Stack<PaqueteDatos> actualizar() {
         // Toda la informacion recibida de las sub-estaciones
         // La información recibida de _una_ subestacion se almacena acá

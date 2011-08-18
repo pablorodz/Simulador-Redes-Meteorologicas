@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resumen>
+<estacion4>
+<sensor>
+<id>1004</id>
+<tipo>SensorPluv</tipo>
+<maximo>9.59</maximo>
+<minimo>0.0</minimo>
+<medio>4.078809</medio>
+<mediciones>71</mediciones>
+</sensor>
+</estacion4>
+</resumen>

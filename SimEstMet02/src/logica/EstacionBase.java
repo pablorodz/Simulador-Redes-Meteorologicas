@@ -1,29 +1,38 @@
+/*
+ * Simulador de Redes Meteorológicas
+ * Copyright 2011 (C) Rodríguez Pablo Andrés
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; under version 2 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses>.
+ */ 
+
 /**
  *  @file EstacionBase.java
  * 
  *  @author Pablo Rodríguez <pablorodriguez.bb at gmail dot com>
  */
-
 package logica;
 
 import java.util.Stack;
 import java.util.logging.Logger;
 
-/*
- *  Estacion base.
- *      * Solo se puede crear una. Esto se chequea en el constructor de Estacion
- *          debido a que no puedo preguntar primero si ya existe una y luego
- *          llamar al constructor de la superclase.
- *      * ID = 0.
- *      * La agrgacion es por estar el programa visto desde la estacion base (1/12/2010).
- *      * Lista de Estaciones Meteorologicas
+/**
+ * Clase estacion base.
+ * 
+ * Es la estacion raiz de toda la red. Solo puede crearse una.
  */
 public class EstacionBase extends Estacion {
 
     /* *** Propiedades *** */
-
-    /// El arreglo que indica todas estaciones que pertenecen a la estacion base.
-    // private Estacion[] totalEstaciones;
 
     // El logger solo para esta clase
     private final static Logger LOGGER = Logger.getLogger(EstacionBase.class .getName());
@@ -33,23 +42,21 @@ public class EstacionBase extends Estacion {
     // Como se va a crear una unica estacion base, su nombre va a estar definido
     public EstacionBase() throws CreacionException {
         this("Estacion Base");
-        // En caso de tener poder crear mas de una estacion base, el nombre va a
-        // ser mas generico.
-        // super( Tipo.BASE );
     }
 
     public EstacionBase(String nombre) throws CreacionException {
         super( nombre, Tipo.BASE );
     }
 
-    @Override
-    public Stack<PaqueteDatos> actualizar() {
-        // Ejecuta el metodo original, pero no usa su salida
-        Stack<PaqueteDatos> datos = super.actualizar();
-        
-        return datos;
-    }
-
+    /* *** Otros metodos *** */
+    
+    /**
+     * Agrega un sensor a la red.
+     * 
+     * @param sensorNuevo Sensor a agregar
+     * @param padreID Id de la estacion donde debe agregarse el sensor
+     * @return Si se agrego correctamente el sensor
+     */
     @Override
     public boolean agregarSensor(Sensor sensorNuevo, int padreID) {
         boolean insertado = false;
@@ -65,6 +72,12 @@ public class EstacionBase extends Estacion {
         return insertado;
     }
 
+    /**
+     * Elimina un sensor de la red.
+     * 
+     * @param sensorElim Sensor a ser eliminado
+     * @return Si se elimino correctamente el sensor
+     */
     @Override
     public boolean eliminarSensor(Sensor sensorElim) {
         boolean eliminado = false;
@@ -80,6 +93,12 @@ public class EstacionBase extends Estacion {
         return eliminado;
     }
 
+    /**
+     * Elimina un sensor de la red.
+     * 
+     * @param sensorElimID El id del sensor a ser eliminado
+     * @return Si se elimino correctamente el sensor
+     */
     @Override
     public boolean eliminarSensor(int sensorElimID) {
         boolean eliminado = false;

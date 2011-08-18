@@ -1,0 +1,1602 @@
+16/08/2011 18:47:33 java.util.logging.LogManager$RootLogger log
+INFO: Limpiando directorio de resumenes
+16/08/2011 18:47:35 logica.Estacion <init>
+INFO: Creanda estacion BASE 0 ( Estacion Base ).
+16/08/2011 18:47:39 logica.Estacion <init>
+INFO: Creanda estacion MET 1 ( Estacion1 ).
+16/08/2011 18:47:39 logica.Estacion agregarEstacion
+INFO: Agregada estacion 1 a la red de la estacion 0.
+16/08/2011 18:47:39 logica.SensorHum <init>
+INFO: Creado sensor de humedad, ID = 1000
+16/08/2011 18:47:39 logica.EstacionMet agregarSensor
+INFO: Agregando sensor 1000 a la red de la estacion 1
+16/08/2011 18:47:39 logica.Estacion <init>
+INFO: Creanda estacion MET 2 ( Estacion2 ).
+16/08/2011 18:47:39 logica.Estacion agregarEstacion
+INFO: Agregada estacion 2 a la red de la estacion 0.
+16/08/2011 18:47:39 logica.SensorViento <init>
+INFO: Creado sensor de viento, ID = 1001
+16/08/2011 18:47:39 logica.SensorTemp <init>
+INFO: Creado sensor de temperatura, ID = 1002
+16/08/2011 18:47:39 logica.EstacionMet agregarSensor
+INFO: Agregando sensor 1001 a la red de la estacion 2
+16/08/2011 18:47:39 logica.EstacionMet agregarSensor
+INFO: Agregando sensor 1002 a la red de la estacion 2
+16/08/2011 18:47:39 logica.Estacion <init>
+INFO: Creanda estacion MET 3 ( Estacion3 ).
+16/08/2011 18:47:39 logica.Estacion agregarEstacion
+INFO: Agregada estacion 3 a la red de la estacion 0.
+16/08/2011 18:47:39 logica.SensorHum <init>
+INFO: Creado sensor de humedad, ID = 1003
+16/08/2011 18:47:39 logica.EstacionMet agregarSensor
+INFO: Agregando sensor 1003 a la red de la estacion 3
+16/08/2011 18:47:39 logica.Estacion <init>
+INFO: Creanda estacion MET 4 ( Estacion4 ).
+16/08/2011 18:47:39 logica.Estacion agregarEstacion
+INFO: Agregada estacion 4 a la red de la estacion 3.
+16/08/2011 18:47:39 logica.SensorPluv <init>
+INFO: Creado sensor de humedad, ID = 1004
+16/08/2011 18:47:39 logica.EstacionMet agregarSensor
+INFO: Agregando sensor 1004 a la red de la estacion 4
+16/08/2011 18:47:43 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:47:44 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:47:44 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:47:44 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:47:44 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:47:44 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:47:44 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:47:44 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:47:44 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:47:44 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:47:44 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:47:46 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:47:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:47:46 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:47:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:47:46 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:47:46 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:47:46 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:47:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:47:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:47:46 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:47:46 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:47:49 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:47:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:47:49 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:47:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:47:49 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:47:49 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:47:49 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:47:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:47:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:47:49 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:47:49 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:47:52 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:47:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:47:52 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:47:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:47:52 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:47:52 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:47:52 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:47:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:47:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:47:52 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:47:52 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:47:55 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:47:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:47:55 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:47:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:47:55 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:47:55 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:47:55 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:47:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:47:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:47:55 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:47:55 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:47:58 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:47:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:47:58 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:47:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:47:58 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:47:58 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:47:58 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:47:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:47:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:47:58 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:47:58 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:01 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:01 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:01 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:01 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:01 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:01 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:01 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:04 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:04 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:04 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:04 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:04 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:04 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:04 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:07 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:07 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:07 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:07 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:07 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:07 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:07 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:10 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:10 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:10 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:10 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:10 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:10 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:10 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:13 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:13 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:13 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:13 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:13 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:13 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:13 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:16 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:16 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:16 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:16 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:16 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:16 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:16 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:16 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:16 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:16 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:16 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:19 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:19 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:19 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:19 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:19 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:19 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:19 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:19 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:19 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:19 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:19 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:22 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:22 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:22 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:22 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:22 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:22 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:22 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:22 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:22 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:22 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:22 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:25 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:25 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:25 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:25 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:25 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:25 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:25 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:25 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:25 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:25 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:25 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:28 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:28 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:28 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:28 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:28 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:28 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:28 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:28 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:28 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:28 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:28 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:31 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:31 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:31 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:31 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:31 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:31 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:31 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:31 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:31 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:31 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:31 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:34 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:34 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:34 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:34 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:34 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:34 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:34 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:34 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:34 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:34 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:34 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:37 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:37 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:37 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:37 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:37 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:37 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:37 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:37 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:37 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:37 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:37 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:40 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:40 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:40 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:40 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:40 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:40 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:40 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:40 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:40 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:40 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:40 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:43 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:43 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:43 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:43 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:43 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:43 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:43 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:43 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:43 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:43 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:43 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:46 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:46 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:46 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:46 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:46 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:46 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:46 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:49 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:49 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:49 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:49 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:49 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:49 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:49 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:52 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:52 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:52 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:52 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:52 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:52 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:52 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:55 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:55 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:55 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:55 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:55 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:55 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:55 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:58 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:48:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:48:58 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:48:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:48:58 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:48:58 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:48:58 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:48:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:48:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:48:58 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:48:58 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:01 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:01 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:01 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:01 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:01 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:01 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:01 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:04 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:04 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:04 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:04 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:04 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:04 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:04 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:07 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:07 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:07 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:07 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:07 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:07 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:07 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:10 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:10 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:10 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:10 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:10 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:10 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:10 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:13 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:13 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:13 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:13 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:13 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:13 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:13 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:16 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:16 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:16 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:16 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:16 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:16 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:16 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:16 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:16 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:16 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:16 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:19 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:19 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:19 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:19 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:19 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:19 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:19 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:19 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:19 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:19 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:19 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:22 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:22 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:22 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:22 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:22 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:22 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:22 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:22 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:22 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:22 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:22 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:25 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:25 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:25 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:25 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:25 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:25 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:25 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:25 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:25 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:25 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:25 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:28 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:28 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:28 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:28 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:28 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:28 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:28 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:28 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:28 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:28 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:28 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:31 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:31 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:31 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:31 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:31 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:31 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:31 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:31 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:31 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:31 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:31 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:34 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:34 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:34 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:34 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:34 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:34 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:34 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:34 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:34 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:34 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:34 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:37 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:37 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:37 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:37 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:37 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:37 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:37 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:37 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:37 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:37 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:37 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:40 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:40 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:40 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:40 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:40 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:40 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:40 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:40 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:40 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:40 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:40 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:43 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:43 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:43 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:43 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:43 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:43 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:43 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:43 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:43 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:43 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:43 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:46 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:46 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:46 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:46 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:46 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:46 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:46 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:49 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:49 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:49 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:49 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:49 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:49 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:49 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:52 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:52 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:52 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:52 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:52 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:52 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:52 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:55 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:55 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:55 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:55 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:55 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:55 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:55 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:58 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:49:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:49:58 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:49:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:49:58 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:49:58 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:49:58 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:49:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:49:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:49:58 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:49:58 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:01 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:01 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:01 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:01 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:01 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:01 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:01 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:04 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:04 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:04 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:04 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:04 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:04 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:04 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:07 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:07 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:07 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:07 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:07 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:07 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:07 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:10 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:10 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:10 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:10 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:10 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:10 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:10 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:13 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:13 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:13 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:13 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:13 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:13 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:13 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:16 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:16 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:16 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:16 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:16 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:16 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:16 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:16 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:16 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:16 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:16 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:19 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:19 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:19 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:19 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:19 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:19 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:19 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:19 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:19 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:19 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:19 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:22 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:22 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:22 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:22 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:22 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:22 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:22 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:22 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:22 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:22 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:22 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:25 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:25 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:25 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:25 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:25 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:25 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:25 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:25 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:25 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:25 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:25 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:28 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:28 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:28 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:28 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:28 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:28 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:28 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:28 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:28 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:28 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:28 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:31 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:31 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:31 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:31 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:31 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:31 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:31 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:31 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:31 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:31 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:31 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:34 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:34 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:34 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:34 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:34 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:34 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:34 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:34 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:34 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:34 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:34 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:37 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:37 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:37 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:37 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:37 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:37 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:37 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:37 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:37 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:37 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:37 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:40 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:40 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:40 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:40 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:40 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:40 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:40 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:40 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:40 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:40 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:40 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:43 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:43 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:43 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:43 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:43 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:43 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:43 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:43 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:43 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:43 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:43 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:46 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:46 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:46 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:46 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:46 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:46 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:46 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:46 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:49 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:49 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:49 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:49 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:49 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:49 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:49 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:49 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:52 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:52 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:52 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:52 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:52 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:52 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:52 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:52 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:55 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:55 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:55 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:55 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:55 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:55 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:55 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:55 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:58 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:50:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:50:58 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:50:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:50:58 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:50:58 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:50:58 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:50:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:50:58 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:50:58 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:50:58 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:51:01 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:51:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:51:01 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:51:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:51:01 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:51:01 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:51:01 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:51:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:51:01 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:51:01 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:51:01 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:51:04 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:51:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:51:04 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:51:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:51:04 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:51:04 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:51:04 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:51:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:51:04 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:51:04 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:51:04 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:51:07 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:51:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:51:07 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:51:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:51:07 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:51:07 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:51:07 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:51:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:51:07 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:51:07 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:51:07 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:51:10 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:51:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:51:10 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:51:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:51:10 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:51:10 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:51:10 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:51:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:51:10 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:51:10 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:51:10 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:51:13 logica.Estacion actualizar
+INFO: Actualizando estacion BASE 0
+16/08/2011 18:51:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 1
+16/08/2011 18:51:13 logica.SensorHum getHumedad
+INFO: getHumedad
+16/08/2011 18:51:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 2
+16/08/2011 18:51:13 logica.SensorViento getVientoVel
+INFO: getVientoVel()
+16/08/2011 18:51:13 logica.SensorViento getVientoDir
+INFO: getVientoDir()
+16/08/2011 18:51:13 logica.SensorTemp getTemp
+INFO: getTemp
+16/08/2011 18:51:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 3
+16/08/2011 18:51:13 logica.Estacion actualizar
+INFO: Actualizando estacion MET 4
+16/08/2011 18:51:13 logica.SensorPluv getLluvia
+INFO: getLluvia
+16/08/2011 18:51:13 logica.SensorHum getHumedad
+INFO: getHumedad

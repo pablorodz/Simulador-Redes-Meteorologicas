@@ -1,3 +1,20 @@
+/*
+ * Simulador de Redes Meteorológicas
+ * Copyright 2011 (C) Rodríguez Pablo Andrés
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; under version 2 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses>.
+ */ 
+
 /**
  *  @file SensorTemp.java
  * 
@@ -12,7 +29,7 @@ import java.util.logging.Logger;
 
 /**
  *  Sensor de temperatura.
- *  Indica la temperatura actual en ºC
+ *  Indica la temperatura actual en ºC.
  */
 public class SensorTemp extends Sensor {
     // Temperatura actual del sensor en ºC.
@@ -47,11 +64,23 @@ public class SensorTemp extends Sensor {
         return temp;
     }
 
+    /**
+     * Setea de forma externa el estado (medicion) del sensor.
+     * 
+     * Al ser un simulador tiene sentido que los valores medidos sean seteados
+     * externamente por valores cargados de archivos con datos previos.
+     */
     @Override
     public String getMedicion() {
         return String.valueOf(getTemp());
     }
 
+    /**
+     * Setea de forma externa el estado (medicion) del sensor.
+     * 
+     * Al ser un simulador tiene sentido que los valores medidos sean seteados
+     * externamente por valores cargados de archivos con datos previos.
+     */
     public void setTemp (float temp) throws InputMismatchException {
         if ( Math.abs(temp) > TEMP_MAX)
             throw new InputMismatchException( String.format("La variable debe "

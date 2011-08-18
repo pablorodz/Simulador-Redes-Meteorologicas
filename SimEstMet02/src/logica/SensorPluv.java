@@ -1,3 +1,20 @@
+/*
+ * Simulador de Redes Meteorológicas
+ * Copyright 2011 (C) Rodríguez Pablo Andrés
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; under version 2 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses>.
+ */ 
+
 /**
  *  @file SensorPluv.java
  * 
@@ -12,7 +29,7 @@ import java.util.logging.Logger;
 
 /**
  *  Pluviómetro.
- *  Lluvia caída en los últimos 5 minutos en mm
+ *  Indica la lluvia caída en los últimos 5 minutos en mm.
  */
 public class SensorPluv extends Sensor {
     // Lluvia caida en los últimos 5 minutos. Variable siempre positiva, menor 
@@ -55,6 +72,12 @@ public class SensorPluv extends Sensor {
         return String.valueOf(getLluvia());
     }
 
+    /**
+     * Setea de forma externa el estado (medicion) del sensor.
+     * 
+     * Al ser un simulador tiene sentido que los valores medidos sean seteados
+     * externamente por valores cargados de archivos con datos previos.
+     */
     public void setLluvia (float lluvia) throws InputMismatchException {
         if (lluvia < 0 || lluvia > LLUVIA_MAX)
             throw new InputMismatchException(String.format("La variable debe "
@@ -63,6 +86,12 @@ public class SensorPluv extends Sensor {
         this.lluviaInstantanea = lluvia;
     }
 
+    /**
+     * Setea de forma externa el estado (medicion) del sensor.
+     * 
+     * Al ser un simulador tiene sentido que los valores medidos sean seteados
+     * externamente por valores cargados de archivos con datos previos.
+     */
     @Override
     public void setMedicion(String medicion) {
         setLluvia( Float.valueOf(medicion) );
@@ -131,13 +160,4 @@ public class SensorPluv extends Sensor {
             lluviaInstantanea = randomLluvia();
         
     }
-
-
-    /** 
-     *  LLuvia caída desde que se encendio el sensor. 
-     */
-//     public double getLluviaTotal () {
-//         
-//     }
-
 }

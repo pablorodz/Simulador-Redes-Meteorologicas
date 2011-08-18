@@ -1,8 +1,30 @@
+/*
+ * Simulador de Redes Meteorológicas
+ * Copyright 2011 (C) Rodríguez Pablo Andrés
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; under version 2 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses>.
+ */ 
+
+/**
+ *  @file SimNoGui.java
+ * 
+ *  @author Pablo Rodríguez <pablorodriguez.bb at gmail dot com>
+ */
+
 package logica;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Stack;
@@ -12,7 +34,7 @@ import java.util.logging.Logger;
 import Main.Main;   // Para poder usar limpiarResumenes()
 
 /**
- *
+ * Simlacion sin GUI
  */
 public class SimNoGui {
     
@@ -21,25 +43,25 @@ public class SimNoGui {
     
     static EstacionBase base = null;    // Es necesario ponerlo a null ??
     
-//    public static void main(String args[]) {
-//        
-//        // Limpio el LOG
-//        Loggers.clearFileLog();
-//        // Apago todos los handlers y habilito solo el que escribe a un archivo
-//        Loggers.setLevel(Level.OFF);
-//        Loggers.fileLogger(Level.ALL);
-//        // Limpio el directorio de los resumenes
-//        limpiarResumenesDir();
-//        
-//        // Menu principal
-//        main();
-//    }
-
-    // menu principal
+    // El que actualiza y el tiempo de actualizacion en milisegundos
+    private final int REFRESH_TIME = 1000;
+    
+    /**
+     *  Menu principal
+     */
     public void main() {
         Scanner scan = new Scanner(System.in);
         boolean salir = false;
         Integer seleccion;
+        
+        // Creo la estacion base
+        try {
+            base = new EstacionBase();
+        } catch (CreacionException ex) {
+            System.err.println( String.format("Error critico! \nNo se pudo crear "
+                    + "la estacion base.") );
+            System.exit(1);
+        }
         
         while(!salir) {
             // Imprimo menu
@@ -66,7 +88,8 @@ public class SimNoGui {
             }
         }
     }
-    /*
+    
+    /**
      * Metodo que decide la accion a seguir dependiendo de la accion del usuario
      * 
      * @return boolean True=salir
@@ -77,7 +100,7 @@ public class SimNoGui {
         switch(seleccion) {
             case 1: {
                 try {
-                    base = nuevaRed();
+                    nuevaRed();
                 } catch (CreacionException ex) {
                     Logger.getLogger(SimNoGui.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println(ex.getMessage());
@@ -85,9 +108,9 @@ public class SimNoGui {
                 break;
             }
                 
-            case 2: base = modificarRed(base); break;
+            case 2: modificarRed(); break;
                 
-            case 3: base = ejemplo1(base); break;
+            case 3: ejemplo1(); break;
                 
             case 4: start(base); break;
                 
@@ -119,10 +142,12 @@ public class SimNoGui {
         return salir;
     }    
 
-    /*
+    /**
      * Se carga un ejemplo en el simulador
      */
-    private EstacionBase ejemplo1(EstacionBase base) {
+    private void ejemplo1() {
+        base.nueva();
+        
         EstacionMet met1 = null;
             SensorHum sensor1 = null;
         EstacionMet met2 = null;
@@ -185,11 +210,9 @@ public class SimNoGui {
             Logger.getLogger(SimNoGui.class.getName()).log(Level.SEVERE, null, ex);
             System.exit(1);
         }
-        
-        return base;
     }
 
-    /*
+    /**
      * Metodo donde se ejcuta la simulacion
      */
     private void start(EstacionBase base) {
@@ -215,7 +238,7 @@ public class SimNoGui {
 
         // Creo el listener e inicio el timer
         timerListener = new TimerListener();
-        timer = new javax.swing.Timer(1000, timerListener);
+        timer = new javax.swing.Timer(REFRESH_TIME, timerListener);
 
 //        while(stop != true) {
         for (int i=0; i<nAct; i++) {
@@ -245,41 +268,22 @@ public class SimNoGui {
 
         }
     }
-    
-    /*
-     * @return Si se limpio correctamente el directorio
-     */
-//    private boolean limpiarResumenesDir() throws NullPointerException {
-//        File dir = new File("resumenes");
-//
-//        if (!dir.exists() || !dir.isDirectory())
-//            throw new NullPointerException("No existe directorio.");
-//        
-//        Logger.getLogger("").log(Level.INFO, "Limpiando directorio de resumenes");
-//        
-//        File[] archivos = dir.listFiles();
-//        int numArchivos = dir.list().length;
-//        boolean exito = true;
-//        
-//        for (int i=0; i<numArchivos; i++) {
-//            //System.out.println(archivos[i].getName());
-//            if (!archivos[i].delete()){
-//                exito = false;
-//                break;
-//            }                
-//        }
-//        
-//        return exito;
-//    }
 
-    private EstacionBase nuevaRed() throws CreacionException {
-        EstacionBase base = new EstacionBase();
+    /**
+     * Crea una nueva red
+     * Todo el proceso es guiado a base de preguntas.
+     * 
+     * @throws CreacionException 
+     */
+    private void nuevaRed() throws CreacionException {
+//        EstacionBase base = new EstacionBase();
         int numSubEstaciones = 0;
         // Ingreso de datos 
         Scanner scan = new Scanner(System.in);
         boolean valido = false;
         
         System.out.printf("\n### Creando nueva red ###\n");
+        base.nueva();
         
         // Pregunto numero de sub-estaciones, maximo 4
         while (!valido) {
@@ -301,9 +305,16 @@ public class SimNoGui {
             base.agregarEstacion( crearEstacion(), base.getID() );
         }
 
-        return base;
+//        return base;
     }
     
+    /**
+     * Crea una nueva sub red y retorna la base.
+     * Todo el proceso es guiado a base de preguntas.
+     * 
+     * @return La estacion meterologica base de la sub red
+     * @throws CreacionException 
+     */
     private Estacion crearEstacion() throws CreacionException {
         Estacion estacion = new EstacionMet();
         String nombre = null;
@@ -366,6 +377,12 @@ public class SimNoGui {
         return estacion;
     }
 
+    /**
+     * Creacion de un nuevo sensor. 
+     * Todo el proceso es guiado a base de preguntas.
+     * 
+     * @return El sensor
+     */
     private Sensor crearSensor() {
         Sensor sensor = null;
         int tipo = 0;
@@ -413,21 +430,19 @@ public class SimNoGui {
     /**
      * @brief Modifica una red existente
      * 
-     * Modifica la red existente cuya estacion base es pasada como argumento.
+     * Modifica la red existente.
      * En este metodo se puede agregar una sub-red, eliminar una sub-red, 
      * agregar un sensor o eliminar un sensor.
      * Todo el proceso es guiado a base de preguntas.
      * 
-     * @param base EstacionBase del la red
-     * 
-     * @return EstacionBase modificada
      */
-    private EstacionBase modificarRed(EstacionBase base) {
+    private void modificarRed() {
         Scanner scan = new Scanner(System.in);
         int seleccion = 0;
         boolean valido = false;
         boolean salir = false;
         
+        base.nueva();
         while (!salir) {
             System.out.printf("\n### Modificando red existente ###\n");
             
@@ -463,8 +478,6 @@ public class SimNoGui {
                 }
             }
         }
-        
-        return base;
     }
 
     /**

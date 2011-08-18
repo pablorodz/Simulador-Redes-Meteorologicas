@@ -1,14 +1,7 @@
 Version funcionando. Todavia tiene errores.
 Falta acomodar MUCHO el codigo :)
 
-Version acotada del simulador (SimEstMet)
-  * sin grafo
-  * Solo una estacion base
-
-Hago esto para resolver un problema mas chico y despues ampliarlo.
-
-** Modificaciones **
-
+--------------------------------------------------------------------------------
   * Porque debo restringir la estacion base a ID=0 ?
 Como va a haber solo una estacion base, la clase Estacion posee la variable
 existeEstacionBase.
@@ -32,16 +25,13 @@ Para se me ocurrieron (por ahora) dos soluciones:
 Se implementa con el tipo de dato String porque me parece que va a ser mas
 generico.
 
-  * La hora en el PaqueteDatos esta por el momento como la hora actual de la
-maquina. Cuando se tenga el clock de la simulacion, cambiar "hora" por ese valor.
-
   * Los sensores tienen un metodo heredado, que lo poseen todos que es el set y get
 a traves de String y metodos propios de set y get a traves de sus variables.
 
   * Todo sensor tiene una parte numerica. Esta debe ser la primera parte de la 
 medicion y ser como maximo de tipo float.
 
-----------------------------
+--------------------------------------------------------------------------------
 ### ACTUALIZAR (REFRESH) ###
 
  Mandar señal de actualizar a la estacion base (metodo actualizar() de la
@@ -57,7 +47,7 @@ actual y luego la información de las sub-estaciones.
  En el metodo actualizar() de Estacion se deben limpiar los datos (medidasPila)
 por que en caso contrario, se apilaran los datos nuevos sobre los anteriores.
 
--------------------------
+--------------------------------------------------------------------------------
 ### LOGGER ###
 
  Propuse de tener un logger por clase, para que cada loger posea el nombre de la
@@ -88,7 +78,3 @@ parte. Se convierte a valor numerico y luego se compara.
 
  No tiene sentido el valor medio en el sensor de viento !!
 --------------------------------------------------------------------------------
-
-// No se pueden ejecutar antes de la gui ¿WTF?
-
-//        Loggers.fileLogger(Level.ALL);

@@ -1,3 +1,20 @@
+/*
+ * Simulador de Redes Meteorológicas
+ * Copyright 2011 (C) Rodríguez Pablo Andrés
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; under version 2 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses>.
+ */ 
+
 /**
  *  @file Sensor.java
  * 
@@ -10,17 +27,19 @@ import java.util.Random;
 import java.util.logging.Logger;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-/*
- * Cada sensor especifico posee su valor de la medicion.
+/**
+ * Clase padre de todos los sensores
+ * 
  * Es una clase abstracta porque tengo varios metodos definidos.
+ * Cada sensor especifico posee su valor de la medicion.
  */
 public abstract class Sensor {
+    
+    /* *** Propiedades *** */
+    
     protected int ID;
     private static int IDsiguiente = 1000;
     private boolean estado;
-    // Define de que tipo es el sensor. Para utilizar en paquete datos.
-    // Voy a probar primero con .getClass.getSimpleName()
-//    public enum Tipo { HUM, PLUV, TEMP, VDIR, VVEL };  // Es public debido a que paquete de datos lo debe utilizar
 
     // El logger solo para esta clase
     private final static Logger LOGGER = Logger.getLogger(Sensor.class .getName());
@@ -31,10 +50,6 @@ public abstract class Sensor {
     // Creo un Random, porque se usa mucho en todas las subclases.
     protected Random random = new Random();
     
-    /** 
-     *  Constructor.
-     *  estado = false. 
-     */
     public Sensor () {
         // Seteo el ID
         ID = IDsiguiente;
@@ -44,14 +59,19 @@ public abstract class Sensor {
         sensorTreeNode = new DefaultMutableTreeNode(this);
 
         // Seteo el estado inicial
-//        setEstado(false);  // deberia poner solo estado = false ??        
+//        setEstado(false);
     }
 
     /* *** Setters y Getters *** */
     
     public int getID() { return ID; }
     public boolean isEstado () { return estado; }
-    // El valor que mide cada sensor
+    
+    /**
+     * Valor de la medicion del sensor
+     * 
+     * @return Valor de la medicion del sensor
+     */
     public abstract String getMedicion();
     
     /**
@@ -71,33 +91,21 @@ public abstract class Sensor {
      */
     public DefaultMutableTreeNode getTreeNode() { return sensorTreeNode; }
 
-    /*
-     *  * Settearlo a mano o segun un archivo externo con los valores.
-     *  * Debe existir un setter?
-     *  * Publico?
+    /**
+     * Setea de forma externa el estado (medicion) del sensor.
+     * 
+     * Al ser un simulador tiene sentido que los valores medidos sean seteados
+     * externamente por valores cargados de archivos con datos previos.
      */
     public abstract void setMedicion( String medicion);
 
-    /** Podria eliminarse y dejar solo prender() apagar() */
     private void setEstado ( boolean estado ) { this.estado = estado; }
     
     /* *** Otros metodos *** */
-    
-    /** 
-     *  Prende el sensor.
-     *      * setEstado(true) 
+
+    /**
+     * Metodo que se llama cuando se actualiza el sistema
      */
-    public void prender () {
-        setEstado(true);  // Si elimino setEstado() --> estado = true
-    }
-
-    /** 
-     *  Apaga el sensor.
-     *      * setEstado(false) */
-    public void apagar () {
-        setEstado(false);  // Si elimino setEstado() --> estado = false
-    }
-
     public abstract void actualizar();
 
     @Override

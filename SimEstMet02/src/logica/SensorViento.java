@@ -1,7 +1,26 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Simulador de Redes Meteorológicas
+ * Copyright 2011 (C) Rodríguez Pablo Andrés
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; under version 2 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses>.
+ */ 
+
+/**
+ *  @file SensorViento.java
+ * 
+ *  @author Pablo Rodríguez <pablorodriguez.bb at gmail dot com>
  */
+
 package logica;
 
 import java.util.InputMismatchException;
@@ -9,8 +28,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Indicación en km/h.
- * Indicación S, SE, E, NE, N, NO, O, SO.
+ * Sensor de velocidad y direccion del viento.
+ * 
+ * indica la velocidad del viento en km/h.
+ * Indica la direccion del viento en S, SE, E, NE, N, NO, O, SO.
  */
 public class SensorViento extends Sensor {
     // Velocidad del viento medida en km/h. Variable siempre positiva y menor 
@@ -58,6 +79,12 @@ public class SensorViento extends Sensor {
         return (String.valueOf( getVientoVel()) + " " + getVientoDir().toString());
     }
 
+    /**
+     * Setea de forma externa el estado (medicion) del sensor.
+     * 
+     * Al ser un simulador tiene sentido que los valores medidos sean seteados
+     * externamente por valores cargados de archivos con datos previos.
+     */
     public void setVientoVel(float vientoVel) {
         if (vientoVel < 0 || vientoVel > VEL_MAX)
             throw new InputMismatchException(String.format("La variable debe ser"
@@ -66,6 +93,12 @@ public class SensorViento extends Sensor {
         this.vientoVel = vientoVel;
     }
     
+    /**
+     * Setea de forma externa el estado (medicion) del sensor.
+     * 
+     * Al ser un simulador tiene sentido que los valores medidos sean seteados
+     * externamente por valores cargados de archivos con datos previos.
+     */
     public void setVientoDir(Direccion dir) {
         vientoDir = dir;
     }

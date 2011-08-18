@@ -1,3 +1,20 @@
+/*
+ * Simulador de Redes Meteorológicas
+ * Copyright 2011 (C) Rodríguez Pablo Andrés
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; under version 2 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses>.
+ */ 
+
 /**
  *  @file EstacionMet.java
  * 
@@ -14,12 +31,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import org.apache.commons.configuration.*;
 
 /* 
- *  Estacion Meteorologica
- *      * Lista de sensores (maximo 4)
- *      * Lista de Estaciones Meteorologicas (maximo 3) ??
- *      * Lanza una CreacionException, pero esta excepcion nunca deberia pasar.
-          Asi que en el try-catch no se deberia atrapar nunca nada.
- *  * La estacion base le pide a cada subestacion los datos --> EstacionMet.pedirData().
+ * Clase estacion Meteorologica
+ * 
  */
 public class EstacionMet extends Estacion {
 
@@ -55,7 +68,7 @@ public class EstacionMet extends Estacion {
     
     /* *** Otros metodos *** */
 
-        /**
+    /**
      * Retorna el objeto TreeNode del sensor coorespondiente al ID
      * 
      * Pasa la orden a las sub-estaciones en busca de El TreeNode del sensor 
@@ -249,7 +262,11 @@ public class EstacionMet extends Estacion {
         return eliminado;
     }
 
-    // Agrego los sensores de esta estacion a los sensores de las sub-estaciones
+    /*
+     * Actualiza toda la sub red a partir de esta estacion y agrega los 
+     * sensores propios a la pila de los sensores de la sub red
+     * 
+     */
     @Override
     public Stack<PaqueteDatos> actualizar() {
         // Informacion para PaqueteDatos()
@@ -296,6 +313,15 @@ public class EstacionMet extends Estacion {
         return medidasPila;
     }
 
+    /**
+     * Encargado de actualizar y guardar la informacion de un sensor en los 
+     * resumenes XML
+     * 
+     * @param registro El manejador de XML
+     * @param sensorID El id del sensor cuyo resumen hay que actualizar
+     * @param tipo El tipo de sensor cuyo resumen hay que actualizar
+     * @param medicionS La medicion del sensor
+     */
     private void resumenSave(XMLConfiguration registro, Integer sensorID, String tipo, String medicionS) {
         try {
             // Busco si ya hay algun registro del sensor.

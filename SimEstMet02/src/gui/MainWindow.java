@@ -1,12 +1,22 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+ * Simulador de Redes Meteorológicas
+ * Copyright 2011 (C) Rodríguez Pablo Andrés
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; under version 2 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses>.
+ */ 
 
 /*
  * MainWindow.java
- *
- * Created on 13/08/2011, 23:18:53
  */
 package gui;
 
@@ -23,8 +33,7 @@ import javax.swing.event.TreeModelListener;
 import javax.swing.tree.*;
 
 /**
- *
- * @author pablo
+ * Ventana principal de la aplicacion
  */
 public class MainWindow extends javax.swing.JFrame {
 
@@ -419,6 +428,7 @@ private void eliminarSensorMenuItemActionPerformed(java.awt.event.ActionEvent ev
 }//GEN-LAST:event_eliminarSensorMenuItemActionPerformed
 
 private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirMenuItemActionPerformed
+    // Si el simulador esta corriendo primero debo pararlo para que no haya errores
     if (corriendo) {
         this.stop();
     } 
@@ -426,20 +436,22 @@ private void salirMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 }//GEN-LAST:event_salirMenuItemActionPerformed
 
 private void comenzarMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comenzarMenuItemActionPerformed
-    this.start();
+    if (!corriendo) {
+        this.start();
+    }
 }//GEN-LAST:event_comenzarMenuItemActionPerformed
 
 private void pararMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pararMenuItemActionPerformed
-    this.stop();
+    if (corriendo) {
+        this.stop();
+    }
 }//GEN-LAST:event_pararMenuItemActionPerformed
 
 private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startStopToggleButtonActionPerformed
     if ( startStopToggleButton.isSelected() )
         comenzarMenuItemActionPerformed(evt);
-//        System.out.println("Hola maricon!!");
     else
         pararMenuItemActionPerformed(evt);
-//        System.out.println("Chau maricon!!");
 }//GEN-LAST:event_startStopToggleButtonActionPerformed
 
     /**
@@ -522,16 +534,24 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
 
     /* *** Metodos propios *** */
     
+    /**
+     * Inicia la simulacion
+     */
     private void start() {
-//        salidaTextArea.setText("");
         startStopToggleButton.setSelected(true);
         corriendo = true;
         estadoLabel.setText("Estado: corriendo");
 
+        // Reinicio la cuenta e inicio el timer
+        timer.setDelay(timer.getInitialDelay());
         timer.start();
     }
 
+    /**
+     * Detiene la simulacion
+     */
     private void stop() {
+        // Paro el timer
         timer.stop();
         
         estadoLabel.setText("Estado: parada");
@@ -539,6 +559,9 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         startStopToggleButton.setSelected(false);
     }
     
+    /**
+     * Actualiza la red y muestra el estado actual
+     */
     private void step() {
         Stack<PaqueteDatos> datos = new Stack();
         // Actualizo
@@ -563,11 +586,10 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         for (String dir : direcciones) {
             mensaje = mensaje + String.format("\n\t%s", dir);
         }
-
-//        JOptionPane.showMessageDialog(null, mensaje, "Resumenes", JOptionPane.PLAIN_MESSAGE);
+        // Ventana de seleccion
         String dir = (String)JOptionPane.showInputDialog(null, "Seleccione:", "Titulo", JOptionPane.PLAIN_MESSAGE, null, direcciones.toArray(), direcciones.firstElement());
 
-        // Muestro y cargo el archivo
+        // Muestro la ventana y cargo el archivo
         viewer.display(new File(dir));
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -577,9 +599,7 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
     }
     
     /**
-     * Se carga un ejemplo y retorna la base
-     * 
-     * @return La estacion base de la red
+     * Se carga un ejemplo en el simulador
      */
     private void ejemplo1() {
         if (corriendo) {
@@ -905,6 +925,9 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         }
     }
 
+    /**
+     * Clase interna utilizada para redirigir la salida estandar a JEditorPane
+     */
     private class FilteredStream extends FilterOutputStream {
         public FilteredStream(OutputStream out) {
             super(out);
@@ -927,11 +950,19 @@ private void startStopToggleButtonActionPerformed(java.awt.event.ActionEvent evt
         }
     }
 
+    /**
+     * Clase interna que se encarga de escuchar cuando cambia el arbol
+     */
     private class MyTreeModelHandler implements TreeModelListener {
 
         public void treeNodesChanged(TreeModelEvent e) {
         }
         
+        /**
+         * Se inserto un Nodo al arbol. Extiendo el arbol hasta ese nodo.
+         * 
+         * @param e 
+         */
         public void treeNodesInserted(TreeModelEvent e) {
             // Expando el arbol al ultimo nodo creado
             DefaultMutableTreeNode node;

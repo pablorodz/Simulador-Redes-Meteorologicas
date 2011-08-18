@@ -1,3 +1,20 @@
+/*
+ * Simulador de Redes Meteorológicas
+ * Copyright 2011 (C) Rodríguez Pablo Andrés
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; under version 2 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses>.
+ */ 
+
 /**
  *  @file SensorHum.java
  * 
@@ -12,7 +29,7 @@ import java.util.logging.Logger;
 
 /**
  *  Sensor de humedad.
- *  Indica la humedad actual en %
+ *  indica la humedad relativa porcentual.
  */
 public class SensorHum extends Sensor {
     // Valor de la medicion del sensor en %. Valor siempre positivo
@@ -47,6 +64,12 @@ public class SensorHum extends Sensor {
         return String.valueOf(getHumedad());
     }
 
+    /**
+     * Setea de forma externa el estado (medicion) del sensor.
+     * 
+     * Al ser un simulador tiene sentido que los valores medidos sean seteados
+     * externamente por valores cargados de archivos con datos previos.
+     */
     public void setHumedad (float humedad) throws InputMismatchException {
         if (humedad < 0 || humedad > HUM_MAX)
             throw new InputMismatchException(String.format("La variable debe "
@@ -55,6 +78,12 @@ public class SensorHum extends Sensor {
         this.humedad = humedad;
     }
 
+    /**
+     * Setea de forma externa el estado (medicion) del sensor.
+     * 
+     * Al ser un simulador tiene sentido que los valores medidos sean seteados
+     * externamente por valores cargados de archivos con datos previos.
+     */
     @Override
     public void setMedicion(String medicion) {
         setHumedad( Float.valueOf(medicion) );
